@@ -1,7 +1,7 @@
 #ifndef GLFWTESTAPP_BLAZEGLVECTOR_HPP
 #define GLFWTESTAPP_BLAZEGLVECTOR_HPP
 
-#include "Blaze.hpp"
+#include "LinAlBlaze.hpp"
 
 namespace LinAl {
 using GLVecf = blaze::StaticVector<float_t, 4, blaze::rowMajor,

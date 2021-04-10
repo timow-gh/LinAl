@@ -1,7 +1,7 @@
 #ifndef GLFWTESTAPP_EIGENLINEARALGEBRA_H
 #define GLFWTESTAPP_EIGENLINEARALGEBRA_H
 
-#include "Blaze.hpp"
+#include "LinAlBlaze.hpp"
 
 namespace LinAl {
 template <typename T, std::size_t D>
