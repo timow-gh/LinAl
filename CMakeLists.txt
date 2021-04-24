@@ -16,14 +16,14 @@ list(APPEND CMAKE_MODULE_PATH
      ${CMAKE_CURRENT_LIST_DIR}/CMake
      ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-option(${PROJECT_NAME}_INSTALL_LIBS "Enable install rule" ON)
-option(${PROJECT_NAME}_BUILD_TESTS "Enable Core tests" ON)
+option(${PROJECT_NAME}_INSTALL "Enable install rule" ON)
+option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" ON)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 
-if (${PROJECT_NAME}_INSTALL_LIBS)
+if (${PROJECT_NAME}_INSTALL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 
@@ -39,11 +39,7 @@ if (${PROJECT_NAME}_INSTALL_LIBS)
     endif ()
 endif ()
 
-find_package(OpenBLAS CONFIG REQUIRED)
 find_package(blaze CONFIG REQUIRED)
-
-option(${PROJECT_NAME}_INSTALL_LIBS "Enable install rule" ON)
-option(${PROJECT_NAME}_BUILD_TESTS "Enable Core tests" OFF)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
@@ -108,7 +104,7 @@ if (${PROJECT_NAME}_INSTALL)
             DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
 
     install(TARGETS
-            Lin_Al blaze_interface
+            Lin_Al
             EXPORT
             LinAlTargetsExportSet
             RUNTIME
