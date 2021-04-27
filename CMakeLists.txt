@@ -85,6 +85,7 @@ set_target_properties(Lin_Al
                       EXPORT_NAME ${TARGET_ALIAS})
 target_set_warnings(Lin_Al ENABLE ALL AS_ERROR ALL DISABLE Annoying)
 if (MSVC)
+    include(HelperFunctions)
     setMSVCOutputDirectories(Lin_Al)
 endif ()
 
