@@ -50,10 +50,6 @@ endif ()
 find_package(OpenBLAS CONFIG REQUIRED)
 find_package(blaze CONFIG REQUIRED)
 
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
-
 add_subdirectory(src)
 
 if (${PROJECT_NAME}_BUILD_TESTS)
