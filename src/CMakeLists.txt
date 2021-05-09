@@ -22,7 +22,7 @@ add_library(Lin_Al ${linAl_SOURCES})
 target_include_directories(Lin_Al
                            PUBLIC
                            $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-                           $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
+                           $<BUILD_INTERFACE:${LinAl_BINARY_DIR}/src>
                            # Make blaze headers visible
                            $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>
                            )
