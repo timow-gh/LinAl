@@ -24,9 +24,9 @@ target_include_directories(Lin_Al
                            $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
                            $<BUILD_INTERFACE:${LinAl_BINARY_DIR}/src>
                            # Make blaze headers visible
-                           $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>
-                           )
-target_link_libraries(Lin_Al INTERFACE blaze::blaze OpenBLAS::OpenBLAS)
+#                           $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>
+                            )
+target_link_libraries(Lin_Al PUBLIC blaze::blaze OpenBLAS::OpenBLAS)
 set(TARGET_ALIAS LinAl)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Lin_Al)
 set_target_properties(Lin_Al
