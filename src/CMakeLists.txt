@@ -11,21 +11,24 @@ set(linAl_HEADER
     include/LinAl/BlazeWrapper/BlazeMatrixConversions.hpp
     include/LinAl/LinearAlgebra.hpp
     include/LinAl/LinearAlgebraUtil.hpp
-    include/LinAl/BlazeWrapper/BlazeUtil.hpp)
+    include/LinAl/BlazeWrapper/BlazeUtil.hpp
+    include/LinAl/BlazeWrapper/BlazeVec2.hpp
+    include/LinAl/BlazeWrapper/BlazeVec3.hpp
+    include/LinAl/BlazeWrapper/BlazeVec4.hpp
+    include/LinAl/BlazeWrapper/BlazeHMatrix.hpp
+    include/LinAl/BlazeWrapper/BlazeHVector.hpp include/LinAl/BlazeWrapper/BlazeHMatrixOperations.hpp)
 
 set(linAl_SOURCES
-    source/BlazeGlMatrixOperations.cpp include/LinAl/BlazeWrapper/BlazeVec2.hpp include/LinAl/BlazeWrapper/BlazeVec3.hpp include/LinAl/BlazeWrapper/BlazeVec4.hpp)
+    source/BlazeGlMatrixOperations.cpp
+    )
 
 include(Warnings)
 
-add_library(Lin_Al ${linAl_SOURCES})
+add_library(Lin_Al ${linAl_SOURCES} ${linAl_HEADER})
 target_include_directories(Lin_Al
                            PUBLIC
                            $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-                           $<BUILD_INTERFACE:${LinAl_BINARY_DIR}/src>
-                           # Make blaze headers visible
-#                           $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>
-                            )
+                           $<BUILD_INTERFACE:${LinAl_BINARY_DIR}/src>)
 target_link_libraries(Lin_Al PUBLIC blaze::blaze OpenBLAS::OpenBLAS)
 set(TARGET_ALIAS LinAl)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Lin_Al)

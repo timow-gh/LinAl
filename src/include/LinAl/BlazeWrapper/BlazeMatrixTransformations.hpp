@@ -5,36 +5,8 @@
 #include "BlazeVec3.hpp"
 
 namespace LinAl {
-template <typename T> Matrix4<T> mat4XRot(T alpha) {
-  auto [cos, sin] = calcCosSin(alpha);
-  // clang-format off
-  return Matrix4<T>{
-      {1, 0,    0,    0},
-      {0, cos, -sin,  0},
-      {0, sin,  cos,  0},
-      {0, 0,    0,    1}};
-  // clang-format on
-}
-template <typename T> Matrix4<T> mat4YRot(T alpha) {
-  auto [cos, sin] = calcCosSin(alpha);
-  // clang-format off
-  return Matrix4<T>{
-      {cos, 0, -sin,  0},
-      {0,   1,  0,    0},
-      {sin, 0,  cos,  0},
-      {0,   0,  0,    1}};
-  // clang-format on
-}
-template <typename T> Matrix4<T> mat4ZRot(T alpha) {
-  auto [cos, sin] = calcCosSin(alpha);
-  // clang-format off
-  return Matrix4<T>{
-      {cos, -sin, 0, 0},
-      {sin, cos,  0, 0},
-      {0,   0,    1, 0},
-      {0,   0,    0, 1}};
-  // clang-format on
-}
+
+//! alpha in radians
 template <typename T> Matrix3<T> mat3XRot(T alpha) {
   auto [cos, sin] = calcCosSin(alpha);
   // clang-format off
@@ -44,15 +16,19 @@ template <typename T> Matrix3<T> mat3XRot(T alpha) {
         {0, sin,  cos}};
   // clang-format on
 }
+
+//! alpha in radians
 template <typename T> Matrix3<T> mat3YRot(T alpha) {
   auto [cos, sin] = calcCosSin(alpha);
   // clang-format off
   return Matrix3<T>{
-      {cos, 0, -sin},
-      {0,   1,  0},
-      {sin, 0,  cos}};
+      {cos,   0, sin},
+      {0,     1,  0},
+      {-sin,  0,  cos}};
   // clang-format on
 }
+
+//! alpha in radians
 template <typename T> Matrix3<T> mat3ZRot(T alpha) {
   auto [cos, sin] = calcCosSin(alpha);
   // clang-format off

@@ -4,6 +4,8 @@
 #include "gtest/gtest.h"
 #include <iostream>
 
+#include "Core/Math/Constants.hpp"
+
 #include "LinAl/LinearAlgebra.hpp"
 
 using namespace LinAl;
@@ -37,6 +39,30 @@ TEST(createLcsToGlobalRotationMatrix_vectors, Matrix) {
       rotatedLcs[0], rotatedLcs[1], rotatedLcs[2]);
 
   testZRotation(a, rotationMatrix);
+}
+
+TEST(Matrix3dOperations, xRotation) {
+  Matrix3d rotMat = hMatXRot(Core::PI_HALF);
+  Vec3d start{0, 1, 0};
+  Vec3d result = rotMat * start;
+  Vec3d expected{0, 0, 1};
+  EXPECT_EQ(result, expected);
+}
+
+TEST(Matrix3dOperations, yRotation) {
+  Matrix3d rotMat = hMatYRot(Core::PI_HALF);
+  Vec3d start{0, 0, 1};
+  Vec3d result = rotMat * start;
+  Vec3d expected{1, 0, 0};
+  EXPECT_EQ(result, expected);
+}
+
+TEST(Matrix3dOperations, zRotation) {
+  Matrix3d rotMat = hMatZRot(Core::PI_HALF);
+  Vec3d start{1, 0, 0};
+  Vec3d result = rotMat * start;
+  Vec3d expected{0, 1, 0};
+  EXPECT_EQ(result, expected);
 }
 
 TEST(createLcsToGlobalRotationMatrix_array, Matrix) {

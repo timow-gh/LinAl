@@ -25,5 +25,21 @@ mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_GOOGLETEST)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(testBlaze)
-add_subdirectory(testLinearAlgebra)
+FetchContent_Declare(
+        core
+        GIT_REPOSITORY git@github.com:timow-gh/Core.git
+        GIT_TAG main)
+set(Core_INSTALL ON)
+FetchContent_MakeAvailable(core)
+
+add_executable(Test_HMatrixOperations Test_HMatrixOperations.cpp)
+target_link_libraries(Test_HMatrixOperations PRIVATE gtest_main Core::Math LinAl::LinAl)
+add_test(NAME Test_HMatrixOperations COMMAND Test_HMatrixOperations)
+
+add_executable(Test_MatrixOperations Test_HMatrixOperations.cpp)
+target_link_libraries(Test_MatrixOperations PRIVATE gtest_main Core::Math LinAl::LinAl)
+add_test(NAME Test_MatrixOperations COMMAND Test_MatrixOperations)
+
+add_executable(Test_DotProduct Test_HMatrixOperations.cpp)
+target_link_libraries(Test_DotProduct PRIVATE gtest_main Core::Math LinAl::LinAl)
+add_test(NAME Test_DotProduct COMMAND Test_DotProduct)
