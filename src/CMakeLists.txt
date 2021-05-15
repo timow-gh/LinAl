@@ -8,15 +8,15 @@ set(linAl_HEADER
     include/LinAl/BlazeWrapper/BlazeGlMatrixOperations.hpp
     include/LinAl/BlazeWrapper/BlazeMatrixTransformations.hpp
     include/LinAl/BlazeWrapper/BlazeMatrixOperations.hpp
-    include/LinAl/BlazeWrapper/BlazeMatrixConversions.hpp
-    include/LinAl/LinearAlgebra.hpp
-    include/LinAl/LinearAlgebraUtil.hpp
     include/LinAl/BlazeWrapper/BlazeUtil.hpp
     include/LinAl/BlazeWrapper/BlazeVec2.hpp
     include/LinAl/BlazeWrapper/BlazeVec3.hpp
     include/LinAl/BlazeWrapper/BlazeVec4.hpp
     include/LinAl/BlazeWrapper/BlazeHMatrix.hpp
-    include/LinAl/BlazeWrapper/BlazeHVector.hpp include/LinAl/BlazeWrapper/BlazeHMatrixOperations.hpp)
+    include/LinAl/BlazeWrapper/BlazeHVector.hpp
+    include/LinAl/BlazeWrapper/BlazeHMatrixOperations.hpp
+    include/LinAl/LinearAlgebra.hpp
+    include/LinAl/LinearAlgebraUtil.hpp)
 
 set(linAl_SOURCES
     source/BlazeGlMatrixOperations.cpp
