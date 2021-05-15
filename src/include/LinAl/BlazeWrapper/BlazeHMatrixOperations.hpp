@@ -3,6 +3,7 @@
 
 #include "LinAl/BlazeWrapper/BlazeHMatrix.hpp"
 #include "LinAl/BlazeWrapper/BlazeUtil.hpp"
+#include "LinAl/BlazeWrapper/BlazeVecOperations.hpp"
 #include "blaze/math/Submatrix.h"
 
 namespace LinAl {
@@ -55,6 +56,34 @@ template <typename T> HMatrix<T> hMatZRot(T alpha) {
       {sin, cos,  0, 0},
       {0,   0,    1, 0},
       {0,   0,    0, 1}};
+  // clang-format on
+}
+
+template <typename T>
+HMatrix<T> hMatAxisAngleRot(const Vec3<T> &axis, double_t angle) {
+  Vec3<T> nAxis = LinAl::normalize(axis);
+  const T c = std::cos(angle);
+  const T C = 1 - c;
+  const T s = std::sin(angle);
+
+  const T xxC = nAxis[0] * nAxis[0] * C;
+  const T yyC = nAxis[1] * nAxis[1] * C;
+  const T zzC = nAxis[2] * nAxis[2] * C;
+
+  const T xyC = nAxis[0] * nAxis[1] * C;
+  const T xzC = nAxis[0] * nAxis[2] * C;
+  const T yzC = nAxis[1] * nAxis[2] * C;
+
+  const T zs = nAxis[2] * s;
+  const T ys = nAxis[1] * s;
+  const T xs = nAxis[0] * s;
+
+  // clang-format off
+  return HMatrix<T>{
+      {xxC+c,   xyC-zs,   xzC+ys,   0},
+      {xyC+zs,  yyC+c,    yzC-xs,   0},
+      {xzC-ys,  yzC-xs,   zzC+c,    0},
+      {0,       0,        0,        1}};
   // clang-format on
 }
 

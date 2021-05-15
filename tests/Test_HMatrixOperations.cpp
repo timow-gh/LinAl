@@ -54,6 +54,25 @@ TEST(HMatrixOperations, zRotation) {
   EXPECT_EQ(result, expected);
 }
 
+TEST(HMatrixOperations, axisRotation_Y) {
+  HMatrix<float_t> hMatrix = hMatAxisAngleRot(Vec3f{0, 1, 0}, Core::PI_HALF);
+  HVec<float_t> start{0, 0, 1, 1};
+  HVec<float_t> result = hMatrix * start;
+  HVec<float_t> expected{1, 0, 0, 1};
+  EXPECT_EQ(result, expected);
+}
+
+TEST(HMatrixOperations, axisRotation) {
+  Vec3d rotAxis = LinAl::cross(Vec3d{1, 0, 0}, Vec3d{0, 1, 1});
+  HMatrix<double_t> hMatrix = hMatAxisAngleRot(rotAxis, Core::PI_HALF);
+  Vec3d startVec{0,1,1};
+  startVec = LinAl::normalize(startVec);
+  HVec<double_t> start{startVec[0], startVec[1], startVec[2], 1};
+  HVec<double_t> result = hMatrix * start;
+  HVec<double_t> expected{-1, 0, 0, 1};
+  EXPECT_EQ(result, expected);
+}
+
 TEST(HMatrixOperations, inverseXTranslation) {
   HMatrix<float_t> xTranslation = createTranslation(HVec<float_t>{3, 0, 0});
   HMatrix<float_t> invXTranslation = LinAl::inverse(xTranslation);
