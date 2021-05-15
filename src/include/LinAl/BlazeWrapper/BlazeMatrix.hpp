@@ -2,7 +2,7 @@
 #define GLFWTESTAPP_BLAZEMATRIXOPERATIONS_H
 
 #include "BlazeContainers.hpp"
-#include "BlazeVector.hpp"
+#include "BlazeVec.hpp"
 
 namespace LinAl {
 template <typename T, std::size_t M, std::size_t N>

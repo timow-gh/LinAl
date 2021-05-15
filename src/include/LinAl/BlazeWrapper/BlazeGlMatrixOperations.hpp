@@ -2,7 +2,7 @@
 #define GLFWTESTAPP_BLAZEGLMATRIXOPERATIONS_HPP
 
 #include "BlazeGlMatrix.hpp"
-#include "BlazeGlVector.hpp"
+#include "BlazeGlVec.hpp"
 #include "linal_export.h"
 
 namespace LinAl {

@@ -1,10 +1,10 @@
 set(linAl_HEADER
     include/LinAl/BlazeWrapper/LinAlBlaze.hpp
-    include/LinAl/BlazeWrapper/BlazeVector.hpp
+    include/LinAl/BlazeWrapper/BlazeVec.hpp
     include/LinAl/BlazeWrapper/BlazeMatrix.hpp
     include/LinAl/BlazeWrapper/BlazeContainers.hpp
     include/LinAl/BlazeWrapper/BlazeGlMatrix.hpp
-    include/LinAl/BlazeWrapper/BlazeGlVector.hpp
+    include/LinAl/BlazeWrapper/BlazeGlVec.hpp
     include/LinAl/BlazeWrapper/BlazeGlMatrixOperations.hpp
     include/LinAl/BlazeWrapper/BlazeMatrixTransformations.hpp
     include/LinAl/BlazeWrapper/BlazeMatrixOperations.hpp
@@ -14,7 +14,7 @@ set(linAl_HEADER
     include/LinAl/BlazeWrapper/BlazeUtil.hpp)
 
 set(linAl_SOURCES
-    source/BlazeGlMatrixOperations.cpp)
+    source/BlazeGlMatrixOperations.cpp include/LinAl/BlazeWrapper/BlazeVec2.hpp include/LinAl/BlazeWrapper/BlazeVec3.hpp include/LinAl/BlazeWrapper/BlazeVec4.hpp)
 
 include(Warnings)
 

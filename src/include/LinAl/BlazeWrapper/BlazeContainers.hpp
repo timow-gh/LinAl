@@ -1,7 +1,9 @@
 #ifndef GLFWTESTAPP_BLAZECONTAINERS_H
 #define GLFWTESTAPP_BLAZECONTAINERS_H
 
-#include "BlazeVector.hpp"
+#include "BlazeVec.hpp"
+#include "BlazeVec2.hpp"
+#include "BlazeVec3.hpp"
 #include <array>
 #include <memory>
 #include <vector>

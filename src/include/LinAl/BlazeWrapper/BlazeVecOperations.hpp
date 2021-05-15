@@ -1,7 +1,7 @@
 #ifndef GLFWTESTAPP_VECTOROPERATIONS_H
 #define GLFWTESTAPP_VECTOROPERATIONS_H
 
-#include "BlazeVector.hpp"
+#include "BlazeVec.hpp"
 #include <cmath>
 #include <numeric>
 
