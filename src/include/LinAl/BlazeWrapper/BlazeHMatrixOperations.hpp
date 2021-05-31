@@ -99,6 +99,26 @@ template <typename T> HMatrix<T> inverse(const HMatrix<T> &matrix) {
   return result;
 }
 
+template <typename T>
+void scaleTranslation(HMatrix<T> &matrix, T scaleFactor, T lowerLimit,
+                      T upperLimit) {
+  auto translSubMatrix = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(matrix);
+  translSubMatrix = translSubMatrix * scaleFactor;
+
+  Vec3<T> lengthVec{matrix(0, 3), matrix(1, 3), matrix(2, 3)};
+  T length = LinAl::norm2(lengthVec);
+  if (length < lowerLimit) {
+    lengthVec = LinAl::normalize(lengthVec) * lowerLimit;
+  } else if (length > upperLimit) {
+    lengthVec = LinAl::normalize(lengthVec) * upperLimit;
+  } else
+    return;
+
+  matrix(0, 3) = lengthVec[0];
+  matrix(1, 3) = lengthVec[1];
+  matrix(2, 3) = lengthVec[2];
+}
+
 } // namespace LinAl
 
 #endif // LINAL_BLAZEHMATRIXOPERATIONS_HPP
