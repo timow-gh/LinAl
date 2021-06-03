@@ -3,7 +3,8 @@
 
 #include "LinAl/BlazeWrapper/BlazeHVector.hpp"
 
-namespace LinAl {
+namespace LinAl
+{
 // clang-format off
 template<typename T>
 using HMatrix = blaze::StaticMatrix<T,

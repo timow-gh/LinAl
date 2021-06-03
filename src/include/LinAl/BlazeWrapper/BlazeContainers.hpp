@@ -8,7 +8,8 @@
 #include <memory>
 #include <vector>
 
-namespace LinAl {
+namespace LinAl
+{
 
 template <typename T, std::size_t D>
 using VecVector = std::vector<LinAl::Vec<T, D>, LinAl::VecAllocator<T, D>>;
@@ -26,16 +27,20 @@ using VecArray = std::array<LinAl::Vec<T, D>, N>;
 template <typename T, std::size_t N>
 using Vec2Array = std::array<LinAl::Vec2<T>, N>;
 
-template <std::size_t N> using Vec2fArray = std::array<LinAl::Vec2f, N>;
+template <std::size_t N>
+using Vec2fArray = std::array<LinAl::Vec2f, N>;
 
-template <std::size_t N> using Vec2dArray = std::array<LinAl::Vec2d, N>;
+template <std::size_t N>
+using Vec2dArray = std::array<LinAl::Vec2d, N>;
 
 template <typename T, std::size_t N>
 using Vec3Array = std::array<LinAl::Vec3<T>, N>;
 
-template <std::size_t N> using Vec3fArray = std::array<LinAl::Vec3f, N>;
+template <std::size_t N>
+using Vec3fArray = std::array<LinAl::Vec3f, N>;
 
-template <std::size_t N> using Vec3dArray = std::array<LinAl::Vec3d, N>;
+template <std::size_t N>
+using Vec3dArray = std::array<LinAl::Vec3d, N>;
 
 } // namespace LinAl
 

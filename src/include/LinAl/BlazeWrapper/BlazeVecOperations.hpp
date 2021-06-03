@@ -5,46 +5,54 @@
 #include <cmath>
 #include <numeric>
 
-namespace LinAl {
+namespace LinAl
+{
 
 template <typename T, std::size_t D>
-[[nodiscard]] T dot(const Vec<T, D> &lhs, const Vec<T, D> &rhs) {
-  return blaze::dot(lhs, rhs);
+[[nodiscard]] T dot(const Vec<T, D>& lhs, const Vec<T, D>& rhs)
+{
+    return blaze::dot(lhs, rhs);
 }
 
 template <typename T>
-[[nodiscard]] Vec3<T> cross(const Vec3<T> &lhs, const Vec3<T> &rhs) {
-  return blaze::cross(lhs, rhs);
+[[nodiscard]] Vec3<T> cross(const Vec3<T>& lhs, const Vec3<T>& rhs)
+{
+    return blaze::cross(lhs, rhs);
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] T norm2Squared(const Vec<T, D> &vector) {
-  T sum{0};
-  for (const T &value : vector)
-    sum += value * value;
-  return sum;
+[[nodiscard]] T norm2Squared(const Vec<T, D>& vector)
+{
+    T sum{0};
+    for (const T& value: vector)
+        sum += value * value;
+    return sum;
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] T norm2(const Vec<T, D> &vector) {
-  return blaze::norm(vector);
+[[nodiscard]] T norm2(const Vec<T, D>& vector)
+{
+    return blaze::norm(vector);
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] Vec<T, D> normalize(const Vec<T, D> &vector) {
-  return Vec<T, D>{blaze::normalize(vector)};
+[[nodiscard]] Vec<T, D> normalize(const Vec<T, D>& vector)
+{
+    return Vec<T, D>{blaze::normalize(vector)};
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] Vec<T, D> projection(const Vec<T, D> &source,
-                                   const Vec<T, D> &target) {
-  return target * (dot(source, target)) / (dot(target, target));
+[[nodiscard]] Vec<T, D> projection(const Vec<T, D>& source,
+                                   const Vec<T, D>& target)
+{
+    return target * (dot(source, target)) / (dot(target, target));
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] Vec<T, D> rejection(const Vec<T, D> &source,
-                                  const Vec<T, D> &target) {
-  return source - projection(source, target);
+[[nodiscard]] Vec<T, D> rejection(const Vec<T, D>& source,
+                                  const Vec<T, D>& target)
+{
+    return source - projection(source, target);
 }
 
 } // namespace LinAl

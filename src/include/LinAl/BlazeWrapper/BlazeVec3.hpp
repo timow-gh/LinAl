@@ -3,14 +3,23 @@
 
 #include "BlazeVec.hpp"
 
-namespace LinAl {
-template <typename T> using Vec3 = blaze::StaticVector<T, 3>;
-using Vec3f = blaze::StaticVector<float_t, 3, blaze::columnVector,
-                                  blaze::aligned, blaze::padded>;
-using Vec3d = blaze::StaticVector<double_t, 3, blaze::columnVector,
-                                  blaze::aligned, blaze::padded>;
+namespace LinAl
+{
+template <typename T>
+using Vec3 = blaze::StaticVector<T, 3>;
+using Vec3f = blaze::StaticVector<float_t,
+                                  3,
+                                  blaze::columnVector,
+                                  blaze::aligned,
+                                  blaze::padded>;
+using Vec3d = blaze::StaticVector<double_t,
+                                  3,
+                                  blaze::columnVector,
+                                  blaze::aligned,
+                                  blaze::padded>;
 
-template <typename T> using Vec3Allocator = blaze::AlignedAllocator<Vec<T, 3>>;
+template <typename T>
+using Vec3Allocator = blaze::AlignedAllocator<Vec<T, 3>>;
 using Vec3fAllocator = blaze::AlignedAllocator<Vec3f>;
 using Vec3dAllocator = blaze::AlignedAllocator<Vec3d>;
 

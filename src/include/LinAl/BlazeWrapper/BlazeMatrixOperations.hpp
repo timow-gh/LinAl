@@ -3,13 +3,14 @@
 
 #include "LinAl/BlazeWrapper/BlazeHMatrix.hpp"
 #include "blaze/math/Submatrix.h"
-
 #include <iostream>
 
-namespace LinAl {
+namespace LinAl
+{
 template <typename T, std::size_t M, std::size_t N>
-void invert(Matrix<T, M, N> &matrix) {
-  blaze::invert(matrix);
+void invert(Matrix<T, M, N>& matrix)
+{
+    blaze::invert(matrix);
 }
 } // namespace LinAl
 

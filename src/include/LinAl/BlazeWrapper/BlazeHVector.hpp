@@ -1,7 +1,8 @@
 #ifndef LINAL_BLAZEHVECTOR_HPP
 #define LINAL_BLAZEHVECTOR_HPP
 
-namespace LinAl {
+namespace LinAl
+{
 // clang-format off
 template <typename T>
 using HVec = blaze::StaticVector<T,
@@ -11,7 +12,8 @@ using HVec = blaze::StaticVector<T,
                                 blaze::padded>;
 // clang-format on
 
-template <typename T> using HVecAllocator = blaze::AlignedAllocator<HVec<T>>;
+template <typename T>
+using HVecAllocator = blaze::AlignedAllocator<HVec<T>>;
 } // namespace LinAl
 
 #endif // LINAL_BLAZEHVECTOR_HPP
