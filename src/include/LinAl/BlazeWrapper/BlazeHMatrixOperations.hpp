@@ -28,6 +28,14 @@ HMatrix<T> createTranslation(const HVec<T>& vec)
     return result;
 }
 
+template <typename T> HMatrix<T> createTranslation(T x, T y, T z) {
+  HMatrix<T> result = createIdentityHMatrix<T>();
+  result(0, 3) = x;
+  result(1, 3) = y;
+  result(2, 3) = z;
+  return result;
+}
+
 //! alpha in radians
 template <typename T>
 HMatrix<T> hMatXRot(T alpha)
