@@ -57,10 +57,21 @@ template <typename T, std::size_t D>
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] bool collinear(const Vec<T, D>& source,
-                                  const Vec<T, D>& target)
+[[nodiscard]] bool collinear(const Vec<T, D>& source, const Vec<T, D>& target)
 {
-    return Core::isZero(std::abs(LinAl::dot(source, target)));
+    return Core::isZero(T(1) - std::abs(LinAl::dot(LinAl::normalize(source),
+                                                   LinAl::normalize(target))));
+}
+
+// clang-format off
+struct isNormalized{};
+// clang-format on
+
+template <typename T, std::size_t D>
+[[nodiscard]] bool
+collinear(const Vec<T, D>& source, const Vec<T, D>& target, isNormalized)
+{
+    return Core::isZero(T(1) - std::abs(LinAl::dot(source, target)));
 }
 
 } // namespace LinAl

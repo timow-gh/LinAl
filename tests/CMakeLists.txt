@@ -33,13 +33,17 @@ set(Core_INSTALL ON)
 FetchContent_MakeAvailable(core)
 
 add_executable(Test_HMatrixOperations Test_HMatrixOperations.cpp)
-target_link_libraries(Test_HMatrixOperations PRIVATE gtest_main Core::Math LinAl::LinAl)
+target_link_libraries(Test_HMatrixOperations PRIVATE gtest_main LinAl::LinAl)
 add_test(NAME Test_HMatrixOperations COMMAND Test_HMatrixOperations)
 
 add_executable(Test_MatrixOperations Test_HMatrixOperations.cpp)
-target_link_libraries(Test_MatrixOperations PRIVATE gtest_main Core::Math LinAl::LinAl)
+target_link_libraries(Test_MatrixOperations PRIVATE gtest_main LinAl::LinAl)
 add_test(NAME Test_MatrixOperations COMMAND Test_MatrixOperations)
 
 add_executable(Test_DotProduct Test_HMatrixOperations.cpp)
-target_link_libraries(Test_DotProduct PRIVATE gtest_main Core::Math LinAl::LinAl)
+target_link_libraries(Test_DotProduct PRIVATE gtest_main LinAl::LinAl)
 add_test(NAME Test_DotProduct COMMAND Test_DotProduct)
+
+add_executable(Test_VecOperations Test_VecOperations.cpp)
+target_link_libraries(Test_VecOperations PRIVATE gtest_main LinAl::LinAl)
+add_test(NAME Test_VecOperations COMMAND Test_VecOperations)
