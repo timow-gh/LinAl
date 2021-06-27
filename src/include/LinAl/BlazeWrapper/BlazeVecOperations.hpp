@@ -2,6 +2,7 @@
 #define GLFWTESTAPP_VECTOROPERATIONS_H
 
 #include "BlazeVec.hpp"
+#include "Core/Math/Eps.hpp"
 #include <cmath>
 #include <numeric>
 
@@ -53,6 +54,13 @@ template <typename T, std::size_t D>
                                   const Vec<T, D>& target)
 {
     return source - projection(source, target);
+}
+
+template <typename T, std::size_t D>
+[[nodiscard]] bool collinear(const Vec<T, D>& source,
+                                  const Vec<T, D>& target)
+{
+    return Core::isZero(std::abs(LinAl::dot(source, target)));
 }
 
 } // namespace LinAl

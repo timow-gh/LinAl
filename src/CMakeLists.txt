@@ -29,7 +29,7 @@ target_include_directories(Lin_Al
                            PUBLIC
                            $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
                            $<BUILD_INTERFACE:${LinAl_BINARY_DIR}/src>)
-target_link_libraries(Lin_Al PUBLIC blaze::blaze OpenBLAS::OpenBLAS)
+target_link_libraries(Lin_Al PUBLIC blaze::blaze OpenBLAS::OpenBLAS Core::Math)
 set(TARGET_ALIAS LinAl)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Lin_Al)
 set_target_properties(Lin_Al
