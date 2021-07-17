@@ -46,9 +46,6 @@ if (${PROJECT_NAME}_INSTALL)
     endif ()
 endif ()
 
-find_package(OpenBLAS CONFIG REQUIRED)
-find_package(blaze CONFIG REQUIRED)
-
 add_subdirectory(dependencies)
 
 add_subdirectory(src)

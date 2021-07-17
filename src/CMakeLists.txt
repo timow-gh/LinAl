@@ -29,7 +29,7 @@ target_include_directories(Lin_Al
                            PUBLIC
                            $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
                            $<BUILD_INTERFACE:${LinAl_BINARY_DIR}/src>)
-target_link_libraries(Lin_Al PUBLIC blaze::blaze OpenBLAS::OpenBLAS Core::Math)
+target_link_libraries(Lin_Al PUBLIC LinAlBase::LinAlBase Core::Math)
 set(TARGET_ALIAS LinAl)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Lin_Al)
 set_target_properties(Lin_Al
@@ -57,8 +57,8 @@ if (${PROJECT_NAME}_INSTALL)
     install(FILES "${LinAl_BINARY_DIR}/src/${GENERATED_TARGET_EXPORTS_FILE}"
             DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
 
-    install(TARGETS Lin_Al EXPORT
-            LinAlTargetsExportSet
+    install(TARGETS Lin_Al
+            EXPORT LinAlTargetsExportSet
             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
             ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
