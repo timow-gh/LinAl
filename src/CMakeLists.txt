@@ -30,7 +30,7 @@ target_link_libraries(Lin_Al
         PUBLIC
         LinAlBase::LinAlBase
         Core::Math)
-set(TARGET_ALIAS LinAl)
+
 add_library(LinAl::LinAl ALIAS Lin_Al)
 set_target_properties(Lin_Al
         PROPERTIES
@@ -38,27 +38,25 @@ set_target_properties(Lin_Al
         VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
         DEBUG_POSTFIX d
         LINKER_LANGUAGE CXX
-        EXPORT_NAME ${TARGET_ALIAS})
+        EXPORT_NAME LinAl)
+
 include(GenerateExportHeader)
-generate_export_header(Lin_Al BASE_NAME ${PROJECT_NAME})
+generate_export_header(Lin_Al BASE_NAME LinAl)
+include(CMakePackageConfigHelpers)
 
-if (${PROJECT_NAE}_INSTALL)
-    include(CMakePackageConfigHelpers)
+install(TARGETS Lin_Al
+        EXPORT LinAlTargetsExportSet
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        INCLUDES DESTINATION
+        ${CMAKE_INSTALL_INCLUDEDIR}
+        ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 
-    install(TARGETS Lin_Al
-            EXPORT LinAlTargetsExportSet
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            INCLUDES DESTINATION
-            ${CMAKE_INSTALL_INCLUDEDIR}
-            ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+install(DIRECTORY "include/LinAl" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
-    install(DIRECTORY "include/LinAl" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+string(TOLOWER "${PROJECT_NAME}_export.h" GENERATED_TARGET_EXPORTS_FILE)
+install(FILES "${LinAl_BINARY_DIR}/src/${GENERATED_TARGET_EXPORTS_FILE}"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
 
-    string(TOLOWER "${PROJECT_NAME}_export.h" GENERATED_TARGET_EXPORTS_FILE)
-    install(FILES "${LinAl_BINARY_DIR}/src/${GENERATED_TARGET_EXPORTS_FILE}"
-            DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
-
-    setupExportSetInstall(${PROJECT_NAME} "LinAlTargetsExportSet")
-endif ()
+setupExportSetInstall("${PROJECT_NAME}" "LinAlTargetsExportSet")

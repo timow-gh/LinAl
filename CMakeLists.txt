@@ -19,7 +19,6 @@ project("LinAl"
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-option(${PROJECT_NAME}_INSTALL "Enable install rule" ON)
 option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" OFF)
 
 preamble()
