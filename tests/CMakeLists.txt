@@ -1,7 +1,3 @@
-enable_testing()
-
-include(FetchContent)
-
 option(INSTALL_GTEST OFF)
 mark_as_advanced(BUILD_GMOCK)
 mark_as_advanced(BUILD_TESTING)

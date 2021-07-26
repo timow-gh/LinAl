@@ -29,5 +29,6 @@ add_subdirectory(src)
 
 if (${PROJECT_NAME}_BUILD_TESTS)
     include(CTest)
+    enable_testing()
     add_subdirectory(tests)
 endif ()
