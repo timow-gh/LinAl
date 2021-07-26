@@ -25,13 +25,6 @@ mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_GOOGLETEST)
 
 set(CMAKE_CXX_STANDARD 17)
 
-FetchContent_Declare(
-        core
-        GIT_REPOSITORY git@github.com:timow-gh/Core.git
-        GIT_TAG main)
-set(Core_INSTALL ON)
-FetchContent_MakeAvailable(core)
-
 add_executable(Test_HMatrixOperations Test_HMatrixOperations.cpp)
 target_link_libraries(Test_HMatrixOperations PRIVATE gtest_main LinAl::LinAl)
 add_test(NAME Test_HMatrixOperations COMMAND Test_HMatrixOperations)

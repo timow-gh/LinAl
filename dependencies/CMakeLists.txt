@@ -3,6 +3,7 @@ FetchContent_Declare(
         core
         GIT_REPOSITORY git@github.com:timow-gh/Core.git
         GIT_TAG main)
+
 FetchContent_Declare(
         linalbase
         GIT_REPOSITORY git@github.com:timow-gh/LinAlBase.git
