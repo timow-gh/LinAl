@@ -25,7 +25,7 @@ add_executable(Test_HMatrixOperations Test_HMatrixOperations.cpp)
 target_link_libraries(Test_HMatrixOperations PRIVATE gtest_main LinAl::LinAl)
 add_test(NAME Test_HMatrixOperations COMMAND Test_HMatrixOperations)
 
-add_executable(Test_MatrixOperations Test_HMatrixOperations.cpp)
+add_executable(Test_MatrixOperations Test_MatrixOperations.cpp)
 target_link_libraries(Test_MatrixOperations PRIVATE gtest_main LinAl::LinAl)
 add_test(NAME Test_MatrixOperations COMMAND Test_MatrixOperations)
 

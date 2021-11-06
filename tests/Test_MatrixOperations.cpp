@@ -45,7 +45,7 @@ TEST(createLcsToGlobalRotationMatrix_vectors, Matrix)
 
 TEST(Matrix3dOperations, xRotation)
 {
-    Matrix3d rotMat = hMatXRot(Core::PI_HALF);
+    Matrix3d rotMat = mat3XRot(Core::PI_HALF);
     Vec3d start{0, 1, 0};
     Vec3d result = rotMat * start;
     Vec3d expected{0, 0, 1};
@@ -54,7 +54,7 @@ TEST(Matrix3dOperations, xRotation)
 
 TEST(Matrix3dOperations, yRotation)
 {
-    Matrix3d rotMat = hMatYRot(Core::PI_HALF);
+    Matrix3d rotMat = mat3YRot(Core::PI_HALF);
     Vec3d start{0, 0, 1};
     Vec3d result = rotMat * start;
     Vec3d expected{1, 0, 0};
@@ -63,7 +63,7 @@ TEST(Matrix3dOperations, yRotation)
 
 TEST(Matrix3dOperations, zRotation)
 {
-    Matrix3d rotMat = hMatZRot(Core::PI_HALF);
+    Matrix3d rotMat = mat3ZRot(Core::PI_HALF);
     Vec3d start{1, 0, 0};
     Vec3d result = rotMat * start;
     Vec3d expected{0, 1, 0};
@@ -77,6 +77,51 @@ TEST(createLcsToGlobalRotationMatrix_array, Matrix)
         LinAl::createLcsTransformation(create90DegRotatedLcs());
 
     testZRotation(a, rotationMatrix);
+}
+
+TEST(Matrix3Operations, rotationAlign_xToy)
+{
+    Vec3d xDir = X_VEC3D;
+    Matrix3d rotMat = rotationAlign<double_t>(xDir, Y_VEC3D);
+    Vec3d result = rotMat * xDir;
+    EXPECT_EQ(Y_VEC3D, result);
+}
+
+TEST(Matrix3Operations, rotationAlign_xToz)
+{
+    Vec3d xDir = X_VEC3D;
+    Matrix3d rotMat = rotationAlign<double_t>(xDir, Z_VEC3D);
+    Vec3d result = rotMat * xDir;
+    EXPECT_EQ(Z_VEC3D, result);
+}
+
+TEST(Matrix3Operations, rotationAlign_xTox)
+{
+    Vec3d xDir = X_VEC3D;
+    Matrix3d rotMat = rotationAlign<double_t>(xDir, X_VEC3D);
+    Vec3d result = rotMat * xDir;
+    EXPECT_EQ(X_VEC3D, result);
+}
+
+TEST(Matrix3Operations, rotationAlign_xToNormalizedOnes)
+{
+    Vec3d xDir = X_VEC3D;
+    Vec3d targetVec{1, 1, 1};
+    targetVec /= LinAl::norm2(targetVec);
+    Matrix3d rotMat = rotationAlign<double_t>(xDir, targetVec);
+    Vec3d result = rotMat * xDir;
+    constexpr double_t eps = 1E-7;
+    for (std::size_t i{0}; i < 3; ++i)
+        EXPECT_TRUE(Core::isEq(result[i], targetVec[i], eps));
+}
+
+TEST(Matrix3Operations, rotationAlign_xToOnes)
+{
+    Vec3d xDir = {1, 0, 0};
+    Vec3d targetVec{1, 1, 1};
+    Matrix3d rotMat = rotationAlign<double_t>(xDir, targetVec);
+    Vec3d result = rotMat * xDir;
+    EXPECT_EQ(result, targetVec);
 }
 
 #pragma clang diagnostic pop
