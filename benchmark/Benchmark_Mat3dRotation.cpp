@@ -7,7 +7,7 @@
 
 using namespace LinAl;
 
-static void BM_mat3XRot_Vec3d(benchmark::State& state)
+static void BM_mat3dXRot_Vec3d(benchmark::State& state)
 {
     Vec3d source{1, 0, 0};
     for (auto _: state)
@@ -16,9 +16,9 @@ static void BM_mat3XRot_Vec3d(benchmark::State& state)
         benchmark::DoNotOptimize(result);
     }
 }
-BENCHMARK(BM_mat3XRot_Vec3d);
+BENCHMARK(BM_mat3dXRot_Vec3d);
 
-static void BM_mat3YRot_Vec3d(benchmark::State& state)
+static void BM_mat3dYRot_Vec3d(benchmark::State& state)
 {
     Vec3d source{1, 0, 0};
     for (auto _: state)
@@ -27,9 +27,9 @@ static void BM_mat3YRot_Vec3d(benchmark::State& state)
         benchmark::DoNotOptimize(result);
     }
 }
-BENCHMARK(BM_mat3YRot_Vec3d);
+BENCHMARK(BM_mat3dYRot_Vec3d);
 
-static void BM_mat3ZRot_Vec3d(benchmark::State& state)
+static void BM_mat3dZRot_Vec3d(benchmark::State& state)
 {
     Vec3d source{1, 0, 0};
     for (auto _: state)
@@ -38,7 +38,7 @@ static void BM_mat3ZRot_Vec3d(benchmark::State& state)
         benchmark::DoNotOptimize(result);
     }
 }
-BENCHMARK(BM_mat3ZRot_Vec3d);
+BENCHMARK(BM_mat3dZRot_Vec3d);
 
 static void BM_rotationAlign_Vec3d(benchmark::State& state)
 {
