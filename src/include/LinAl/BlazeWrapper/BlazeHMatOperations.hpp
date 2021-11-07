@@ -70,11 +70,22 @@ HMatrix<T> hMatZRot(T alpha)
 }
 
 template <typename T>
-HMatrix<T> hMatAxisAngleRot(const Vec3<T>& axis, double_t angle)
+HMatrix<T> hMatAxisAngleRot(const HVec<T>& axis, double_t angle)
 {
     HMatrix<T> result = createIdentityHMatrix<T>();
     auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-    R = matAxisAngleRot(axis, angle);
+    R = matAxisAngleRot(hVecToVec3<T>(axis), angle);
+    return result;
+}
+
+//! Input Vectors are not normalized.
+//! Make sure the input vectors are normalized if scaling is not desired.
+template <typename T>
+HMatrix<T> rotationAlign(const HVec<T>& source, const HVec<T>& target)
+{
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = rotationAlign(hVecToVec3<T>(source), hVecToVec3<T>(target));
     return result;
 }
 

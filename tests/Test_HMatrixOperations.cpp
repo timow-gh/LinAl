@@ -63,7 +63,8 @@ TEST(HMatrixOperations, zRotation)
 
 TEST(HMatrixOperations, axisRotation_Y)
 {
-    HMatrix<float_t> hMatrix = hMatAxisAngleRot(Vec3f{0, 1, 0}, Core::PI_HALF);
+    HMatrix<float_t> hMatrix =
+        hMatAxisAngleRot(vec3ToHVec(Vec3f{0, 1, 0}), Core::PI_HALF);
     HVec<float_t> start{0, 0, 1, 1};
     HVec<float_t> result = hMatrix * start;
     HVec<float_t> expected{1, 0, 0, 1};
@@ -73,7 +74,8 @@ TEST(HMatrixOperations, axisRotation_Y)
 TEST(HMatrixOperations, axisRotation)
 {
     Vec3d rotAxis = LinAl::cross(Vec3d{1, 0, 0}, Vec3d{0, 1, 1});
-    HMatrix<double_t> hMatrix = hMatAxisAngleRot(rotAxis, Core::PI_HALF);
+    HMatrix<double_t> hMatrix =
+        hMatAxisAngleRot(vec3ToHVec(rotAxis), Core::PI_HALF);
     Vec3d startVec{0, 1, 1};
     startVec = LinAl::normalize(startVec);
     HVec<double_t> start{startVec[0], startVec[1], startVec[2], 1};
@@ -92,6 +94,38 @@ TEST(HMatrixOperations, inverseXTranslation)
                               {0, 0, 1, 0},
                               {0, 0, 0, 1}};
     EXPECT_EQ(invXTranslation, expected);
+}
+
+TEST(HMatrixOperations, rotationAlign_xTox)
+{
+    HVecd xDir = X_HVECD;
+    HMatrixd rotMat = rotationAlign<double_t>(xDir, X_HVECD);
+    HVecd result = rotMat * xDir;
+    EXPECT_EQ(X_HVECD, result);
+}
+
+TEST(HMatrixOperations, rotationAlign_xToNormalizedOnes)
+{
+    HVecd xDir = X_HVECD;
+    HVecd targetVec{1, 1, 1, 1};
+    double_t vec3Len = LinAl::norm2(targetVec);
+    targetVec[0] /= vec3Len;
+    targetVec[1] /= vec3Len;
+    targetVec[2] /= vec3Len;
+    HMatrixd rotMat = rotationAlign<double_t>(xDir, targetVec);
+    HVecd result = rotMat * xDir;
+    constexpr double_t eps = 1E-7;
+    for (std::size_t i{0}; i < 4; ++i)
+        EXPECT_TRUE(Core::isEq(result[i], targetVec[i], eps));
+}
+
+TEST(HMatrixOperations, rotationAlign_xToOnes)
+{
+    HVecd xDir = {1, 0, 0};
+    HVecd targetVec{1, 1, 1};
+    HMatrixd rotMat = rotationAlign<double_t>(xDir, targetVec);
+    HVecd result = rotMat * xDir;
+    EXPECT_EQ(result, targetVec);
 }
 
 #pragma clang diagnostic pop
