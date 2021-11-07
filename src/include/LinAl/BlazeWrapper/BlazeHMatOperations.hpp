@@ -39,6 +39,22 @@ HMatrix<T> createTranslation(T x, T y, T z)
     return result;
 }
 
+template <typename T>
+void setTranslation(HMatrix<T>& hMatrix, const HVec<T>& translation)
+{
+    hMatrix(0, 3) = translation[0];
+    hMatrix(1, 3) = translation[1];
+    hMatrix(2, 3) = translation[2];
+}
+
+template <typename T>
+void setTranslation(HMatrix<T>& hMatrix, const Vec3<T>& translation)
+{
+    hMatrix(0, 3) = translation[0];
+    hMatrix(1, 3) = translation[1];
+    hMatrix(2, 3) = translation[2];
+}
+
 //! alpha in radians
 template <typename T>
 HMatrix<T> hMatXRot(T alpha)

@@ -121,11 +121,22 @@ TEST(HMatrixOperations, rotationAlign_xToNormalizedOnes)
 
 TEST(HMatrixOperations, rotationAlign_xToOnes)
 {
-    HVecd xDir = {1, 0, 0};
-    HVecd targetVec{1, 1, 1};
+    HVecd xDir = {1, 0, 0, 1};
+    HVecd targetVec{1, 1, 1, 1};
     HMatrixd rotMat = rotationAlign<double_t>(xDir, targetVec);
     HVecd result = rotMat * xDir;
     EXPECT_EQ(result, targetVec);
+}
+
+TEST(HMatrixOperations, setTranslation)
+{
+    Vec3d targetVec{0, 0, 1};
+    HMatrixd mat = createIdentityHMatrix<double_t>();
+    setTranslation(mat, targetVec);
+    HVecd start = {0, 0, 0, 1};
+    HVecd result = mat * start;
+    HVecd expected{0, 0, 1, 1};
+    EXPECT_EQ(result, expected);
 }
 
 #pragma clang diagnostic pop
