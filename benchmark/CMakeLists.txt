@@ -17,4 +17,4 @@ function(create_linal_benchmark benchMarkName)
 endfunction()
 
 create_linal_benchmark(Benchmark_MatOperations)
-create_linal_benchmark(Benchmark_MatRotation)
+create_linal_benchmark(Benchmark_Mat3dRotation)

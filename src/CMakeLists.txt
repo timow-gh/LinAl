@@ -1,7 +1,7 @@
 set(linAl_HEADER
         include/LinAl/BlazeWrapper/LinAlBlaze.hpp
         include/LinAl/BlazeWrapper/BlazeVec.hpp
-        include/LinAl/BlazeWrapper/BlazeMatrix.hpp
+        include/LinAl/BlazeWrapper/BlazeMat.hpp
         include/LinAl/BlazeWrapper/BlazeContainers.hpp
         include/LinAl/BlazeWrapper/BlazeGlMatrix.hpp
         include/LinAl/BlazeWrapper/BlazeGlVec.hpp
@@ -11,7 +11,7 @@ set(linAl_HEADER
         include/LinAl/BlazeWrapper/BlazeVec2.hpp
         include/LinAl/BlazeWrapper/BlazeVec3.hpp
         include/LinAl/BlazeWrapper/BlazeVec4.hpp
-        include/LinAl/BlazeWrapper/BlazeHMatrix.hpp
+        include/LinAl/BlazeWrapper/BlazeHMat.hpp
         include/LinAl/BlazeWrapper/BlazeHVec.hpp
         include/LinAl/BlazeWrapper/BlazeHMatOperations.hpp
         include/LinAl/LinearAlgebra.hpp

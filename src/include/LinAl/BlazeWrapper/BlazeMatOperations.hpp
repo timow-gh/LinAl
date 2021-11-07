@@ -1,7 +1,7 @@
 #ifndef LINAL_BLAZEMATOPERATIONS_HPP
 #define LINAL_BLAZEMATOPERATIONS_HPP
 
-#include "LinAl/BlazeWrapper/BlazeHMatrix.hpp"
+#include "LinAl/BlazeWrapper/BlazeHMat.hpp"
 #include "blaze/math/Submatrix.h"
 #include <iostream>
 
