@@ -43,42 +43,30 @@ HMatrix<T> createTranslation(T x, T y, T z)
 template <typename T>
 HMatrix<T> hMatXRot(T alpha)
 {
-    auto [cos, sin] = calcCosSin(alpha);
-    // clang-format off
-  return HMatrix<T>{
-      {1, 0,    0,    0},
-      {0, cos,  -sin, 0},
-      {0, sin,  cos,  0},
-      {0, 0,    0,    1}};
-    // clang-format on
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = mat3XRot(alpha);
+    return result;
 }
 
 //! alpha in radians
 template <typename T>
 HMatrix<T> hMatYRot(T alpha)
 {
-    auto [cos, sin] = calcCosSin(alpha);
-    // clang-format off
-  return HMatrix<T>{
-      {cos,   0,  sin,  0},
-      {0,     1,  0,    0},
-      {-sin,  0,  cos,  0},
-      {0,     0,  0,    1}};
-    // clang-format on
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = mat3YRot(alpha);
+    return result;
 }
 
 //! alpha in radians
 template <typename T>
 HMatrix<T> hMatZRot(T alpha)
 {
-    auto [cos, sin] = calcCosSin(alpha);
-    // clang-format off
-  return HMatrix<T>{
-      {cos, -sin, 0, 0},
-      {sin, cos,  0, 0},
-      {0,   0,    1, 0},
-      {0,   0,    0, 1}};
-    // clang-format on
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = mat3ZRot(alpha);
+    return result;
 }
 
 template <typename T>
