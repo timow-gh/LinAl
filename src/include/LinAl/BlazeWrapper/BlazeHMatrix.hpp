@@ -1,7 +1,7 @@
 #ifndef LINAL_BLAZEHMATRIX_HPP
 #define LINAL_BLAZEHMATRIX_HPP
 
-#include "LinAl/BlazeWrapper/BlazeHVector.hpp"
+#include "LinAl/BlazeWrapper/BlazeHVec.hpp"
 
 namespace LinAl
 {

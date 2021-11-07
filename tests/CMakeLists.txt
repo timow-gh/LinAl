@@ -29,7 +29,7 @@ add_executable(Test_MatrixOperations Test_MatrixOperations.cpp)
 target_link_libraries(Test_MatrixOperations PRIVATE gtest_main LinAl::LinAl)
 add_test(NAME Test_MatrixOperations COMMAND Test_MatrixOperations)
 
-add_executable(Test_DotProduct Test_HMatrixOperations.cpp)
+add_executable(Test_DotProduct Test_DotProduct.cpp)
 target_link_libraries(Test_DotProduct PRIVATE gtest_main LinAl::LinAl)
 add_test(NAME Test_DotProduct COMMAND Test_DotProduct)
 

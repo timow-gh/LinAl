@@ -6,15 +6,14 @@ set(linAl_HEADER
         include/LinAl/BlazeWrapper/BlazeGlMatrix.hpp
         include/LinAl/BlazeWrapper/BlazeGlVec.hpp
         include/LinAl/BlazeWrapper/BlazeGlMatrixOperations.hpp
-        include/LinAl/BlazeWrapper/BlazeMatrixTransformations.hpp
-        include/LinAl/BlazeWrapper/BlazeMatrixOperations.hpp
+        include/LinAl/BlazeWrapper/BlazeMatOperations.hpp
         include/LinAl/BlazeWrapper/BlazeUtil.hpp
         include/LinAl/BlazeWrapper/BlazeVec2.hpp
         include/LinAl/BlazeWrapper/BlazeVec3.hpp
         include/LinAl/BlazeWrapper/BlazeVec4.hpp
         include/LinAl/BlazeWrapper/BlazeHMatrix.hpp
-        include/LinAl/BlazeWrapper/BlazeHVector.hpp
-        include/LinAl/BlazeWrapper/BlazeHMatrixOperations.hpp
+        include/LinAl/BlazeWrapper/BlazeHVec.hpp
+        include/LinAl/BlazeWrapper/BlazeHMatOperations.hpp
         include/LinAl/LinearAlgebra.hpp
         include/LinAl/LinearAlgebraUtil.hpp)
 
@@ -39,6 +38,8 @@ set_target_properties(Lin_Al
         DEBUG_POSTFIX d
         LINKER_LANGUAGE CXX
         EXPORT_NAME LinAl)
+target_compile_features(Lin_Al INTERFACE cxx_std_17)
+
 
 include(GenerateExportHeader)
 generate_export_header(Lin_Al BASE_NAME LinAl)

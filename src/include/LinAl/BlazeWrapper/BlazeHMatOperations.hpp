@@ -1,5 +1,5 @@
-#ifndef LINAL_BLAZEHMATRIXOPERATIONS_HPP
-#define LINAL_BLAZEHMATRIXOPERATIONS_HPP
+#ifndef LINAL_BLAZEHMATOPERATIONS_HPP
+#define LINAL_BLAZEHMATOPERATIONS_HPP
 
 #include "LinAl/BlazeWrapper/BlazeHMatrix.hpp"
 #include "LinAl/BlazeWrapper/BlazeUtil.hpp"
@@ -152,4 +152,4 @@ void scaleTranslation(HMatrix<T>& matrix,
 
 } // namespace LinAl
 
-#endif // LINAL_BLAZEHMATRIXOPERATIONS_HPP
+#endif // LINAL_BLAZEHMATOPERATIONS_HPP

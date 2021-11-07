@@ -11,7 +11,7 @@ if (NOT ${lcs_twCMakeUtils}_POPULATED)
     FetchContent_Populate(twCMakeUtils)
     list(APPEND CMAKE_MODULE_PATH ${${lcs_twCMakeUtils}_SOURCE_DIR}/modules)
     include(CMakeHelperFunctions)
-endif()
+endif ()
 
 project("LinAl"
         VERSION 0.1.0
@@ -19,7 +19,8 @@ project("LinAl"
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" OFF)
+option(LinAl_BUILD_TESTS "Enable tests" ON)
+option(LinAl_BUILD_BENCHMARKS "Geometry, enable benchmarks" ON)
 
 preamble()
 
@@ -27,7 +28,11 @@ add_subdirectory(dependencies)
 
 add_subdirectory(src)
 
-if (${PROJECT_NAME}_BUILD_TESTS)
+if (LinAl_BUILD_BENCHMARKS)
+    add_subdirectory(benchmark)
+endif ()
+
+if (LinAl_BUILD_TESTS)
     include(CTest)
     enable_testing()
     add_subdirectory(tests)

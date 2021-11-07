@@ -1,5 +1,5 @@
-#ifndef LINAL_BLAZEHVECTOR_HPP
-#define LINAL_BLAZEHVECTOR_HPP
+#ifndef LINAL_BLAZEHVEC_HPP
+#define LINAL_BLAZEHVEC_HPP
 
 namespace LinAl
 {
@@ -16,4 +16,4 @@ template <typename T>
 using HVecAllocator = blaze::AlignedAllocator<HVec<T>>;
 } // namespace LinAl
 
-#endif // LINAL_BLAZEHVECTOR_HPP
+#endif // LINAL_BLAZEHVEC_HPP
