@@ -56,9 +56,10 @@ static void BM_matAxisAngleRot_Vec3f(benchmark::State& state)
 {
     Vec3f source{1, 0, 0};
     Vec3f rotAxis{0, 0, 1};
+    constexpr auto angle = static_cast<float_t>(Core::PI / 180 * 90);
     for (auto _: state)
     {
-        Vec3f result = LinAl::matAxisAngleRot(rotAxis, Core::PI / 180 * 90) * source;
+        Vec3f result = LinAl::matAxisAngleRot(rotAxis, angle) * source;
         benchmark::DoNotOptimize(result);
     }
 }

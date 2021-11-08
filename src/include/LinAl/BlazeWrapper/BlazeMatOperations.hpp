@@ -51,7 +51,7 @@ Matrix3<T> mat3ZRot(T alpha)
 
 //! Angle in radians
 template <typename T>
-Matrix3<T> matAxisAngleRot(const Vec3<T>& axis, double_t angle)
+Matrix3<T> matAxisAngleRot(const Vec3<T>& axis, T angle)
 {
     Vec3<T> nAxis = LinAl::normalize(axis);
     const T c = std::cos(angle);
@@ -90,17 +90,18 @@ Matrix3<T> rotationAlign(const Vec3<T>& source, const Vec3<T>& target)
     M = -------  +  ( -v.z,   c,    v.x)
          1+c        (  v.y,  -v.x,  c  )
     */
-    // clang-format on
-    const Vec3<T> v = cross(target, source);
-    const float c = dot(target, source);
+    const Vec3<T> v = cross(source, target);
+    const float c = dot(source, target);
     const float k = 1.0f / (1.0f + c);
 
-    return Matrix3<T>{
-        {v[0] * v[0] * k + c, -v[1] * v[0] * k + v[2], -v[2] * v[0] * k - v[1]},
-        {-v[0] * v[1] * k - v[2], v[1] * v[1] * k + c, -v[2] * v[1] * k + v[0]},
-        {-v[0] * v[2] * k + v[1],
-         -v[1] * v[2] * k - v[0],
-         v[2] * v[2] * k + c}};
+    const T v10k = v[1]*v[0]*k;
+    const T v20k = v[2]*v[0]*k;
+    const T v21k = v[2]*v[1]*k;
+
+    return { {v[0]*v[0]*k + c,  v10k - v[2] ,     v20k + v[1]    },
+             {v10k + v[2],      v[1]*v[1]*k + c,  v21k - v[0]    },
+             {v20k - v[1],      v21k + v[0],      v[2]*v[2]*k + c}};
+    // clang-format on
 }
 
 template <typename T>

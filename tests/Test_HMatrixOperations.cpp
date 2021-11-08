@@ -64,7 +64,8 @@ TEST(HMatrixOperations, zRotation)
 TEST(HMatrixOperations, axisRotation_Y)
 {
     HMatrix<float_t> hMatrix =
-        hMatAxisAngleRot(vec3ToHVec(Vec3f{0, 1, 0}), Core::PI_HALF);
+        hMatAxisAngleRot(vec3ToHVec(Vec3f{0, 1, 0}),
+                         static_cast<float_t>(Core::PI_HALF));
     HVec<float_t> start{0, 0, 1, 1};
     HVec<float_t> result = hMatrix * start;
     HVec<float_t> expected{1, 0, 0, 1};

@@ -86,7 +86,7 @@ HMatrix<T> hMatZRot(T alpha)
 }
 
 template <typename T>
-HMatrix<T> hMatAxisAngleRot(const HVec<T>& axis, double_t angle)
+HMatrix<T> hMatAxisAngleRot(const HVec<T>& axis, T angle)
 {
     HMatrix<T> result = createIdentityHMatrix<T>();
     auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);

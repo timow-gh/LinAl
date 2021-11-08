@@ -19,8 +19,8 @@ project("LinAl"
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-option(LinAl_BUILD_TESTS "Enable tests" OFF)
-option(LinAl_BUILD_BENCHMARKS "Geometry, enable benchmarks" OFF)
+option(LinAl_BUILD_TESTS "Enable tests" ON)
+option(LinAl_BUILD_BENCHMARKS "Geometry, enable benchmarks" ON)
 
 preamble()
 
