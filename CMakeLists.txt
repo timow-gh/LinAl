@@ -20,11 +20,11 @@ project("LinAl"
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 if ((CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR))
-    option(LinAl_BUILD_TESTS "Enable tests" ON)
-    option(LinAl_BUILD_BENCHMARKS "Geometry, enable benchmarks" ON)
+    option(LinAl_BUILD_TESTS "LinAl: Enable tests" ON)
+    option(LinAl_BUILD_BENCHMARKS "LinAl: Enable benchmarks" ON)
 else ()
-    option(LinAl_BUILD_TESTS "Enable tests" OFF)
-    option(LinAl_BUILD_BENCHMARKS "Geometry, enable benchmarks" OFF)
+    option(LinAl_BUILD_TESTS "LinAl: Enable tests" OFF)
+    option(LinAl_BUILD_BENCHMARKS "LinAl: Enable benchmarks" OFF)
 endif ()
 
 preamble()
