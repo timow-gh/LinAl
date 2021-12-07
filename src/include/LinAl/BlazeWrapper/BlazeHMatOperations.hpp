@@ -1,7 +1,8 @@
-#ifndef LINAL_BLAZEHMATRIXOPERATIONS_HPP
-#define LINAL_BLAZEHMATRIXOPERATIONS_HPP
+#ifndef LINAL_BLAZEHMATOPERATIONS_HPP
+#define LINAL_BLAZEHMATOPERATIONS_HPP
 
-#include "LinAl/BlazeWrapper/BlazeHMatrix.hpp"
+#include "LinAl/BlazeWrapper/BlazeHMat.hpp"
+#include "LinAl/BlazeWrapper/BlazeMatOperations.hpp"
 #include "LinAl/BlazeWrapper/BlazeUtil.hpp"
 #include "LinAl/BlazeWrapper/BlazeVecOperations.hpp"
 #include "blaze/math/Submatrix.h"
@@ -38,75 +39,70 @@ HMatrix<T> createTranslation(T x, T y, T z)
     return result;
 }
 
+template <typename T>
+void setTranslation(HMatrix<T>& hMatrix, const HVec<T>& translation)
+{
+    hMatrix(0, 3) = translation[0];
+    hMatrix(1, 3) = translation[1];
+    hMatrix(2, 3) = translation[2];
+}
+
+template <typename T>
+void setTranslation(HMatrix<T>& hMatrix, const Vec3<T>& translation)
+{
+    hMatrix(0, 3) = translation[0];
+    hMatrix(1, 3) = translation[1];
+    hMatrix(2, 3) = translation[2];
+}
+
 //! alpha in radians
 template <typename T>
 HMatrix<T> hMatXRot(T alpha)
 {
-    auto [cos, sin] = calcCosSin(alpha);
-    // clang-format off
-  return HMatrix<T>{
-      {1, 0,    0,    0},
-      {0, cos,  -sin, 0},
-      {0, sin,  cos,  0},
-      {0, 0,    0,    1}};
-    // clang-format on
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = mat3XRot(alpha);
+    return result;
 }
 
 //! alpha in radians
 template <typename T>
 HMatrix<T> hMatYRot(T alpha)
 {
-    auto [cos, sin] = calcCosSin(alpha);
-    // clang-format off
-  return HMatrix<T>{
-      {cos,   0,  sin,  0},
-      {0,     1,  0,    0},
-      {-sin,  0,  cos,  0},
-      {0,     0,  0,    1}};
-    // clang-format on
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = mat3YRot(alpha);
+    return result;
 }
 
 //! alpha in radians
 template <typename T>
 HMatrix<T> hMatZRot(T alpha)
 {
-    auto [cos, sin] = calcCosSin(alpha);
-    // clang-format off
-  return HMatrix<T>{
-      {cos, -sin, 0, 0},
-      {sin, cos,  0, 0},
-      {0,   0,    1, 0},
-      {0,   0,    0, 1}};
-    // clang-format on
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = mat3ZRot(alpha);
+    return result;
 }
 
 template <typename T>
-HMatrix<T> hMatAxisAngleRot(const Vec3<T>& axis, double_t angle)
+HMatrix<T> hMatAxisAngleRot(const HVec<T>& axis, T angle)
 {
-    Vec3<T> nAxis = LinAl::normalize(axis);
-    const T c = std::cos(angle);
-    const T C = 1 - c;
-    const T s = std::sin(angle);
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = matAxisAngleRot(hVecToVec3<T>(axis), angle);
+    return result;
+}
 
-    const T xxC = nAxis[0] * nAxis[0] * C;
-    const T yyC = nAxis[1] * nAxis[1] * C;
-    const T zzC = nAxis[2] * nAxis[2] * C;
-
-    const T xyC = nAxis[0] * nAxis[1] * C;
-    const T xzC = nAxis[0] * nAxis[2] * C;
-    const T yzC = nAxis[1] * nAxis[2] * C;
-
-    const T zs = nAxis[2] * s;
-    const T ys = nAxis[1] * s;
-    const T xs = nAxis[0] * s;
-
-    // clang-format off
-  return HMatrix<T>{
-      {xxC+c,   xyC-zs,   xzC+ys,   0},
-      {xyC+zs,  yyC+c,    yzC-xs,   0},
-      {xzC-ys,  yzC-xs,   zzC+c,    0},
-      {0,       0,        0,        1}};
-    // clang-format on
+//! Input Vectors are not normalized.
+//! Make sure the input vectors are normalized if scaling is not desired.
+template <typename T>
+HMatrix<T> rotationAlign(const HVec<T>& source, const HVec<T>& target)
+{
+    HMatrix<T> result = createIdentityHMatrix<T>();
+    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+    R = rotationAlign(hVecToVec3<T>(source), hVecToVec3<T>(target));
+    return result;
 }
 
 template <typename T>
@@ -152,4 +148,4 @@ void scaleTranslation(HMatrix<T>& matrix,
 
 } // namespace LinAl
 
-#endif // LINAL_BLAZEHMATRIXOPERATIONS_HPP
+#endif // LINAL_BLAZEHMATOPERATIONS_HPP
