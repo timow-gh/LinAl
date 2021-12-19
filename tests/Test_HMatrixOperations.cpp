@@ -140,4 +140,17 @@ TEST(HMatrixOperations, setTranslation)
     EXPECT_EQ(result, expected);
 }
 
+TEST(HMatrixOperations, getTranslation)
+{
+    Vec3d targetVec{0, 0, 1};
+    HMatrixd mat = createIdentityHMatrix<double_t>();
+    setTranslation(mat, targetVec);
+
+    Vec3d translation{};
+    getTranslation(mat, translation);
+
+    Vec3d expected{{0, 0, 1}};
+    EXPECT_EQ(translation, expected);
+}
+
 #pragma clang diagnostic pop

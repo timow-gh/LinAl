@@ -39,6 +39,16 @@ HMatrix<T> createTranslation(T x, T y, T z)
     return result;
 }
 
+template <typename T, std::size_t D>
+void getTranslation(const HMatrix<T>& hMatrix, LinAl::Vec<T, D>& result)
+{
+    result[0] = hMatrix(0, 3);
+    result[1] = hMatrix(1, 3);
+    result[2] = hMatrix(2, 3);
+    if constexpr (D == 4)
+        result[3] = hMatrix(3, 3);
+}
+
 template <typename T>
 void setTranslation(HMatrix<T>& hMatrix, const HVec<T>& translation)
 {
