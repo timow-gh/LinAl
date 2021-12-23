@@ -36,7 +36,7 @@ TEST(HMatrixOperations, xTranslation)
 
 TEST(HMatrixOperations, xRotation)
 {
-    HMatrix<float_t> hMatrix = hMatXRot(Core::PI_HALF);
+    HMatrix<float_t> hMatrix = hMatXRot(Core::PI_HALF<float_t>);
     HVec<float_t> start{0, 1, 0, 1};
     HVec<float_t> result = hMatrix * start;
     HVec<float_t> expected{0, 0, 1, 1};
@@ -45,7 +45,7 @@ TEST(HMatrixOperations, xRotation)
 
 TEST(HMatrixOperations, yRotation)
 {
-    HMatrix<float_t> hMatrix = hMatYRot(Core::PI_HALF);
+    HMatrix<float_t> hMatrix = hMatYRot(Core::PI_HALF<float_t>);
     HVec<float_t> start{0, 0, 1, 1};
     HVec<float_t> result = hMatrix * start;
     HVec<float_t> expected{1, 0, 0, 1};
@@ -54,7 +54,7 @@ TEST(HMatrixOperations, yRotation)
 
 TEST(HMatrixOperations, zRotation)
 {
-    HMatrix<float_t> hMatrix = hMatZRot(Core::PI_HALF);
+    HMatrix<float_t> hMatrix = hMatZRot(Core::PI_HALF<float_t>);
     HVec<float_t> start{1, 0, 0, 1};
     HVec<float_t> result = hMatrix * start;
     HVec<float_t> expected{0, 1, 0, 1};
@@ -65,7 +65,7 @@ TEST(HMatrixOperations, axisRotation_Y)
 {
     HMatrix<float_t> hMatrix =
         hMatAxisAngleRot(vec3ToHVec(Vec3f{0, 1, 0}),
-                         static_cast<float_t>(Core::PI_HALF));
+                         static_cast<float_t>(Core::PI_HALF<float_t>));
     HVec<float_t> start{0, 0, 1, 1};
     HVec<float_t> result = hMatrix * start;
     HVec<float_t> expected{1, 0, 0, 1};
@@ -76,7 +76,7 @@ TEST(HMatrixOperations, axisRotation)
 {
     Vec3d rotAxis = LinAl::cross(Vec3d{1, 0, 0}, Vec3d{0, 1, 1});
     HMatrix<double_t> hMatrix =
-        hMatAxisAngleRot(vec3ToHVec(rotAxis), Core::PI_HALF);
+        hMatAxisAngleRot(vec3ToHVec(rotAxis), Core::PI_HALF<double_t>);
     Vec3d startVec{0, 1, 1};
     startVec = LinAl::normalize(startVec);
     HVec<double_t> start{startVec[0], startVec[1], startVec[2], 1};

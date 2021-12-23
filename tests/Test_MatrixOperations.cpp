@@ -45,7 +45,7 @@ TEST(createLcsToGlobalRotationMatrix_vectors, Matrix)
 
 TEST(Matrix3dOperations, xRotation)
 {
-    Matrix3d rotMat = mat3XRot(Core::PI_HALF);
+    Matrix3d rotMat = mat3XRot(Core::PI_HALF<double_t>);
     Vec3d start{0, 1, 0};
     Vec3d result = rotMat * start;
     Vec3d expected{0, 0, 1};
@@ -54,7 +54,7 @@ TEST(Matrix3dOperations, xRotation)
 
 TEST(Matrix3dOperations, yRotation)
 {
-    Matrix3d rotMat = mat3YRot(Core::PI_HALF);
+    Matrix3d rotMat = mat3YRot(Core::PI_HALF<double_t>);
     Vec3d start{0, 0, 1};
     Vec3d result = rotMat * start;
     Vec3d expected{1, 0, 0};
@@ -63,7 +63,7 @@ TEST(Matrix3dOperations, yRotation)
 
 TEST(Matrix3dOperations, zRotation)
 {
-    Matrix3d rotMat = mat3ZRot(Core::PI_HALF);
+    Matrix3d rotMat = mat3ZRot(Core::PI_HALF<double_t>);
     Vec3d start{1, 0, 0};
     Vec3d result = rotMat * start;
     Vec3d expected{0, 1, 0};

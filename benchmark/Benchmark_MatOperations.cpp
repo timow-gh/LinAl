@@ -9,7 +9,7 @@ using namespace LinAl;
 
 static void BM_transpose_Mat3d(benchmark::State& state)
 {
-    auto mat = LinAl::mat3XRot(Core::PI / 180 * 90);
+    auto mat = LinAl::mat3XRot(Core::PI<double_t>/ 180.0 * 90.0);
     for (auto _: state)
     {
         LinAl::transpose(mat);

@@ -12,7 +12,7 @@ static void BM_mat3dXRot_Vec3d(benchmark::State& state)
     Vec3d source{1, 0, 0};
     for (auto _: state)
     {
-        Vec3d result = LinAl::mat3XRot(Core::PI / 180 * 90) * source;
+        Vec3d result = LinAl::mat3XRot(Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }
@@ -23,7 +23,7 @@ static void BM_mat3dYRot_Vec3d(benchmark::State& state)
     Vec3d source{1, 0, 0};
     for (auto _: state)
     {
-        Vec3d result = LinAl::mat3YRot(Core::PI / 180 * 90) * source;
+        Vec3d result = LinAl::mat3YRot(Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }
@@ -34,7 +34,7 @@ static void BM_mat3dZRot_Vec3d(benchmark::State& state)
     Vec3d source{1, 0, 0};
     for (auto _: state)
     {
-        Vec3d result = LinAl::mat3ZRot(Core::PI / 180 * 90) * source;
+        Vec3d result = LinAl::mat3ZRot(Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }
@@ -58,7 +58,7 @@ static void BM_matAxisAngleRot_Vec3d(benchmark::State& state)
     Vec3d rotAxis{0, 0, 1};
     for (auto _: state)
     {
-        Vec3d result = LinAl::matAxisAngleRot(rotAxis, Core::PI / 180 * 90) * source;
+        Vec3d result = LinAl::matAxisAngleRot(rotAxis, Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }

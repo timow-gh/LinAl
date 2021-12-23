@@ -12,7 +12,7 @@ static void BM_hMatdXRot_HVec(benchmark::State& state)
     HVecd source{1, 0, 0, 1};
     for (auto _: state)
     {
-        HVecd result = LinAl::hMatXRot(Core::PI / 180 * 90) * source;
+        HVecd result = LinAl::hMatXRot(Core::PI<double_t>/ 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }
@@ -23,7 +23,7 @@ static void BM_hMatdYRot_HVec(benchmark::State& state)
     HVecd source{1, 0, 0, 1};
     for (auto _: state)
     {
-        HVecd result = LinAl::hMatYRot(Core::PI / 180 * 90) * source;
+        HVecd result = LinAl::hMatYRot(Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }
@@ -34,7 +34,7 @@ static void BM_hMatdZRot_HVec(benchmark::State& state)
     HVecd source{1, 0, 0, 1};
     for (auto _: state)
     {
-        HVecd result = LinAl::hMatZRot(Core::PI / 180 * 90) * source;
+        HVecd result = LinAl::hMatZRot(Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }
@@ -59,7 +59,7 @@ static void BM_matAxisAngleRot_HVec(benchmark::State& state)
     for (auto _: state)
     {
         HVecd result =
-            LinAl::hMatAxisAngleRot(rotAxis, Core::PI / 180 * 90) * source;
+            LinAl::hMatAxisAngleRot(rotAxis, Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }
