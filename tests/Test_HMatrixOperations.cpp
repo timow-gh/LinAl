@@ -149,7 +149,7 @@ TEST(HMatrixOperations, getTranslation)
     Vec3d translation{};
     getTranslation(mat, translation);
 
-    Vec3d expected{{0, 0, 1}};
+    Vec3d expected{0, 0, 1};
     EXPECT_EQ(translation, expected);
 }
 
