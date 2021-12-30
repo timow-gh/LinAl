@@ -27,5 +27,6 @@ endfunction()
 
 create_linal_test(Test_HMatrixOperations)
 create_linal_test(Test_MatrixOperations)
+create_linal_test(Test_LinAlUtils)
 create_linal_test(Test_DotProduct)
 create_linal_test(Test_VecOperations)

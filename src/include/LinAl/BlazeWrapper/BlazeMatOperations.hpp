@@ -1,21 +1,21 @@
 #ifndef LINAL_BLAZEMATOPERATIONS_HPP
 #define LINAL_BLAZEMATOPERATIONS_HPP
 
-#include "LinAl/BlazeWrapper/BlazeHMat.hpp"
-#include "blaze/math/Submatrix.h"
-#include <iostream>
+#include <Core/Utils/Compiler.hpp>
+#include <LinAl/BlazeWrapper/BlazeHMat.hpp>
+#include <blaze/math/Submatrix.h>
 
 namespace LinAl
 {
 template <typename T, std::size_t M, std::size_t N>
-void transpose(Matrix<T, M, N>& matrix)
+CORE_CONSTEXPR void transpose(Matrix<T, M, N>& matrix)
 {
     blaze::transpose(matrix);
 }
 
 //! alpha in radians
 template <typename T>
-Matrix3<T> mat3XRot(T alpha)
+CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3XRot(T alpha)
 {
     auto [cos, sin] = calcCosSin(alpha);
     // clang-format off
@@ -27,7 +27,7 @@ Matrix3<T> mat3XRot(T alpha)
 
 //! alpha in radians
 template <typename T>
-Matrix3<T> mat3YRot(T alpha)
+CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3YRot(T alpha)
 {
     auto [cos, sin] = calcCosSin(alpha);
     // clang-format off
@@ -39,7 +39,7 @@ Matrix3<T> mat3YRot(T alpha)
 
 //! alpha in radians
 template <typename T>
-Matrix3<T> mat3ZRot(T alpha)
+CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3ZRot(T alpha)
 {
     auto [cos, sin] = calcCosSin(alpha);
     // clang-format off
@@ -51,7 +51,7 @@ Matrix3<T> mat3ZRot(T alpha)
 
 //! Angle in radians
 template <typename T>
-Matrix3<T> matAxisAngleRot(const Vec3<T>& axis, T angleRad)
+CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> matAxisAngleRot(const Vec3<T>& axis, T angleRad)
 {
     Vec3<T> nAxis = LinAl::normalize(axis);
     const T c = std::cos(angleRad);
@@ -81,9 +81,9 @@ Matrix3<T> matAxisAngleRot(const Vec3<T>& axis, T angleRad)
 //! Input Vectors are not normalized.
 //! Make sure the input vectors are normalized if scaling is not desired.
 template <typename T>
-Matrix3<T> rotationAlign(const Vec3<T>& source, const Vec3<T>& target)
+CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> rotationAlign(const Vec3<T>& source, const Vec3<T>& target)
 {
-// clang-format off
+    // clang-format off
     https://iquilezles.org/www/articles/noacos/noacos.htm
     /*
         v * v^T     (  c,     v.z, -v.y)
@@ -105,7 +105,8 @@ Matrix3<T> rotationAlign(const Vec3<T>& source, const Vec3<T>& target)
 }
 
 template <typename T>
-Matrix3<T> createLcsTransformation(const Vec3<T>& lcsX, const Vec3<T>& lcsY, const Vec3<T>& lcsZ)
+CORE_NODISCARD CORE_CONSTEXPR Matrix3<T>
+createLcsTransformation(const Vec3<T>& lcsX, const Vec3<T>& lcsY, const Vec3<T>& lcsZ)
 {
     // clang-format off
     return Matrix3<T>{{lcsX[0], lcsY[0], lcsZ[0]},
@@ -114,7 +115,7 @@ Matrix3<T> createLcsTransformation(const Vec3<T>& lcsX, const Vec3<T>& lcsY, con
     // clang-format on
 }
 template <typename T, std::size_t N>
-Matrix3<T> createLcsTransformation(const Vec3Array<T, N>& lcsVectors)
+CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> createLcsTransformation(const Vec3Array<T, N>& lcsVectors)
 {
     return createLcsTransformation(lcsVectors[0], lcsVectors[1], lcsVectors[2]);
 }

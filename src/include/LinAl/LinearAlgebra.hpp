@@ -2,21 +2,21 @@
 #define GLFWTESTAPP_LINEARALGEBRA_H
 
 // clang-format off
-#include "BlazeWrapper/BlazeContainers.hpp"
-#include "BlazeWrapper/BlazeUtil.hpp"
-#include "BlazeWrapper/BlazeVec.hpp"
-#include "BlazeWrapper/BlazeVec2.hpp"
-#include "BlazeWrapper/BlazeVec3.hpp"
-#include "BlazeWrapper/BlazeVec4.hpp"
-#include "BlazeWrapper/BlazeVecOperations.hpp"
-#include "BlazeWrapper/BlazeGlMatrix.hpp"
-#include "BlazeWrapper/BlazeGlMatrixOperations.hpp"
-#include "BlazeWrapper/BlazeGlVec.hpp"
-#include "BlazeWrapper/BlazeMat.hpp"
-#include "BlazeWrapper/BlazeMatOperations.hpp"
-#include "BlazeWrapper/BlazeHMat.hpp"
-#include "BlazeWrapper/BlazeHMatOperations.hpp"
-#include "BlazeWrapper/BlazeHVec.hpp"
+#include <LinAl/BlazeWrapper/BlazeContainers.hpp>
+#include <LinAl/BlazeWrapper/BlazeUtil.hpp>
+#include <LinAl/BlazeWrapper/BlazeVec.hpp>
+#include <LinAl/BlazeWrapper/BlazeVec2.hpp>
+#include <LinAl/BlazeWrapper/BlazeVec3.hpp>
+#include <LinAl/BlazeWrapper/BlazeVec4.hpp>
+#include <LinAl/BlazeWrapper/BlazeVecOperations.hpp>
+#include <LinAl/BlazeWrapper/BlazeGlMatrix.hpp>
+#include <LinAl/BlazeWrapper/BlazeGlMatrixOperations.hpp>
+#include <LinAl/BlazeWrapper/BlazeGlVec.hpp>
+#include <LinAl/BlazeWrapper/BlazeMat.hpp>
+#include <LinAl/BlazeWrapper/BlazeMatOperations.hpp>
+#include <LinAl/BlazeWrapper/BlazeHMat.hpp>
+#include <LinAl/BlazeWrapper/BlazeHMatOperations.hpp>
+#include <LinAl/BlazeWrapper/BlazeHVec.hpp>
 // clang-format on
 
 #endif // GLFWTESTAPP_LINEARALGEBRA_H

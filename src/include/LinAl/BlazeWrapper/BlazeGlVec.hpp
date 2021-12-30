@@ -1,7 +1,7 @@
 #ifndef GLFWTESTAPP_BLAZEGLVECTOR_HPP
 #define GLFWTESTAPP_BLAZEGLVECTOR_HPP
 
-#include "LinAlBlaze.hpp"
+#include <LinAl/BlazeWrapper/LinAlBlaze.hpp>
 
 namespace LinAl
 {

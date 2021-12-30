@@ -1,9 +1,9 @@
 #ifndef GLFWTESTAPP_BLAZECONTAINERS_H
 #define GLFWTESTAPP_BLAZECONTAINERS_H
 
-#include "BlazeVec.hpp"
-#include "BlazeVec2.hpp"
-#include "BlazeVec3.hpp"
+#include <LinAl/BlazeWrapper/BlazeVec.hpp>
+#include <LinAl/BlazeWrapper/BlazeVec2.hpp>
+#include <LinAl/BlazeWrapper/BlazeVec3.hpp>
 #include <array>
 #include <memory>
 #include <vector>

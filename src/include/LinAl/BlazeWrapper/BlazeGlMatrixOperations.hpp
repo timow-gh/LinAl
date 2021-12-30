@@ -1,8 +1,8 @@
 #ifndef GLFWTESTAPP_BLAZEGLMATRIXOPERATIONS_HPP
 #define GLFWTESTAPP_BLAZEGLMATRIXOPERATIONS_HPP
 
-#include "BlazeGlMatrix.hpp"
-#include "BlazeGlVec.hpp"
+#include <LinAl/BlazeWrapper/BlazeGlMatrix.hpp>
+#include <LinAl/BlazeWrapper/BlazeGlVec.hpp>
 #include "linal_export.h"
 
 namespace LinAl

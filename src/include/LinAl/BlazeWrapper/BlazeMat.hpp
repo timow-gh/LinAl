@@ -1,8 +1,8 @@
 #ifndef GLFWTESTAPP_BLAZEMATRIXOPERATIONS_H
 #define GLFWTESTAPP_BLAZEMATRIXOPERATIONS_H
 
-#include "BlazeContainers.hpp"
-#include "BlazeVec.hpp"
+#include <LinAl/BlazeWrapper/BlazeContainers.hpp>
+#include <LinAl/BlazeWrapper/BlazeVec.hpp>
 
 namespace LinAl
 {

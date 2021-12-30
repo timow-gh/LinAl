@@ -28,6 +28,7 @@ target_include_directories(Lin_Al
 target_link_libraries(Lin_Al
         PUBLIC
         LinAlBase::LinAlBase
+        Core::Utils
         Core::Math)
 
 add_library(LinAl::LinAl ALIAS Lin_Al)

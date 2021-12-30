@@ -1,7 +1,7 @@
 #ifndef LINAL_BLAZEVEC2_HPP
 #define LINAL_BLAZEVEC2_HPP
 
-#include "BlazeVec.hpp"
+#include <LinAl/BlazeWrapper/BlazeVec.hpp>
 
 namespace LinAl
 {
