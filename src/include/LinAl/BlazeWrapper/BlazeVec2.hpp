@@ -7,16 +7,8 @@ namespace LinAl
 {
 template <typename T>
 using Vec2 = blaze::StaticVector<T, 2>;
-using Vec2f = blaze::StaticVector<float_t,
-                                  2,
-                                  blaze::columnVector,
-                                  blaze::aligned,
-                                  blaze::padded>;
-using Vec2d = blaze::StaticVector<double_t,
-                                  2,
-                                  blaze::columnVector,
-                                  blaze::aligned,
-                                  blaze::padded>;
+using Vec2f = blaze::StaticVector<float_t, 2, blaze::columnVector, blaze::aligned, blaze::padded>;
+using Vec2d = blaze::StaticVector<double_t, 2, blaze::columnVector, blaze::aligned, blaze::padded>;
 
 template <typename T>
 using Vec2Allocator = blaze::AlignedAllocator<Vec2<T>>;

@@ -49,25 +49,22 @@ template <typename T, std::size_t D>
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] constexpr Vec<T, D> projection(const Vec<T, D>& source,
-                                             const Vec<T, D>& target)
+[[nodiscard]] constexpr Vec<T, D> projection(const Vec<T, D>& source, const Vec<T, D>& target)
 {
     return target * (dot(source, target)) / (dot(target, target));
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] constexpr Vec<T, D> rejection(const Vec<T, D>& source,
-                                            const Vec<T, D>& target)
+[[nodiscard]] constexpr Vec<T, D> rejection(const Vec<T, D>& source, const Vec<T, D>& target)
 {
     return source - projection(source, target);
 }
 
 template <typename T, std::size_t D>
-[[nodiscard]] constexpr bool collinear(const Vec<T, D>& source,
-                                       const Vec<T, D>& target)
+[[nodiscard]] constexpr bool collinear(const Vec<T, D>& source, const Vec<T, D>& target)
 {
-    return Core::isZero(T(1) - std::abs(LinAl::dot(LinAl::normalize(source),
-                                                   LinAl::normalize(target))));
+    return Core::isZero(T(1) -
+                        std::abs(LinAl::dot(LinAl::normalize(source), LinAl::normalize(target))));
 }
 
 // clang-format off

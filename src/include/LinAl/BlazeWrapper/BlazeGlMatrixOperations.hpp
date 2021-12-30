@@ -7,8 +7,7 @@
 
 namespace LinAl
 {
-void LINAL_EXPORT setGlMatrixTranslation(GlMatrix& matrix,
-                                         const LinAl::GLVecf& translation);
+void LINAL_EXPORT setGlMatrixTranslation(GlMatrix& matrix, const LinAl::GLVecf& translation);
 }
 
 #endif // GLFWTESTAPP_BLAZEGLMATRIXOPERATIONS_HPP

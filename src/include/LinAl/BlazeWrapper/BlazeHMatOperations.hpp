@@ -130,10 +130,7 @@ HMatrix<T> inverse(const HMatrix<T>& matrix)
 }
 
 template <typename T>
-void scaleTranslation(HMatrix<T>& matrix,
-                      T scaleFactor,
-                      T lowerLimit,
-                      T upperLimit)
+void scaleTranslation(HMatrix<T>& matrix, T scaleFactor, T lowerLimit, T upperLimit)
 {
     auto translSubMatrix = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(matrix);
     translSubMatrix = translSubMatrix * scaleFactor;

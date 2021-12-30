@@ -5,12 +5,8 @@
 
 namespace LinAl
 {
-using GlMatrix = blaze::StaticMatrix<float_t,
-                                     4,
-                                     4,
-                                     blaze::rowMajor,
-                                     blaze::unaligned,
-                                     blaze::unpadded>;
+using GlMatrix =
+    blaze::StaticMatrix<float_t, 4, 4, blaze::rowMajor, blaze::unaligned, blaze::unpadded>;
 
 using GlProjMatrixAllocator = blaze::AlignedAllocator<GlMatrix>;
 

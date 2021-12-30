@@ -83,7 +83,7 @@ Matrix3<T> matAxisAngleRot(const Vec3<T>& axis, T angle)
 template <typename T>
 Matrix3<T> rotationAlign(const Vec3<T>& source, const Vec3<T>& target)
 {
-    // clang-format off
+// clang-format off
     https://iquilezles.org/www/articles/noacos/noacos.htm
     /*
         v * v^T     (  c,     v.z, -v.y)
@@ -105,9 +105,7 @@ Matrix3<T> rotationAlign(const Vec3<T>& source, const Vec3<T>& target)
 }
 
 template <typename T>
-Matrix3<T> createLcsTransformation(const Vec3<T>& lcsX,
-                                   const Vec3<T>& lcsY,
-                                   const Vec3<T>& lcsZ)
+Matrix3<T> createLcsTransformation(const Vec3<T>& lcsX, const Vec3<T>& lcsY, const Vec3<T>& lcsZ)
 {
     // clang-format off
     return Matrix3<T>{{lcsX[0], lcsY[0], lcsZ[0]},
