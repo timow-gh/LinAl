@@ -51,12 +51,12 @@ Matrix3<T> mat3ZRot(T alpha)
 
 //! Angle in radians
 template <typename T>
-Matrix3<T> matAxisAngleRot(const Vec3<T>& axis, T angle)
+Matrix3<T> matAxisAngleRot(const Vec3<T>& axis, T angleRad)
 {
     Vec3<T> nAxis = LinAl::normalize(axis);
-    const T c = std::cos(angle);
+    const T c = std::cos(angleRad);
     const T C = 1 - c;
-    const T s = std::sin(angle);
+    const T s = std::sin(angleRad);
 
     const T xxC = nAxis[0] * nAxis[0] * C;
     const T yyC = nAxis[1] * nAxis[1] * C;
