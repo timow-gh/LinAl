@@ -1,22 +1,14 @@
 #ifndef LINAL_BLAZEVEC3_HPP
 #define LINAL_BLAZEVEC3_HPP
 
-#include "BlazeVec.hpp"
+#include <LinAl/BlazeWrapper/BlazeVec.hpp>
 
 namespace LinAl
 {
 template <typename T>
 using Vec3 = blaze::StaticVector<T, 3>;
-using Vec3f = blaze::StaticVector<float_t,
-                                  3,
-                                  blaze::columnVector,
-                                  blaze::aligned,
-                                  blaze::padded>;
-using Vec3d = blaze::StaticVector<double_t,
-                                  3,
-                                  blaze::columnVector,
-                                  blaze::aligned,
-                                  blaze::padded>;
+using Vec3f = blaze::StaticVector<float_t, 3, blaze::columnVector, blaze::aligned, blaze::padded>;
+using Vec3d = blaze::StaticVector<double_t, 3, blaze::columnVector, blaze::aligned, blaze::padded>;
 
 template <typename T>
 using Vec3Allocator = blaze::AlignedAllocator<Vec<T, 3>>;

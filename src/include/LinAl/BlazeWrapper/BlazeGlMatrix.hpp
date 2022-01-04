@@ -1,16 +1,12 @@
 #ifndef GLFWTESTAPP_BLAZEGLMATRIX_HPP
 #define GLFWTESTAPP_BLAZEGLMATRIX_HPP
 
-#include "LinAlBlaze.hpp"
+#include <LinAl/BlazeWrapper/LinAlBlaze.hpp>
 
 namespace LinAl
 {
-using GlMatrix = blaze::StaticMatrix<float_t,
-                                     4,
-                                     4,
-                                     blaze::rowMajor,
-                                     blaze::unaligned,
-                                     blaze::unpadded>;
+using GlMatrix =
+    blaze::StaticMatrix<float_t, 4, 4, blaze::rowMajor, blaze::unaligned, blaze::unpadded>;
 
 using GlProjMatrixAllocator = blaze::AlignedAllocator<GlMatrix>;
 
