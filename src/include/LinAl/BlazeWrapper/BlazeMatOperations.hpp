@@ -84,7 +84,7 @@ template <typename T>
 Matrix3<T> rotationAlign(const Vec3<T>& source, const Vec3<T>& target)
 {
     // clang-format off
-    https://iquilezles.org/www/articles/noacos/noacos.htm
+    // https://iquilezles.org/www/articles/noacos/noacos.htm
     /*
         v * v^T     (  c,     v.z, -v.y)
     M = -------  +  ( -v.z,   c,    v.x)
