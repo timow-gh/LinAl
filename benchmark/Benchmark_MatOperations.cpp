@@ -1,3 +1,6 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wredundant-decls"
+
 #include <Core/Math/Constants.hpp>
 #include <LinAl/LinearAlgebra.hpp>
 #include <benchmark/benchmark.h>
@@ -17,3 +20,5 @@ BENCHMARK(BM_transpose_Mat3d);
 
 // Run the benchmark
 BENCHMARK_MAIN();
+
+#pragma GCC diagnostic pop

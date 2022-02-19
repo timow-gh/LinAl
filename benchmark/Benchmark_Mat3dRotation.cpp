@@ -1,3 +1,6 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wredundant-decls"
+
 #include <Core/Math/Constants.hpp>
 #include <LinAl/LinearAlgebra.hpp>
 #include <benchmark/benchmark.h>
@@ -63,3 +66,5 @@ BENCHMARK(BM_matAxisAngleRot_Vec3d);
 
 // Run the benchmark
 BENCHMARK_MAIN();
+
+#pragma GCC diagnostic pop

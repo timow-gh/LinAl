@@ -27,10 +27,11 @@ target_include_directories(Lin_Al
         $<BUILD_INTERFACE:${LinAl_BINARY_DIR}/src>)
 target_link_libraries(Lin_Al
         PUBLIC
-        LinAlBase::LinAlBase
         Core::Settings
         Core::Utils
-        Core::Math)
+        Core::Math
+        LinAlBase::LinAlBase
+        )
 
 add_library(LinAl::LinAl ALIAS Lin_Al)
 set_target_properties(Lin_Al

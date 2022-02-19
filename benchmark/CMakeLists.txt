@@ -13,9 +13,11 @@ else ()
 endif ()
 FetchContent_MakeAvailable(benchmark)
 
-target_compile_options(benchmark INTERFACE
-        "-Wno-weak-vtables"
-        )
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    target_compile_options(benchmark INTERFACE
+            "-Wno-weak-vtables"
+            )
+endif ()
 
 function(create_linal_benchmark benchMarkName)
     add_executable(${benchMarkName} ${benchMarkName}.cpp)
