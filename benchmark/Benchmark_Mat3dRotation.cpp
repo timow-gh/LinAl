@@ -1,6 +1,3 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-err58-cpp"
-
 #include <Core/Math/Constants.hpp>
 #include <LinAl/LinearAlgebra.hpp>
 #include <benchmark/benchmark.h>
@@ -66,4 +63,3 @@ BENCHMARK(BM_matAxisAngleRot_Vec3d);
 
 // Run the benchmark
 BENCHMARK_MAIN();
-#pragma clang diagnostic pop

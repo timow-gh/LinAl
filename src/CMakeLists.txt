@@ -28,6 +28,7 @@ target_include_directories(Lin_Al
 target_link_libraries(Lin_Al
         PUBLIC
         LinAlBase::LinAlBase
+        Core::Settings
         Core::Utils
         Core::Math)
 
@@ -40,7 +41,6 @@ set_target_properties(Lin_Al
         LINKER_LANGUAGE CXX
         EXPORT_NAME LinAl)
 target_compile_features(Lin_Al INTERFACE cxx_std_17)
-
 
 include(GenerateExportHeader)
 generate_export_header(Lin_Al BASE_NAME LinAl)

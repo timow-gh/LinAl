@@ -13,6 +13,10 @@ else ()
 endif ()
 FetchContent_MakeAvailable(benchmark)
 
+target_compile_options(benchmark INTERFACE
+        "-Wno-weak-vtables"
+        )
+
 function(create_linal_benchmark benchMarkName)
     add_executable(${benchMarkName} ${benchMarkName}.cpp)
     target_link_libraries(${benchMarkName}

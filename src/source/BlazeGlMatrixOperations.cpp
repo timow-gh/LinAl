@@ -1,4 +1,4 @@
-#include "LinAl/BlazeWrapper/BlazeGlMatrixOperations.hpp"
+#include <LinAl/BlazeWrapper/BlazeGlMatrixOperations.hpp>
 
 namespace LinAl
 {

@@ -1,15 +1,10 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-err58-cpp"
-
-#include "LinAl/LinearAlgebra.hpp"
-#include "gtest/gtest.h"
+#include <LinAl/LinearAlgebra.hpp>
+#include <gtest/gtest.h>
 #include <iostream>
 
 using namespace LinAl;
 
-class DotProductFixture
-    : public ::testing::Test
-{
+class DotProductFixture : public ::testing::Test {
   protected:
     Vec3d m_vec3d{LinAl::X_VEC3D};
 };
@@ -31,5 +26,3 @@ TEST_F(DotProductFixture, collinearOppositeDir)
     auto dotP = dot(-LinAl::X_VEC3D, m_vec3d);
     EXPECT_DOUBLE_EQ(dotP, -1.0);
 }
-
-#pragma clang diagnostic pop

@@ -91,8 +91,8 @@ CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> rotationAlign(const Vec3<T>& source, co
          1+c        (  v.y,  -v.x,  c  )
     */
     const Vec3<T> v = cross(source, target);
-    const float c = dot(source, target);
-    const float k = 1.0f / (1.0f + c);
+    const T c = dot(source, target);
+    const T k = 1.0f / (1.0f + c);
 
     const T v10k = v[1]*v[0]*k;
     const T v20k = v[2]*v[0]*k;

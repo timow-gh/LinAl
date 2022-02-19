@@ -1,19 +1,18 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-err58-cpp"
-
-#include "Core/Math/Constants.hpp"
-#include "LinAl/LinearAlgebra.hpp"
-#include "gtest/gtest.h"
+#include <Core/Math/Constants.hpp>
+#include <LinAl/LinearAlgebra.hpp>
+#include <gtest/gtest.h>
 #include <iostream>
 
 using namespace LinAl;
+
+Vec3dArray<3> create90DegRotatedLcs();
 
 Vec3dArray<3> create90DegRotatedLcs()
 {
     return Vec3dArray<3>{Vec3d{0, 1, 0}, Vec3d{-1, 0, 0}, Vec3d{0, 0, 1}};
 }
 
-void testZRotation(const Vec3d& a, const Matrix3d& rotationMatrix)
+static void testZRotation(const Vec3d& a, const Matrix3d& rotationMatrix)
 {
     Vec3d b = rotationMatrix * a;
     Vec3d bExpected{0, 1, 1};
@@ -36,9 +35,8 @@ TEST(createLcsToGlobalRotationMatrix_vectors, Matrix)
 {
     Vec3d a{1, 0, 1};
     auto rotatedLcs = create90DegRotatedLcs();
-    Matrix3d rotationMatrix = LinAl::createLcsTransformation(rotatedLcs[0],
-                                                             rotatedLcs[1],
-                                                             rotatedLcs[2]);
+    Matrix3d rotationMatrix =
+        LinAl::createLcsTransformation(rotatedLcs[0], rotatedLcs[1], rotatedLcs[2]);
 
     testZRotation(a, rotationMatrix);
 }
@@ -73,8 +71,7 @@ TEST(Matrix3dOperations, zRotation)
 TEST(createLcsToGlobalRotationMatrix_array, Matrix)
 {
     Vec3d a{1, 0, 1};
-    Matrix3d rotationMatrix =
-        LinAl::createLcsTransformation(create90DegRotatedLcs());
+    Matrix3d rotationMatrix = LinAl::createLcsTransformation(create90DegRotatedLcs());
 
     testZRotation(a, rotationMatrix);
 }
@@ -123,5 +120,3 @@ TEST(Matrix3Operations, rotationAlign_xToOnes)
     Vec3d result = rotMat * xDir;
     EXPECT_EQ(result, targetVec);
 }
-
-#pragma clang diagnostic pop
