@@ -2,6 +2,8 @@
 #define GLFWTESTAPP_LINEARALGEBRA_H
 
 // clang-format off
+#include <Core/Utils/Warnings.h>
+DISABLE_ALL_WARNINGS
 #include <LinAl/BlazeWrapper/BlazeContainers.hpp>
 #include <LinAl/BlazeWrapper/BlazeUtil.hpp>
 #include <LinAl/BlazeWrapper/BlazeVec.hpp>
@@ -17,6 +19,7 @@
 #include <LinAl/BlazeWrapper/BlazeHMat.hpp>
 #include <LinAl/BlazeWrapper/BlazeHMatOperations.hpp>
 #include <LinAl/BlazeWrapper/BlazeHVec.hpp>
+ENABLE_ALL_WARNINGS
 // clang-format on
 
 #endif // GLFWTESTAPP_LINEARALGEBRA_H
