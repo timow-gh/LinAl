@@ -5,11 +5,9 @@
 
 using namespace LinAl;
 
-Vec3dArray<3> create90DegRotatedLcs();
-
 Vec3dArray<3> create90DegRotatedLcs()
 {
-    return Vec3dArray<3>{Vec3d{0, 1, 0}, Vec3d{-1, 0, 0}, Vec3d{0, 0, 1}};
+    return {Vec3d{0, 1, 0}, Vec3d{-1, 0, 0}, Vec3d{0, 0, 1}};
 }
 
 static void testZRotation(const Vec3d& a, const Matrix3d& rotationMatrix)
@@ -34,7 +32,7 @@ static void testZRotation(const Vec3d& a, const Matrix3d& rotationMatrix)
 TEST(createLcsToGlobalRotationMatrix_vectors, Matrix)
 {
     Vec3d a{1, 0, 1};
-    auto rotatedLcs = create90DegRotatedLcs();
+    Vec3dArray<3> rotatedLcs = create90DegRotatedLcs();
     Matrix3d rotationMatrix =
         LinAl::createLcsTransformation(rotatedLcs[0], rotatedLcs[1], rotatedLcs[2]);
 
@@ -71,7 +69,8 @@ TEST(Matrix3dOperations, zRotation)
 TEST(createLcsToGlobalRotationMatrix_array, Matrix)
 {
     Vec3d a{1, 0, 1};
-    Matrix3d rotationMatrix = LinAl::createLcsTransformation(create90DegRotatedLcs());
+    Vec3dArray<3> lcs = create90DegRotatedLcs();
+    Matrix3d rotationMatrix = LinAl::createLcsTransformation(lcs[0], lcs[1], lcs[2]);
 
     testZRotation(a, rotationMatrix);
 }
@@ -79,7 +78,7 @@ TEST(createLcsToGlobalRotationMatrix_array, Matrix)
 TEST(Matrix3Operations, rotationAlign_xToy)
 {
     Vec3d xDir = X_VEC3D;
-    Matrix3d rotMat = rotationAlign<double_t>(xDir, Y_VEC3D);
+    Matrix3d rotMat = rotationAlign(xDir, Y_VEC3D);
     Vec3d result = rotMat * xDir;
     EXPECT_EQ(Y_VEC3D, result);
 }
@@ -87,7 +86,7 @@ TEST(Matrix3Operations, rotationAlign_xToy)
 TEST(Matrix3Operations, rotationAlign_xToz)
 {
     Vec3d xDir = X_VEC3D;
-    Matrix3d rotMat = rotationAlign<double_t>(xDir, Z_VEC3D);
+    Matrix3d rotMat = rotationAlign(xDir, Z_VEC3D);
     Vec3d result = rotMat * xDir;
     EXPECT_EQ(Z_VEC3D, result);
 }
@@ -95,7 +94,7 @@ TEST(Matrix3Operations, rotationAlign_xToz)
 TEST(Matrix3Operations, rotationAlign_xTox)
 {
     Vec3d xDir = X_VEC3D;
-    Matrix3d rotMat = rotationAlign<double_t>(xDir, X_VEC3D);
+    Matrix3d rotMat = rotationAlign(xDir, X_VEC3D);
     Vec3d result = rotMat * xDir;
     EXPECT_EQ(X_VEC3D, result);
 }
@@ -105,7 +104,7 @@ TEST(Matrix3Operations, rotationAlign_xToNormalizedOnes)
     Vec3d xDir = X_VEC3D;
     Vec3d targetVec{1, 1, 1};
     targetVec /= LinAl::norm2(targetVec);
-    Matrix3d rotMat = rotationAlign<double_t>(xDir, targetVec);
+    Matrix3d rotMat = rotationAlign(xDir, targetVec);
     Vec3d result = rotMat * xDir;
     constexpr double_t eps = 1E-7;
     for (std::size_t i{0}; i < 3; ++i)
@@ -116,7 +115,7 @@ TEST(Matrix3Operations, rotationAlign_xToOnes)
 {
     Vec3d xDir = {1, 0, 0};
     Vec3d targetVec{1, 1, 1};
-    Matrix3d rotMat = rotationAlign<double_t>(xDir, targetVec);
+    Matrix3d rotMat = rotationAlign(xDir, targetVec);
     Vec3d result = rotMat * xDir;
     EXPECT_EQ(result, targetVec);
 }

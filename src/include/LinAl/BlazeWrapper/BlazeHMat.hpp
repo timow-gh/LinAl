@@ -5,34 +5,23 @@
 
 namespace LinAl
 {
-// clang-format off
-template<typename T>
-using HMatrix = blaze::StaticMatrix<T,
-                                    4,
-                                    4,
-                                    blaze::rowMajor,
-                                    blaze::aligned,
-                                    blaze::padded>;
 
-using HMatrixf = blaze::StaticMatrix<float_t,
-                                    4,
-                                    4,
-                                    blaze::rowMajor,
-                                    blaze::aligned,
-                                    blaze::padded>;
+template <typename T>
+class HMatrix
+    : public blaze::StaticMatrix<T, 4, 4, blaze::rowMajor, blaze::aligned, blaze::padded> {
+  public:
+    using blaze::StaticMatrix<T, 4, 4>::StaticMatrix;
+    using value_type = T;
+};
 
-using HMatrixd = blaze::StaticMatrix<double_t,
-                                    4,
-                                    4,
-                                    blaze::rowMajor,
-                                    blaze::aligned,
-                                    blaze::padded>;
+using HMatrixf = HMatrix<float_t>;
+using HMatrixd = HMatrix<double_t>;
 
-template<typename T>
+template <typename T>
 using HMatrixAllocator = blaze::AlignedAllocator<HMatrix<T>>;
-using HMatrixfAllocator = blaze::AlignedAllocator<HMatrixf>;
-using HMatrixdAllocator = blaze::AlignedAllocator<HMatrixd>;
-// clang-format on
+using HMatrixAllocatorf = HMatrixAllocator<HMatrixf>;
+using HMatrixAllocatord = HMatrixAllocator<HMatrixd>;
+
 } // namespace LinAl
 
 #endif // LINAL_BLAZEHMAT_HPP

@@ -3,9 +3,6 @@ set(linAl_HEADER
         include/LinAl/BlazeWrapper/BlazeVec.hpp
         include/LinAl/BlazeWrapper/BlazeMat.hpp
         include/LinAl/BlazeWrapper/BlazeContainers.hpp
-        include/LinAl/BlazeWrapper/BlazeGlMatrix.hpp
-        include/LinAl/BlazeWrapper/BlazeGlVec.hpp
-        include/LinAl/BlazeWrapper/BlazeGlMatrixOperations.hpp
         include/LinAl/BlazeWrapper/BlazeMatOperations.hpp
         include/LinAl/BlazeWrapper/BlazeUtil.hpp
         include/LinAl/BlazeWrapper/BlazeVec2.hpp
@@ -14,11 +11,9 @@ set(linAl_HEADER
         include/LinAl/BlazeWrapper/BlazeHMat.hpp
         include/LinAl/BlazeWrapper/BlazeHVec.hpp
         include/LinAl/BlazeWrapper/BlazeHMatOperations.hpp
-        include/LinAl/LinearAlgebra.hpp
-        include/LinAl/LinearAlgebraUtil.hpp)
+        include/LinAl/LinearAlgebra.hpp)
 
-set(linAl_SOURCES
-        source/BlazeGlMatrixOperations.cpp)
+set(linAl_SOURCES)
 
 add_library(Lin_Al ${linAl_HEADER} ${linAl_SOURCES})
 target_include_directories(Lin_Al

@@ -11,30 +11,30 @@ namespace LinAl
 {
 
 template <typename T, std::size_t D>
-CORE_NODISCARD CORE_CONSTEXPR T dot(const Vec<T, D>& lhs, const Vec<T, D>& rhs)
+CORE_NODISCARD CORE_CONSTEXPR auto dot(Vec<T, D> lhs, Vec<T, D> rhs)
 {
     return blaze::dot(lhs, rhs);
 }
 
-template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR Vec3<T> cross(const Vec3<T>& lhs, const Vec3<T>& rhs)
+template <typename T, std::size_t D>
+CORE_NODISCARD CORE_CONSTEXPR Vec<T, D> cross(Vec<T, D> lhs, Vec<T, D> rhs)
 {
     return blaze::cross(lhs, rhs);
 }
 
 template <typename T, std::size_t D>
-CORE_NODISCARD CORE_CONSTEXPR T norm2Squared(const Vec<T, D>& vector)
+CORE_NODISCARD CORE_CONSTEXPR auto norm2Squared(Vec<T, D> vector)
 {
-    T sum{0};
-    for (const T& value: vector)
+    typename Vec<T, D>::value_type sum{0};
+    for (const auto& value: vector)
         sum += value * value;
     return sum;
 }
 
 template <typename T, std::size_t D>
-CORE_NODISCARD CORE_CONSTEXPR T norm2(const Vec<T, D>& vector)
+CORE_NODISCARD CORE_CONSTEXPR typename Vec<T, D>::value_type norm2(Vec<T, D> vec)
 {
-    return blaze::norm(vector);
+    return blaze::norm(vec);
 }
 
 template <typename T>
@@ -44,27 +44,27 @@ CORE_NODISCARD CORE_CONSTEXPR T norm2(const HVec<T>& hVec)
 }
 
 template <typename T, std::size_t D>
-CORE_NODISCARD CORE_CONSTEXPR Vec<T, D> normalize(const Vec<T, D>& vector)
+CORE_NODISCARD CORE_CONSTEXPR Vec<T, D> normalize(Vec<T, D> vector)
 {
     return Vec<T, D>{blaze::normalize(vector)};
 }
 
 template <typename T, std::size_t D>
-CORE_NODISCARD CORE_CONSTEXPR Vec<T, D> projection(const Vec<T, D>& source, const Vec<T, D>& target)
+CORE_NODISCARD CORE_CONSTEXPR Vec<T, D> projection(Vec<T, D> source, Vec<T, D> target)
 {
     return target * (dot(source, target)) / (dot(target, target));
 }
 
 template <typename T, std::size_t D>
-CORE_NODISCARD CORE_CONSTEXPR Vec<T, D> rejection(const Vec<T, D>& source, const Vec<T, D>& target)
+CORE_NODISCARD CORE_CONSTEXPR Vec<T, D> rejection(Vec<T, D> source, Vec<T, D> target)
 {
     return source - projection(source, target);
 }
 
 template <typename T, std::size_t D>
-CORE_NODISCARD CORE_CONSTEXPR bool collinear(const Vec<T, D>& source, const Vec<T, D>& target)
+CORE_NODISCARD CORE_CONSTEXPR bool collinear(Vec<T, D> source, Vec<T, D> target)
 {
-    return Core::isZero(T(1) -
+    return Core::isZero(typename Vec<T, D>::value_type(1) -
                         std::abs(LinAl::dot(LinAl::normalize(source), LinAl::normalize(target))));
 }
 
@@ -73,10 +73,9 @@ struct isNormalized{};
 // clang-format on
 
 template <typename T, std::size_t D>
-CORE_NODISCARD CORE_CONSTEXPR bool
-collinear(const Vec<T, D>& source, const Vec<T, D>& target, isNormalized)
+CORE_NODISCARD CORE_CONSTEXPR bool collinear(Vec<T, D> source, Vec<T, D> target, isNormalized)
 {
-    return Core::isZero(T(1) - std::abs(LinAl::dot(source, target)));
+    return Core::isZero(typename Vec<T, D>::value_type(1) - std::abs(LinAl::dot(source, target)));
 }
 
 } // namespace LinAl

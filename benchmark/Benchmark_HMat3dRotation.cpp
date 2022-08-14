@@ -12,7 +12,7 @@ static void BM_hMatdXRot_HVec(benchmark::State& state)
     HVecd source{1, 0, 0, 1};
     for (auto _: state)
     {
-        HVecd result = LinAl::hMatXRot(Core::PI<double_t>/ 180 * 90) * source;
+        HVecd result = LinAl::hMatXRot(Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }
@@ -46,7 +46,7 @@ static void BM_rotationAlign_HVec(benchmark::State& state)
     HVecd target{0, 1, 0, 1};
     for (auto _: state)
     {
-        HVecd result = LinAl::rotationAlign(source, target) * source;
+        HVecd result = LinAl::hMatRotationAlign(source, target) * source;
         benchmark::DoNotOptimize(result);
     }
 }
@@ -58,8 +58,7 @@ static void BM_matAxisAngleRot_HVec(benchmark::State& state)
     HVecd rotAxis{0, 0, 1, 1};
     for (auto _: state)
     {
-        HVecd result =
-            LinAl::hMatAxisAngleRot(rotAxis, Core::PI<double_t> / 180 * 90) * source;
+        HVecd result = LinAl::hMatAxisAngleRot(rotAxis, Core::PI<double_t> / 180 * 90) * source;
         benchmark::DoNotOptimize(result);
     }
 }

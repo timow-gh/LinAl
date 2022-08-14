@@ -6,7 +6,7 @@ mark_as_advanced(INSTALL_GTEST)
 FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG release-1.10.0)
+        GIT_TAG release-1.12.0)
 
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -32,6 +32,6 @@ endfunction()
 
 create_linal_test(Test_HMatrixOperations)
 create_linal_test(Test_MatrixOperations)
-create_linal_test(Test_LinAlUtils)
 create_linal_test(Test_DotProduct)
 create_linal_test(Test_VecOperations)
+create_linal_test(Test_Vec)

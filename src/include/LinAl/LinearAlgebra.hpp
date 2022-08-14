@@ -11,9 +11,6 @@ DISABLE_ALL_WARNINGS
 #include <LinAl/BlazeWrapper/BlazeVec3.hpp>
 #include <LinAl/BlazeWrapper/BlazeVec4.hpp>
 #include <LinAl/BlazeWrapper/BlazeVecOperations.hpp>
-#include <LinAl/BlazeWrapper/BlazeGlMatrix.hpp>
-#include <LinAl/BlazeWrapper/BlazeGlMatrixOperations.hpp>
-#include <LinAl/BlazeWrapper/BlazeGlVec.hpp>
 #include <LinAl/BlazeWrapper/BlazeMat.hpp>
 #include <LinAl/BlazeWrapper/BlazeMatOperations.hpp>
 #include <LinAl/BlazeWrapper/BlazeHMat.hpp>
