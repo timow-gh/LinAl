@@ -15,10 +15,7 @@ class Vec : public blaze::StaticVector<T, N, blaze::columnVector, blaze::aligned
 };
 
 template <typename T, std::size_t D>
-class VecAllocator : public blaze::AlignedAllocator<Vec<T, D>> {
-  public:
-    using blaze::AlignedAllocator<Vec<T, D>>::AlignedAllocator;
-};
+using VecAllocator = blaze::AlignedAllocator<Vec<T, D>>;
 
 } // namespace LinAl
 
