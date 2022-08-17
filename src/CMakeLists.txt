@@ -1,5 +1,4 @@
-set(linAl_HEADER
-        include/LinAl/BlazeWrapper/LinAlBlaze.hpp
+set(linAl_blayewrapper_HEADER
         include/LinAl/BlazeWrapper/BlazeVec.hpp
         include/LinAl/BlazeWrapper/BlazeMat.hpp
         include/LinAl/BlazeWrapper/BlazeContainers.hpp
@@ -10,51 +9,42 @@ set(linAl_HEADER
         include/LinAl/BlazeWrapper/BlazeVec4.hpp
         include/LinAl/BlazeWrapper/BlazeHMat.hpp
         include/LinAl/BlazeWrapper/BlazeHVec.hpp
+        include/LinAl/BlazeWrapper/BlazeVecOperations.hpp
         include/LinAl/BlazeWrapper/BlazeHMatOperations.hpp
+        include/LinAl/BlazeWrapper/LinAlBlaze.hpp
+        )
+
+set(linAl_HEADER
         include/LinAl/LinearAlgebra.hpp)
 
-set(linAl_SOURCES)
 
-add_library(Lin_Al ${linAl_HEADER} ${linAl_SOURCES})
+add_library(Lin_Al INTERFACE ${linAl_HEADER} ${linAl_blayewrapper_HEADER})
 target_include_directories(Lin_Al
-        PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-        $<BUILD_INTERFACE:${LinAl_BINARY_DIR}/src>)
+        INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
+set(TARGET_ALIAS LinAl)
+set_target_properties(Lin_Al
+        PROPERTIES
+        DEBUG_POSTFIX d
+        LINKER_LANGUAGE CXX
+        EXPORT_NAME ${TARGET_ALIAS})
 target_link_libraries(Lin_Al
-        PUBLIC
+        INTERFACE
         Core::Settings
         Core::Utils
         Core::Math
-        LinAlBase::LinAlBase
-        )
+        LinAlBase::LinAlBase)
 
-add_library(LinAl::LinAl ALIAS Lin_Al)
-set_target_properties(Lin_Al
-        PROPERTIES
-        SOVERSION ${PROJECT_VERSION_MAJOR}
-        VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
-        DEBUG_POSTFIX d
-        LINKER_LANGUAGE CXX
-        EXPORT_NAME LinAl)
-target_compile_features(Lin_Al INTERFACE cxx_std_17)
-
-include(GenerateExportHeader)
-generate_export_header(Lin_Al BASE_NAME LinAl)
-include(CMakePackageConfigHelpers)
+add_library(${TARGET_ALIAS}::${TARGET_ALIAS} ALIAS Lin_Al)
+install(FILES ${linAl_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
+install(FILES ${linAl_blayewrapper_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/BlazeWrapper")
 
 install(TARGETS Lin_Al
         EXPORT LinAlTargetsExportSet
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        INCLUDES DESTINATION
-        ${CMAKE_INSTALL_INCLUDEDIR}
-        ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-install(DIRECTORY "include/LinAl" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+setupExportSetInstall("LinAl" "LinAlTargetsExportSet")
 
-string(TOLOWER "${PROJECT_NAME}_export.h" GENERATED_TARGET_EXPORTS_FILE)
-install(FILES "${LinAl_BINARY_DIR}/src/${GENERATED_TARGET_EXPORTS_FILE}"
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
-
-setupExportSetInstall("${PROJECT_NAME}" "LinAlTargetsExportSet")

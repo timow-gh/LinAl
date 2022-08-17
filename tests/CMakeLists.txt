@@ -24,11 +24,11 @@ mark_as_advanced(FETCHCONTENT_SOURCE_DIR_GOOGLETEST)
 mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
 mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_GOOGLETEST)
 
-function(create_linal_test linAlTestName)
+macro(create_linal_test linAlTestName)
     add_executable(${linAlTestName} ${linAlTestName}.cpp)
     target_link_libraries(${linAlTestName} PRIVATE gtest_main LinAl::LinAl)
     add_test(NAME ${linAlTestName} COMMAND ${linAlTestName})
-endfunction()
+endmacro()
 
 create_linal_test(Test_HMatrixOperations)
 create_linal_test(Test_MatrixOperations)
