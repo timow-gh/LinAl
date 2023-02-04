@@ -2,7 +2,7 @@
 #define GLFWTESTAPP_LINEARALGEBRA_H
 
 // clang-format off
-#include <Core/Utils/Warnings.h>
+#include <Core/Utils/Warnings.hpp>
 DISABLE_ALL_WARNINGS
 #include <LinAl/BlazeWrapper/BlazeContainers.hpp>
 #include <LinAl/BlazeWrapper/BlazeUtil.hpp>

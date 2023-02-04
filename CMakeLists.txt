@@ -9,8 +9,21 @@ set(lcs_twCMakeUtils "")
 string(TOLOWER "twCMakeUtils" lcs_twCMakeUtils)
 if (NOT ${lcs_twCMakeUtils}_POPULATED)
     FetchContent_Populate(twCMakeUtils)
-    list(APPEND CMAKE_MODULE_PATH ${${lcs_twCMakeUtils}_SOURCE_DIR}/modules)
-    include(CMakeHelperFunctions)
+
+    # Adding CPM to the project
+    set(utils_cmake_modules_path ${${lcs_twCMakeUtils}_SOURCE_DIR}/modules)
+    include(${utils_cmake_modules_path}/CPM.cmake)
+    if (NOT CPM_SOURCE_CACHE AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/CPMSourceVariable.cmake")
+        include(CPMSourceVariable.cmake)
+    endif ()
+
+    if (NOT CPM_SOURCE_CACHE)
+        message(AUTHOR_WARNING "CPM_SOURCE_CACHE not set. The source files are downloaded for every build. This is not recommended.
+        Set the CPM_SOURCE_CACHE variable to a directory of your choice to cache the cloned git repositories.
+        Set the CPM_SOURCE_CACHE variable in CPMSourceVariable.cmake to keep your paths private.")
+    endif ()
+
+    list(APPEND CMAKE_MODULE_PATH ${utils_cmake_modules_path})
 endif ()
 
 project("LinAl"
@@ -19,15 +32,39 @@ project("LinAl"
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
+include(project_preamble)
+include(setup_export_set_installation)
+
+include(CPM)
+if (NOT CPM_SOURCE_CACHE AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/CPMSourceVariable.cmake")
+    include(CPMSourceVariable.cmake)
+endif ()
+
+if (NOT CPM_SOURCE_CACHE)
+    message(AUTHOR_WARNING "CPM_SOURCE_CACHE not set. The source files are downloaded for every build. This is not recommended.
+        Set the CPM_SOURCE_CACHE variable to a directory of your choice to cache the cloned git repositories.
+        Set the CPM_SOURCE_CACHE variable in CPMSourceVariable.cmake to keep your paths private.")
+endif ()
+
 if ((CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR))
     option(LinAl_BUILD_TESTS "LinAl: Enable tests" ON)
-    option(LinAl_BUILD_BENCHMARKS "LinAl: Enable benchmarks" ON)
+    option(LinAl_BUILD_BENCHMARKS "LinAl: Enable benchmarks" OFF)
 else ()
     option(LinAl_BUILD_TESTS "LinAl: Enable tests" OFF)
     option(LinAl_BUILD_BENCHMARKS "LinAl: Enable benchmarks" OFF)
 endif ()
+option(${PROJECT_NAME}_INSTALL "Install project targets" ON)
 
-preamble()
+include(project_preamble)
+project_preamble()
+
+if (CMAKE_CXX_STANDARD)
+    if (CMAKE_CXX_STANDARD LESS 17)
+        message(FATAL_ERROR "LinAl requires C++17 or greater. CMAKE_CXX_STANDARD is set to ${CMAKE_CXX_STANDARD}.")
+    endif ()
+else ()
+    message(FATAL_ERROR "CMAKE_CXX_STANDARD is not set. LinAl requires C++17 or greater.")
+endif ()
 
 add_subdirectory(dependencies)
 add_subdirectory(src)

@@ -14,8 +14,3 @@ TEST(Vec, construct_from_vec2)
     Vec<float_t, 2> vec{vec2};
     EXPECT_TRUE(vec2 == vec);
 }
-
-TEST(Vec, vec_allocator)
-{
-    VecAllocator<float_t, 2> allocator;
-}

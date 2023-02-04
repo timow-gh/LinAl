@@ -30,21 +30,28 @@ set_target_properties(Lin_Al
         EXPORT_NAME ${TARGET_ALIAS})
 target_link_libraries(Lin_Al
         INTERFACE
-        Core::Settings
         Core::Utils
         Core::Math
         LinAlBase::LinAlBase)
 
 add_library(${TARGET_ALIAS}::${TARGET_ALIAS} ALIAS Lin_Al)
-install(FILES ${linAl_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
-install(FILES ${linAl_blayewrapper_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/BlazeWrapper")
 
-install(TARGETS Lin_Al
-        EXPORT LinAlTargetsExportSet
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+if (${PROJECT_NAME}_INSTALL)
+    install(FILES ${linAl_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
+    install(FILES ${linAl_blayewrapper_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/BlazeWrapper")
 
-setupExportSetInstall("LinAl" "LinAlTargetsExportSet")
+    install(TARGETS Lin_Al
+            EXPORT LinAlTargetsExportSet
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+    setup_export_set_installation(
+            "LinAl"
+            "LinAlTargetsExportSet"
+            Config.cmake.in
+            ${PROJECT_VERSION_MAJOR} ${PROJECT_VERSION_MINOR} ${PROJECT_VERSION_PATCH}
+    )
+endif ()
 
