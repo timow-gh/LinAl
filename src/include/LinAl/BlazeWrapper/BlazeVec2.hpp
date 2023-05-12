@@ -16,15 +16,15 @@ using VecAllocator2 = VecAllocator<T, 2>;
 using VecAllocator2f = VecAllocator2<float_t>;
 using VecAllocator2d = VecAllocator2<double_t>;
 
-CORE_CONSTEXPR Vec2f ZERO_VEC2F = Vec2f{0, 0};
-CORE_CONSTEXPR Vec2f X_VEC2F = Vec2f{1, 0};
-CORE_CONSTEXPR Vec2f Y_VEC2F = Vec2f{0, 1};
-CORE_CONSTEXPR Vec2f Z_VEC2F = Vec2f{0, 0};
+constexpr Vec2f ZERO_VEC2F = Vec2f{0, 0};
+constexpr Vec2f X_VEC2F = Vec2f{1, 0};
+constexpr Vec2f Y_VEC2F = Vec2f{0, 1};
+constexpr Vec2f Z_VEC2F = Vec2f{0, 0};
 
-CORE_CONSTEXPR Vec2d ZERO_VEC2D = Vec2d{0, 0};
-CORE_CONSTEXPR Vec2d X_VEC2D = Vec2d{1, 0};
-CORE_CONSTEXPR Vec2d Y_VEC2D = Vec2d{0, 1};
-CORE_CONSTEXPR Vec2d Z_VEC2D = Vec2d{0, 0};
+constexpr Vec2d ZERO_VEC2D = Vec2d{0, 0};
+constexpr Vec2d X_VEC2D = Vec2d{1, 0};
+constexpr Vec2d Y_VEC2D = Vec2d{0, 1};
+constexpr Vec2d Z_VEC2D = Vec2d{0, 0};
 
 } // namespace LinAl
 

@@ -11,11 +11,12 @@ set(linAl_blayewrapper_HEADER
         include/LinAl/BlazeWrapper/BlazeHVec.hpp
         include/LinAl/BlazeWrapper/BlazeVecOperations.hpp
         include/LinAl/BlazeWrapper/BlazeHMatOperations.hpp
-        include/LinAl/BlazeWrapper/LinAlBlaze.hpp
+        include/LinAl/Utils/Eps.hpp
+        include/LinAl/Utils/Warnings.hpp
         )
 
 set(linAl_HEADER
-        include/LinAl/LinearAlgebra.hpp)
+        )
 
 
 add_library(Lin_Al INTERFACE ${linAl_HEADER} ${linAl_blayewrapper_HEADER})

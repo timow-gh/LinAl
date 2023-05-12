@@ -1,24 +1,23 @@
 #ifndef LINAL_BLAZEHVEC_HPP
 #define LINAL_BLAZEHVEC_HPP
 
+#include <LinAl/Utils/Warnings.hpp>
+DISABLE_ALL_WARNINGS
+#include <blaze/math/StaticVector.h>
+#include <blaze/util/AlignedAllocator.h>
+ENABLE_ALL_WARNINGS
+
 namespace LinAl
 {
 
 template <typename T>
-class HVec : public blaze::StaticVector<T, 4, blaze::columnVector, blaze::aligned, blaze::padded> {
-  public:
-    using blaze::StaticVector<T, 4>::StaticVector;
-    using value_type = T;
-};
+using HVec = blaze::StaticVector<T, 4, blaze::columnVector, blaze::aligned, blaze::unpadded>;
 
 using HVecf = HVec<float_t>;
 using HVecd = HVec<double_t>;
 
 template <typename T>
-class HVecAllocator : public blaze::AlignedAllocator<HVec<T>> {
-  public:
-    using blaze::AlignedAllocator<Vec<T, 4>>::AlignedAllocator;
-};
+using HVecAllocator = blaze::AlignedAllocator<HVec<T>>;
 
 using HVecAllocatorf = HVecAllocator<float_t>;
 using HVecAllocatord = HVecAllocator<double_t>;

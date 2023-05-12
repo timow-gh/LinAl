@@ -5,8 +5,12 @@
 #include <LinAl/BlazeWrapper/BlazeHMat.hpp>
 #include <LinAl/BlazeWrapper/BlazeMatOperations.hpp>
 #include <LinAl/BlazeWrapper/BlazeUtil.hpp>
+#include <LinAl/BlazeWrapper/BlazeVec.hpp>
 #include <LinAl/BlazeWrapper/BlazeVecOperations.hpp>
+#include <LinAl/Utils/Warnings.hpp>
+DISABLE_ALL_WARNINGS
 #include <blaze/math/Submatrix.h>
+ENABLE_ALL_WARNINGS
 
 namespace LinAl
 {
@@ -14,140 +18,136 @@ namespace LinAl
 template <typename T>
 CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> createIdentityHMatrix()
 {
-    HMatrix<T> result;
-    for (std::size_t i{0}; i < 4; ++i)
-        result(i, i) = 1.0;
-    return result;
+  HMatrix<T> result;
+  for (std::size_t i{0}; i < 4; ++i)
+    result(i, i) = 1.0;
+  return result;
 }
 
 template <typename T>
 CORE_NODISCARD CORE_CONSTEXPR auto createTranslation(HVec<T> vec)
 {
-    HMatrix<T> result = createIdentityHMatrix<T>();
-    result(0, 3) = vec[0];
-    result(1, 3) = vec[1];
-    result(2, 3) = vec[2];
-    return result;
+  HMatrix<T> result = createIdentityHMatrix<T>();
+  result(0, 3) = vec[0];
+  result(1, 3) = vec[1];
+  result(2, 3) = vec[2];
+  return result;
 }
 
 template <typename T>
 CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> createTranslation(T x, T y, T z)
 {
-    HMatrix<T> result = createIdentityHMatrix<T>();
-    result(0, 3) = x;
-    result(1, 3) = y;
-    result(2, 3) = z;
-    return result;
+  HMatrix<T> result = createIdentityHMatrix<T>();
+  result(0, 3) = x;
+  result(1, 3) = y;
+  result(2, 3) = z;
+  return result;
 }
 
-template <typename TVec>
-CORE_CONSTEXPR void getTranslation(const HMatrix<typename TVec::value_type>& hMatrix, TVec& result)
+template <typename T, std::size_t N>
+CORE_CONSTEXPR void getTranslation(const HMatrix<T>& hMatrix, Vec<T, N>& result)
 {
-    result[0] = hMatrix(0, 3);
-    result[1] = hMatrix(1, 3);
-    result[2] = hMatrix(2, 3);
-    if constexpr (TVec::size() == 4)
-        result[3] = hMatrix(3, 3);
+  result[0] = hMatrix(0, 3);
+  result[1] = hMatrix(1, 3);
+  result[2] = hMatrix(2, 3);
+  if constexpr (Vec<T, N>::size() == 4)
+    result[3] = hMatrix(3, 3);
 }
 
 template <typename T, std::size_t D>
 CORE_CONSTEXPR void setTranslation(HMatrix<T>& hMatrix, Vec<T, D> translation)
 {
-    hMatrix(0, 3) = translation[0];
-    hMatrix(1, 3) = translation[1];
-    hMatrix(2, 3) = translation[2];
+  hMatrix(0, 3) = translation[0];
+  hMatrix(1, 3) = translation[1];
+  hMatrix(2, 3) = translation[2];
 }
 
 //! alpha in radians
 template <typename T>
 CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatXRot(T alphaRad)
 {
-    HMatrix<T> result = createIdentityHMatrix<T>();
-    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-    R = mat3XRot(alphaRad);
-    return result;
+  HMatrix<T> result = createIdentityHMatrix<T>();
+  auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+  R = mat3XRot(alphaRad);
+  return result;
 }
 
 //! alpha in radians
 template <typename T>
 CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatYRot(T alphaRad)
 {
-    HMatrix<T> result = createIdentityHMatrix<T>();
-    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-    R = mat3YRot(alphaRad);
-    return result;
+  HMatrix<T> result = createIdentityHMatrix<T>();
+  auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+  R = mat3YRot(alphaRad);
+  return result;
 }
 
 //! alpha in radians
 template <typename T>
 CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatZRot(T alphaRad)
 {
-    HMatrix<T> result = createIdentityHMatrix<T>();
-    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-    R = mat3ZRot(alphaRad);
-    return result;
+  HMatrix<T> result = createIdentityHMatrix<T>();
+  auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+  R = mat3ZRot(alphaRad);
+  return result;
 }
 
 template <typename T>
 CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatAxisAngleRot(const HVec<T>& axis, T alphaRad)
 {
-    HMatrix<T> result = createIdentityHMatrix<T>();
-    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-    R = matAxisAngleRot(hVecToVec3<T>(axis), alphaRad);
-    return result;
+  HMatrix<T> result = createIdentityHMatrix<T>();
+  auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+  R = matAxisAngleRot(hVecToVec3<T>(axis), alphaRad);
+  return result;
 }
 
 //! Input Vectors are not normalized.
 //! Make sure the input vectors are normalized if scaling is not desired.
-template <typename THVec>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<typename THVec::value_type>
-hMatRotationAlign(const THVec& source, const THVec& target)
+template <typename T>
+CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatRotationAlign(const HVec<T>& source, const HVec<T>& target)
 {
-    HMatrix<typename THVec::value_type> result =
-        createIdentityHMatrix<typename THVec::value_type>();
-    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-    R = rotationAlign(hVecToVec3<typename THVec::value_type>(source),
-                      hVecToVec3<typename THVec::value_type>(target));
-    return result;
+  HMatrix<T> result = createIdentityHMatrix<T>();
+  auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+  R = rotationAlign(hVecToVec3(source), hVecToVec3(target));
+  return result;
 }
 
 template <typename T>
 CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatInverse(const HMatrix<T>& matrix)
 {
-    HMatrix<T> result = matrix;
+  HMatrix<T> result = matrix;
 
-    auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-    blaze::transpose(R);
+  auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
+  blaze::transpose(R);
 
-    auto p = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(result);
-    p = -R * p;
+  auto p = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(result);
+  p = -R * p;
 
-    return result;
+  return result;
 }
 
 template <typename T>
-CORE_CONSTEXPR void
-hMatScaleTranslation(HMatrix<T>& matrix, T scaleFactor, T lowerLimit, T upperLimit)
+CORE_CONSTEXPR void hMatScaleTranslation(HMatrix<T>& matrix, T scaleFactor, T lowerLimit, T upperLimit)
 {
-    auto translSubMatrix = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(matrix);
-    translSubMatrix = translSubMatrix * scaleFactor;
+  auto translSubMatrix = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(matrix);
+  translSubMatrix = translSubMatrix * scaleFactor;
 
-    Vec3<T> lengthVec{matrix(0, 3), matrix(1, 3), matrix(2, 3)};
-    T length = LinAl::norm2(lengthVec);
-    if (length < lowerLimit)
-    {
-        lengthVec = LinAl::normalize(lengthVec) * lowerLimit;
-    }
-    else if (length > upperLimit)
-    {
-        lengthVec = LinAl::normalize(lengthVec) * upperLimit;
-    }
-    else
-        return;
+  Vec3<T> lengthVec{matrix(0, 3), matrix(1, 3), matrix(2, 3)};
+  T length = LinAl::norm2(lengthVec);
+  if (length < lowerLimit)
+  {
+    lengthVec = LinAl::normalize(lengthVec) * lowerLimit;
+  }
+  else if (length > upperLimit)
+  {
+    lengthVec = LinAl::normalize(lengthVec) * upperLimit;
+  }
+  else
+    return;
 
-    matrix(0, 3) = lengthVec[0];
-    matrix(1, 3) = lengthVec[1];
-    matrix(2, 3) = lengthVec[2];
+  matrix(0, 3) = lengthVec[0];
+  matrix(1, 3) = lengthVec[1];
+  matrix(2, 3) = lengthVec[2];
 }
 
 } // namespace LinAl
