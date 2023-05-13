@@ -1,9 +1,9 @@
-#ifndef LINAL_BLAZEVEC2_HPP
-#define LINAL_BLAZEVEC2_HPP
+#ifndef LINAL_VEC2_HPP
+#define LINAL_VEC2_HPP
 
-#include <LinAl/BlazeWrapper/BlazeVec.hpp>
+#include <linal/Vec.hpp>
 
-namespace LinAl
+namespace linal
 {
 
 template <typename T>
@@ -26,6 +26,6 @@ constexpr Vec2d X_VEC2D = Vec2d{1, 0};
 constexpr Vec2d Y_VEC2D = Vec2d{0, 1};
 constexpr Vec2d Z_VEC2D = Vec2d{0, 0};
 
-} // namespace LinAl
+} // namespace linal
 
-#endif // LINAL_BLAZEVEC2_HPP
+#endif // LINAL_VEC2_HPP

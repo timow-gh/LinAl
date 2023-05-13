@@ -1,11 +1,11 @@
-#include <Core/Math/Constants.hpp>
-#include <LinAl/BlazeWrapper/BlazeMat.hpp>
-#include <LinAl/BlazeWrapper/BlazeMatOperations.hpp>
-#include <LinAl/BlazeWrapper/BlazeVec3.hpp>
-#include <LinAl/BlazeWrapper/BlazeVecOperations.hpp>
 #include <gtest/gtest.h>
+#include <linal/Mat.hpp>
+#include <linal/MatOperations.hpp>
+#include <linal/Vec3.hpp>
+#include <linal/VecOperations.hpp>
+#include <linal/utils/Constants.hpp>
 
-using namespace LinAl;
+using namespace linal;
 
 Vec3dArray<3> create90DegRotatedLcs()
 {
@@ -35,14 +35,14 @@ TEST(createLcsToGlobalRotationMatrix_vectors, Matrix)
 {
   Vec3d a{1, 0, 1};
   Vec3dArray<3> rotatedLcs = create90DegRotatedLcs();
-  Matrix3d rotationMatrix = LinAl::createLcsTransformation(rotatedLcs[0], rotatedLcs[1], rotatedLcs[2]);
+  Matrix3d rotationMatrix = linal::createLcsTransformation(rotatedLcs[0], rotatedLcs[1], rotatedLcs[2]);
 
   testZRotation(a, rotationMatrix);
 }
 
 TEST(Matrix3dOperations, xRotation)
 {
-  Matrix3d rotMat = mat3XRot(Core::PI_HALF<double_t>);
+  Matrix3d rotMat = mat3XRot(linal::PI_HALF<double>);
   Vec3d start{0, 1, 0};
   Vec3d result = rotMat * start;
   Vec3d expected{0, 0, 1};
@@ -51,7 +51,7 @@ TEST(Matrix3dOperations, xRotation)
 
 TEST(Matrix3dOperations, yRotation)
 {
-  Matrix3d rotMat = mat3YRot(Core::PI_HALF<double_t>);
+  Matrix3d rotMat = mat3YRot(linal::PI_HALF<double>);
   Vec3d start{0, 0, 1};
   Vec3d result = rotMat * start;
   Vec3d expected{1, 0, 0};
@@ -60,7 +60,7 @@ TEST(Matrix3dOperations, yRotation)
 
 TEST(Matrix3dOperations, zRotation)
 {
-  Matrix3d rotMat = mat3ZRot(Core::PI_HALF<double_t>);
+  Matrix3d rotMat = mat3ZRot(linal::PI_HALF<double>);
   Vec3d start{1, 0, 0};
   Vec3d result = rotMat * start;
   Vec3d expected{0, 1, 0};
@@ -71,7 +71,7 @@ TEST(createLcsToGlobalRotationMatrix_array, Matrix)
 {
   Vec3d a{1, 0, 1};
   Vec3dArray<3> lcs = create90DegRotatedLcs();
-  Matrix3d rotationMatrix = LinAl::createLcsTransformation(lcs[0], lcs[1], lcs[2]);
+  Matrix3d rotationMatrix = linal::createLcsTransformation(lcs[0], lcs[1], lcs[2]);
 
   testZRotation(a, rotationMatrix);
 }
@@ -104,12 +104,12 @@ TEST(Matrix3Operations, rotationAlign_xToNormalizedOnes)
 {
   Vec3d xDir = X_VEC3D;
   Vec3d targetVec{1, 1, 1};
-  targetVec /= LinAl::norm2(targetVec);
+  targetVec /= linal::norm2(targetVec);
   Matrix3d rotMat = rotationAlign(xDir, targetVec);
   Vec3d result = rotMat * xDir;
   constexpr double_t eps = 1E-7;
   for (std::size_t i{0}; i < 3; ++i)
-    EXPECT_TRUE(Core::isEq(result[i], targetVec[i], eps));
+    EXPECT_TRUE(linal::isEq(result[i], targetVec[i], eps));
 }
 
 TEST(Matrix3Operations, rotationAlign_xToOnes)

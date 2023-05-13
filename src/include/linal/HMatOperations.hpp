@@ -1,22 +1,22 @@
-#ifndef LINAL_BLAZEHMATOPERATIONS_HPP
-#define LINAL_BLAZEHMATOPERATIONS_HPP
+#ifndef LINAL_HMATOPERATIONS_HPP
+#define LINAL_HMATOPERATIONS_HPP
 
-#include <Core/Utils/Compiler.hpp>
-#include <LinAl/BlazeWrapper/BlazeHMat.hpp>
-#include <LinAl/BlazeWrapper/BlazeMatOperations.hpp>
-#include <LinAl/BlazeWrapper/BlazeUtil.hpp>
-#include <LinAl/BlazeWrapper/BlazeVec.hpp>
-#include <LinAl/BlazeWrapper/BlazeVecOperations.hpp>
-#include <LinAl/Utils/Warnings.hpp>
+#include <linal/utils/Compiler.hpp>
+#include <linal/HMat.hpp>
+#include <linal/MatOperations.hpp>
+#include <linal/utils/Util.hpp>
+#include <linal/Vec.hpp>
+#include <linal/VecOperations.hpp>
+#include <linal/utils/Warnings.hpp>
 DISABLE_ALL_WARNINGS
 #include <blaze/math/Submatrix.h>
 ENABLE_ALL_WARNINGS
 
-namespace LinAl
+namespace linal
 {
 
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> createIdentityHMatrix()
+LINAL_NODISCARD LINAL_CONSTEXPR HMatrix<T> createIdentityHMatrix()
 {
   HMatrix<T> result;
   for (std::size_t i{0}; i < 4; ++i)
@@ -25,7 +25,7 @@ CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> createIdentityHMatrix()
 }
 
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR auto createTranslation(HVec<T> vec)
+LINAL_NODISCARD LINAL_CONSTEXPR auto createTranslation(HVec<T> vec)
 {
   HMatrix<T> result = createIdentityHMatrix<T>();
   result(0, 3) = vec[0];
@@ -35,7 +35,7 @@ CORE_NODISCARD CORE_CONSTEXPR auto createTranslation(HVec<T> vec)
 }
 
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> createTranslation(T x, T y, T z)
+LINAL_NODISCARD LINAL_CONSTEXPR HMatrix<T> createTranslation(T x, T y, T z)
 {
   HMatrix<T> result = createIdentityHMatrix<T>();
   result(0, 3) = x;
@@ -45,7 +45,7 @@ CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> createTranslation(T x, T y, T z)
 }
 
 template <typename T, std::size_t N>
-CORE_CONSTEXPR void getTranslation(const HMatrix<T>& hMatrix, Vec<T, N>& result)
+LINAL_CONSTEXPR void getTranslation(const HMatrix<T>& hMatrix, Vec<T, N>& result)
 {
   result[0] = hMatrix(0, 3);
   result[1] = hMatrix(1, 3);
@@ -55,7 +55,7 @@ CORE_CONSTEXPR void getTranslation(const HMatrix<T>& hMatrix, Vec<T, N>& result)
 }
 
 template <typename T, std::size_t D>
-CORE_CONSTEXPR void setTranslation(HMatrix<T>& hMatrix, Vec<T, D> translation)
+LINAL_CONSTEXPR void setTranslation(HMatrix<T>& hMatrix, Vec<T, D> translation)
 {
   hMatrix(0, 3) = translation[0];
   hMatrix(1, 3) = translation[1];
@@ -64,7 +64,7 @@ CORE_CONSTEXPR void setTranslation(HMatrix<T>& hMatrix, Vec<T, D> translation)
 
 //! alpha in radians
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatXRot(T alphaRad)
+LINAL_NODISCARD LINAL_CONSTEXPR HMatrix<T> hMatXRot(T alphaRad)
 {
   HMatrix<T> result = createIdentityHMatrix<T>();
   auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
@@ -74,7 +74,7 @@ CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatXRot(T alphaRad)
 
 //! alpha in radians
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatYRot(T alphaRad)
+LINAL_NODISCARD LINAL_CONSTEXPR HMatrix<T> hMatYRot(T alphaRad)
 {
   HMatrix<T> result = createIdentityHMatrix<T>();
   auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
@@ -84,7 +84,7 @@ CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatYRot(T alphaRad)
 
 //! alpha in radians
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatZRot(T alphaRad)
+LINAL_NODISCARD LINAL_CONSTEXPR HMatrix<T> hMatZRot(T alphaRad)
 {
   HMatrix<T> result = createIdentityHMatrix<T>();
   auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
@@ -93,7 +93,7 @@ CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatZRot(T alphaRad)
 }
 
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatAxisAngleRot(const HVec<T>& axis, T alphaRad)
+LINAL_NODISCARD LINAL_CONSTEXPR HMatrix<T> hMatAxisAngleRot(const HVec<T>& axis, T alphaRad)
 {
   HMatrix<T> result = createIdentityHMatrix<T>();
   auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
@@ -104,7 +104,7 @@ CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatAxisAngleRot(const HVec<T>& axis, T
 //! Input Vectors are not normalized.
 //! Make sure the input vectors are normalized if scaling is not desired.
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatRotationAlign(const HVec<T>& source, const HVec<T>& target)
+LINAL_NODISCARD LINAL_CONSTEXPR HMatrix<T> hMatRotationAlign(const HVec<T>& source, const HVec<T>& target)
 {
   HMatrix<T> result = createIdentityHMatrix<T>();
   auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
@@ -113,7 +113,7 @@ CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatRotationAlign(const HVec<T>& source
 }
 
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatInverse(const HMatrix<T>& matrix)
+LINAL_NODISCARD LINAL_CONSTEXPR HMatrix<T> hMatInverse(const HMatrix<T>& matrix)
 {
   HMatrix<T> result = matrix;
 
@@ -127,20 +127,20 @@ CORE_NODISCARD CORE_CONSTEXPR HMatrix<T> hMatInverse(const HMatrix<T>& matrix)
 }
 
 template <typename T>
-CORE_CONSTEXPR void hMatScaleTranslation(HMatrix<T>& matrix, T scaleFactor, T lowerLimit, T upperLimit)
+LINAL_CONSTEXPR void hMatScaleTranslation(HMatrix<T>& matrix, T scaleFactor, T lowerLimit, T upperLimit)
 {
   auto translSubMatrix = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(matrix);
   translSubMatrix = translSubMatrix * scaleFactor;
 
   Vec3<T> lengthVec{matrix(0, 3), matrix(1, 3), matrix(2, 3)};
-  T length = LinAl::norm2(lengthVec);
+  T length = linal::norm2(lengthVec);
   if (length < lowerLimit)
   {
-    lengthVec = LinAl::normalize(lengthVec) * lowerLimit;
+    lengthVec = linal::normalize(lengthVec) * lowerLimit;
   }
   else if (length > upperLimit)
   {
-    lengthVec = LinAl::normalize(lengthVec) * upperLimit;
+    lengthVec = linal::normalize(lengthVec) * upperLimit;
   }
   else
     return;
@@ -150,6 +150,6 @@ CORE_CONSTEXPR void hMatScaleTranslation(HMatrix<T>& matrix, T scaleFactor, T lo
   matrix(2, 3) = lengthVec[2];
 }
 
-} // namespace LinAl
+} // namespace linal
 
-#endif // LINAL_BLAZEHMATOPERATIONS_HPP
+#endif // LINAL_HMATOPERATIONS_HPP

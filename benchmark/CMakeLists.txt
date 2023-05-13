@@ -25,8 +25,7 @@ function(create_linal_benchmark benchMarkName)
             PRIVATE
             benchmark::benchmark
             benchmark::benchmark_main
-            Core::Types
-            LinAl::LinAl)
+            linal::linal)
 endfunction()
 
 create_linal_benchmark(Benchmark_HMat3dRotation)

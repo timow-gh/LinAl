@@ -1,13 +1,13 @@
-#ifndef LINAL_BLAZEHVEC_HPP
-#define LINAL_BLAZEHVEC_HPP
+#ifndef LINAL_HVEC_HPP
+#define LINAL_HVEC_HPP
 
-#include <LinAl/Utils/Warnings.hpp>
+#include <linal/utils/Warnings.hpp>
 DISABLE_ALL_WARNINGS
 #include <blaze/math/StaticVector.h>
 #include <blaze/util/AlignedAllocator.h>
 ENABLE_ALL_WARNINGS
 
-namespace LinAl
+namespace linal
 {
 
 template <typename T>
@@ -32,6 +32,6 @@ constexpr HVecd X_HVECD = HVecd{1, 0, 0, 1};
 constexpr HVecd Y_HVECD = HVecd{0, 1, 0, 1};
 constexpr HVecd Z_HVECD = HVecd{0, 0, 1, 1};
 
-} // namespace LinAl
+} // namespace linal
 
-#endif // LINAL_BLAZEHVEC_HPP
+#endif // LINAL_HVEC_HPP

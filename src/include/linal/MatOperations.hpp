@@ -1,28 +1,27 @@
-#ifndef LINAL_BLAZEMATOPERATIONS_HPP
-#define LINAL_BLAZEMATOPERATIONS_HPP
+#ifndef LINAL_MATOPERATIONS_HPP
+#define LINAL_MATOPERATIONS_HPP
 
-#include <Core/Utils/Compiler.hpp>
-#include <LinAl/BlazeWrapper/BlazeHMat.hpp>
-#include <LinAl/BlazeWrapper/BlazeMat.hpp>
-#include <LinAl/BlazeWrapper/BlazeUtil.hpp>
-#include <LinAl/BlazeWrapper/BlazeVecOperations.hpp>
-
-#include <LinAl/Utils/Warnings.hpp>
+#include <linal/utils/Compiler.hpp>
+#include <linal/HMat.hpp>
+#include <linal/Mat.hpp>
+#include <linal/VecOperations.hpp>
+#include <linal/utils/Util.hpp>
+#include <linal/utils/Warnings.hpp>
 DISABLE_ALL_WARNINGS
 #include <blaze/math/Submatrix.h>
 ENABLE_ALL_WARNINGS
 
-namespace LinAl
+namespace linal
 {
 template <typename T, std::size_t M, std::size_t N>
-CORE_CONSTEXPR void transpose(Matrix<T, M, N>& matrix)
+LINAL_CONSTEXPR void transpose(Matrix<T, M, N>& matrix)
 {
   blaze::transpose(matrix);
 }
 
 //! alpha in radians
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3XRot(T alpha)
+LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3XRot(T alpha)
 {
   auto [cos, sin] = calcCosSin(alpha);
   // clang-format off
@@ -34,7 +33,7 @@ CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3XRot(T alpha)
 
 //! alpha in radians
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3YRot(T alpha)
+LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3YRot(T alpha)
 {
   auto [cos, sin] = calcCosSin(alpha);
   // clang-format off
@@ -46,7 +45,7 @@ CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3YRot(T alpha)
 
 //! alpha in radians
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3ZRot(T alpha)
+LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3ZRot(T alpha)
 {
   auto [cos, sin] = calcCosSin(alpha);
   // clang-format off
@@ -58,9 +57,9 @@ CORE_NODISCARD CORE_CONSTEXPR Matrix3<T> mat3ZRot(T alpha)
 
 //! Angle in radians
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR auto matAxisAngleRot(Vec<T, 3> axis, T angleRad)
+LINAL_NODISCARD LINAL_CONSTEXPR auto matAxisAngleRot(Vec<T, 3> axis, T angleRad)
 {
-  Vec<T, 3> nAxis = LinAl::normalize(axis);
+  Vec<T, 3> nAxis = linal::normalize(axis);
   const T c = std::cos(angleRad);
   const T C = 1 - c;
   const T s = std::sin(angleRad);
@@ -88,7 +87,7 @@ CORE_NODISCARD CORE_CONSTEXPR auto matAxisAngleRot(Vec<T, 3> axis, T angleRad)
 //! Input Vectors are not normalized.
 //! Make sure the input vectors are normalized if scaling is not desired.
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR auto rotationAlign(Vec<T, 3> source, Vec<T, 3> target)
+LINAL_NODISCARD LINAL_CONSTEXPR auto rotationAlign(Vec<T, 3> source, Vec<T, 3> target)
 {
   // clang-format off
     // https://iquilezles.org/www/articles/noacos/noacos.htm
@@ -113,7 +112,7 @@ CORE_NODISCARD CORE_CONSTEXPR auto rotationAlign(Vec<T, 3> source, Vec<T, 3> tar
 }
 
 template <typename T>
-CORE_NODISCARD CORE_CONSTEXPR auto createLcsTransformation(Vec<T, 3> lcsX, Vec<T, 3> lcsY, Vec<T, 3> lcsZ)
+LINAL_NODISCARD LINAL_CONSTEXPR auto createLcsTransformation(Vec<T, 3> lcsX, Vec<T, 3> lcsY, Vec<T, 3> lcsZ)
 {
   // clang-format off
     return Matrix3<T>{{lcsX[0], lcsY[0], lcsZ[0]},
@@ -122,6 +121,6 @@ CORE_NODISCARD CORE_CONSTEXPR auto createLcsTransformation(Vec<T, 3> lcsX, Vec<T
   // clang-format on
 }
 
-} // namespace LinAl
+} // namespace linal
 
-#endif // LINAL_BLAZEMATOPERATIONS_HPP
+#endif // LINAL_MATOPERATIONS_HPP

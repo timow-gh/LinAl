@@ -1,9 +1,9 @@
-#ifndef LINAL_BLAZEVEC4_HPP
-#define LINAL_BLAZEVEC4_HPP
+#ifndef LINAL_VEC4_HPP
+#define LINAL_VEC4_HPP
 
-#include <LinAl/BlazeWrapper/BlazeVec.hpp>
+#include <linal/Vec.hpp>
 
-namespace LinAl
+namespace linal
 {
 
 template <typename T>
@@ -16,6 +16,6 @@ using VecAllocator4 = VecAllocator<T, 4>;
 using VecAllocator4f = VecAllocator4<float_t>;
 using VecAllocator4d = VecAllocator4<double_t>;
 
-} // namespace LinAl
+} // namespace linal
 
-#endif // LINAL_BLAZEVEC4_HPP
+#endif // LINAL_VEC4_HPP

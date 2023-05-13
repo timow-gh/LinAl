@@ -1,56 +1,53 @@
-set(linAl_blayewrapper_HEADER
-        include/LinAl/BlazeWrapper/BlazeVec.hpp
-        include/LinAl/BlazeWrapper/BlazeMat.hpp
-        include/LinAl/BlazeWrapper/BlazeContainers.hpp
-        include/LinAl/BlazeWrapper/BlazeMatOperations.hpp
-        include/LinAl/BlazeWrapper/BlazeUtil.hpp
-        include/LinAl/BlazeWrapper/BlazeVec2.hpp
-        include/LinAl/BlazeWrapper/BlazeVec3.hpp
-        include/LinAl/BlazeWrapper/BlazeVec4.hpp
-        include/LinAl/BlazeWrapper/BlazeHMat.hpp
-        include/LinAl/BlazeWrapper/BlazeHVec.hpp
-        include/LinAl/BlazeWrapper/BlazeVecOperations.hpp
-        include/LinAl/BlazeWrapper/BlazeHMatOperations.hpp
-        include/LinAl/Utils/Eps.hpp
-        include/LinAl/Utils/Warnings.hpp
+set(linal_HEADER
+        include/linal/utils/Assert.hpp
+        include/linal/utils/Compiler.hpp
+        include/linal/utils/Constants.hpp
+        include/linal/utils/Eps.hpp
+        include/linal/utils/Util.hpp
+        include/linal/utils/Warnings.hpp
+        include/linal/Vec.hpp
+        include/linal/Mat.hpp
+        include/linal/Containers.hpp
+        include/linal/MatOperations.hpp
+        include/linal/Vec2.hpp
+        include/linal/Vec3.hpp
+        include/linal/Vec4.hpp
+        include/linal/HMat.hpp
+        include/linal/HVec.hpp
+        include/linal/VecOperations.hpp
+        include/linal/HMatOperations.hpp
         )
 
-set(linAl_HEADER
-        )
-
-
-add_library(Lin_Al INTERFACE ${linAl_HEADER} ${linAl_blayewrapper_HEADER})
-target_include_directories(Lin_Al
+set(TARGET_NAME Lin_Al)
+add_library(${TARGET_NAME} INTERFACE ${linal_HEADER})
+target_include_directories(${TARGET_NAME}
         INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
-set(TARGET_ALIAS LinAl)
-set_target_properties(Lin_Al
+set(TARGET_ALIAS linal)
+set_target_properties(${TARGET_NAME}
         PROPERTIES
         DEBUG_POSTFIX d
         LINKER_LANGUAGE CXX
         EXPORT_NAME ${TARGET_ALIAS})
 target_link_libraries(Lin_Al
         INTERFACE
-        Core::Utils
-        Core::Math
         LinAlBase::LinAlBase)
 
-add_library(${TARGET_ALIAS}::${TARGET_ALIAS} ALIAS Lin_Al)
+add_library(${TARGET_ALIAS}::${TARGET_ALIAS} ALIAS ${TARGET_NAME})
 
 if (${PROJECT_NAME}_INSTALL)
-    install(FILES ${linAl_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
-    install(FILES ${linAl_blayewrapper_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/BlazeWrapper")
+    install(FILES ${linal_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
 
-    install(TARGETS Lin_Al
-            EXPORT LinAlTargetsExportSet
+    install(TARGETS ${TARGET_NAME}
+            EXPORT ${TARGET_ALIAS}TargetsExportSet
             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
             ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
             INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
     setup_export_set_installation(
-            "LinAl"
-            "LinAlTargetsExportSet"
+            "${PROJECT_NAME}"
+            "${TARGET_ALIAS}TargetsExportSet"
             Config.cmake.in
             ${PROJECT_VERSION_MAJOR} ${PROJECT_VERSION_MINOR} ${PROJECT_VERSION_PATCH}
     )

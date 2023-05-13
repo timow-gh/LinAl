@@ -1,13 +1,13 @@
-#ifndef LINAL_BLAZEHMAT_HPP
-#define LINAL_BLAZEHMAT_HPP
+#ifndef LINAL_HMAT_HPP
+#define LINAL_HMAT_HPP
 
-#include <LinAl/Utils/Warnings.hpp>
+#include <linal/utils/Warnings.hpp>
 DISABLE_ALL_WARNINGS
 #include <blaze/math/StaticMatrix.h>
 #include <blaze/util/AlignedAllocator.h>
 ENABLE_ALL_WARNINGS
 
-namespace LinAl
+namespace linal
 {
 
 template <typename T>
@@ -20,6 +20,6 @@ using HMatrixAllocator = blaze::AlignedAllocator<HMatrix<T>>;
 using HMatrixAllocatorf = HMatrixAllocator<HMatrixf>;
 using HMatrixAllocatord = HMatrixAllocator<HMatrixd>;
 
-} // namespace LinAl
+} // namespace linal
 
-#endif // LINAL_BLAZEHMAT_HPP
+#endif // LINAL_HMAT_HPP

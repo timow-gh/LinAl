@@ -26,7 +26,7 @@ mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_GOOGLETEST)
 
 macro(create_linal_test linAlTestName)
     add_executable(${linAlTestName} ${linAlTestName}.cpp)
-    target_link_libraries(${linAlTestName} PRIVATE gtest_main LinAl::LinAl)
+    target_link_libraries(${linAlTestName} PRIVATE gtest_main linal::linal)
     add_test(NAME ${linAlTestName} COMMAND ${linAlTestName})
 endmacro()
 
