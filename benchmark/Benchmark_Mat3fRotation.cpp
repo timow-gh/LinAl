@@ -1,6 +1,6 @@
 #include <benchmark/benchmark.h>
 #include <linal/Mat.hpp>
-#include <linal/MatOperations.hpp>
+#include <linal/MatRotation.hpp>
 #include <linal/Vec3.hpp>
 #include <linal/utils/Constants.hpp>
 

@@ -8,13 +8,13 @@ namespace linal
 
 template <typename T>
 using Vec4 = Vec<T, 4>;
-using Vec4f = Vec4<float_t>;
-using Vec4d = Vec4<double_t>;
+using Vec4f = Vec4<float>;
+using Vec4d = Vec4<double>;
 
 template <typename T>
 using VecAllocator4 = VecAllocator<T, 4>;
-using VecAllocator4f = VecAllocator4<float_t>;
-using VecAllocator4d = VecAllocator4<double_t>;
+using VecAllocator4f = VecAllocator4<float>;
+using VecAllocator4d = VecAllocator4<double>;
 
 } // namespace linal
 

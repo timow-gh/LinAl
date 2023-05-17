@@ -8,14 +8,15 @@ set(linal_HEADER
         include/linal/Vec.hpp
         include/linal/Mat.hpp
         include/linal/Containers.hpp
-        include/linal/MatOperations.hpp
+        include/linal/MatRotation.hpp
+        include/linal/HMatTranslation.hpp
         include/linal/Vec2.hpp
         include/linal/Vec3.hpp
         include/linal/Vec4.hpp
         include/linal/HMat.hpp
         include/linal/HVec.hpp
         include/linal/VecOperations.hpp
-        include/linal/HMatOperations.hpp
+        include/linal/HMatRotation.hpp
         )
 
 set(TARGET_NAME Lin_Al)

@@ -1,6 +1,7 @@
 #ifndef GLFWTESTAPP_BLAZEMATRIXOPERATIONS_H
 #define GLFWTESTAPP_BLAZEMATRIXOPERATIONS_H
 
+#include <linal/utils/Compiler.hpp>
 #include <linal/utils/Warnings.hpp>
 DISABLE_ALL_WARNINGS
 #include <linal/Containers.hpp>
@@ -11,20 +12,26 @@ namespace linal
 {
 
 template <typename T, std::size_t M, std::size_t N>
-using Matrix = blaze::StaticMatrix<T, M, N, blaze::rowMajor, blaze::aligned, blaze::padded>;
+using mat = blaze::StaticMatrix<T, M, N, blaze::rowMajor, blaze::aligned, blaze::unpadded>;
 
 template <typename T>
-using Matrix3 = Matrix<T, 3, 3>;
-using Matrix3f = Matrix3<float_t>;
-using Matrix3d = Matrix3<double_t>;
+using mat3 = mat<T, 3, 3>;
+using mat3f = mat3<float>;
+using mat3d = mat3<double>;
 
 template <typename T, std::size_t M, std::size_t N>
-using MatrixAllocator = blaze::AlignedAllocator<Matrix<T, M, N>>;
+using matAllocator = blaze::AlignedAllocator<mat<T, M, N>>;
 
 template <typename T>
-using MatrixAllocator3 = MatrixAllocator<T, 3, 3>;
-using MatrixAllocator3f = MatrixAllocator3<float_t>;
-using MatrixAllocator3d = MatrixAllocator3<double_t>;
+using matAllocator3 = matAllocator<T, 3, 3>;
+using matAllocator3f = matAllocator3<float>;
+using matAllocator3d = matAllocator3<double>;
+
+template <typename T, std::size_t M, std::size_t N>
+LINAL_CONSTEXPR void transpose(mat<T, M, N>& matrix)
+{
+  blaze::transpose(matrix);
+}
 
 } // namespace linal
 

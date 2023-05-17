@@ -1,10 +1,10 @@
-#ifndef LINAL_MATOPERATIONS_HPP
-#define LINAL_MATOPERATIONS_HPP
+#ifndef LINAL_MATROTATION_HPP
+#define LINAL_MATROTATION_HPP
 
-#include <linal/utils/Compiler.hpp>
 #include <linal/HMat.hpp>
 #include <linal/Mat.hpp>
 #include <linal/VecOperations.hpp>
+#include <linal/utils/Compiler.hpp>
 #include <linal/utils/Util.hpp>
 #include <linal/utils/Warnings.hpp>
 DISABLE_ALL_WARNINGS
@@ -13,19 +13,14 @@ ENABLE_ALL_WARNINGS
 
 namespace linal
 {
-template <typename T, std::size_t M, std::size_t N>
-LINAL_CONSTEXPR void transpose(Matrix<T, M, N>& matrix)
-{
-  blaze::transpose(matrix);
-}
 
 //! alpha in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3XRot(T alpha)
+LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_x(T alpha)
 {
-  auto [cos, sin] = calcCosSin(alpha);
+  auto [cos, sin] = linal_utils::calcCosSin(alpha);
   // clang-format off
-    return Matrix3<T>{{1, 0,    0},
+    return mat3<T>{{1, 0,    0},
                      {0, cos, -sin},
                      {0, sin,  cos}};
   // clang-format on
@@ -33,11 +28,11 @@ LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3XRot(T alpha)
 
 //! alpha in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3YRot(T alpha)
+LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_y(T alpha)
 {
-  auto [cos, sin] = calcCosSin(alpha);
+  auto [cos, sin] = linal_utils::calcCosSin(alpha);
   // clang-format off
-    return Matrix3<T>{{cos,   0, sin},
+    return mat3<T>{{cos,   0, sin},
                       {0,     1,  0},
                       {-sin,  0,  cos}};
   // clang-format on
@@ -45,11 +40,11 @@ LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3YRot(T alpha)
 
 //! alpha in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3ZRot(T alpha)
+LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_z(T alpha)
 {
-  auto [cos, sin] = calcCosSin(alpha);
+  auto [cos, sin] = linal_utils::calcCosSin(alpha);
   // clang-format off
-    return Matrix3<T>{{cos, -sin, 0},
+    return mat3<T>{{cos, -sin, 0},
                       {sin, cos,  0},
                       {0,   0,    1}};
   // clang-format on
@@ -57,7 +52,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR Matrix3<T> mat3ZRot(T alpha)
 
 //! Angle in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR auto matAxisAngleRot(Vec<T, 3> axis, T angleRad)
+LINAL_NODISCARD LINAL_CONSTEXPR auto rot_axis(Vec<T, 3> axis, T angleRad)
 {
   Vec<T, 3> nAxis = linal::normalize(axis);
   const T c = std::cos(angleRad);
@@ -77,7 +72,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto matAxisAngleRot(Vec<T, 3> axis, T angleRad)
   const T xs = nAxis[0] * s;
 
   // clang-format off
-    return Matrix3<T>{
+    return mat3<T>{
       {xxC+c,   xyC-zs,   xzC+ys},
       {xyC+zs,  yyC+c,    yzC-xs},
       {xzC-ys,  yzC-xs,   zzC+c}};
@@ -87,7 +82,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto matAxisAngleRot(Vec<T, 3> axis, T angleRad)
 //! Input Vectors are not normalized.
 //! Make sure the input vectors are normalized if scaling is not desired.
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR auto rotationAlign(Vec<T, 3> source, Vec<T, 3> target)
+LINAL_NODISCARD LINAL_CONSTEXPR auto rot_align(Vec<T, 3> source, Vec<T, 3> target)
 {
   // clang-format off
     // https://iquilezles.org/www/articles/noacos/noacos.htm
@@ -104,7 +99,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto rotationAlign(Vec<T, 3> source, Vec<T, 3> t
     const T v20k = v[2]*v[0]*k;
     const T v21k = v[2]*v[1]*k;
 
-    return Matrix3<T>
+    return mat3<T>
              { {v[0]*v[0]*k + c,  v10k - v[2] ,     v20k + v[1]    },
              {v10k + v[2],      v[1]*v[1]*k + c,  v21k - v[0]      },
              {v20k - v[1],      v21k + v[0],      v[2]*v[2]*k + c} };
@@ -115,7 +110,7 @@ template <typename T>
 LINAL_NODISCARD LINAL_CONSTEXPR auto createLcsTransformation(Vec<T, 3> lcsX, Vec<T, 3> lcsY, Vec<T, 3> lcsZ)
 {
   // clang-format off
-    return Matrix3<T>{{lcsX[0], lcsY[0], lcsZ[0]},
+    return mat3<T>{{lcsX[0], lcsY[0], lcsZ[0]},
                      {lcsX[1], lcsY[1], lcsZ[1]},
                      {lcsX[2], lcsY[2], lcsZ[2]}};
   // clang-format on
@@ -123,4 +118,4 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto createLcsTransformation(Vec<T, 3> lcsX, Vec
 
 } // namespace linal
 
-#endif // LINAL_MATOPERATIONS_HPP
+#endif // LINAL_MATROTATION_HPP

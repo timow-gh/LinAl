@@ -8,13 +8,13 @@ namespace linal
 
 template <typename T>
 using Vec2 = Vec<T, 2>;
-using Vec2f = Vec2<float_t>;
-using Vec2d = Vec2<double_t>;
+using Vec2f = Vec2<float>;
+using Vec2d = Vec2<double>;
 
 template <typename T>
 using VecAllocator2 = VecAllocator<T, 2>;
-using VecAllocator2f = VecAllocator2<float_t>;
-using VecAllocator2d = VecAllocator2<double_t>;
+using VecAllocator2f = VecAllocator2<float>;
+using VecAllocator2d = VecAllocator2<double>;
 
 constexpr Vec2f ZERO_VEC2F = Vec2f{0, 0};
 constexpr Vec2f X_VEC2F = Vec2f{1, 0};

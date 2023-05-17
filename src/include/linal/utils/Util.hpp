@@ -8,23 +8,28 @@
 namespace linal
 {
 
+namespace linal_utils
+{
+
 template <typename T>
 LINAL_NODISCARD LINAL_CONSTEXPR auto calcCosSin(T alphaRad)
 {
   return std::make_pair(std::cos(alphaRad), std::sin(alphaRad));
 }
 
-template <typename T, typename = std::enable_if<std::is_same_v<T, HVec<T>>>>
-LINAL_NODISCARD LINAL_CONSTEXPR Vec3<T> hVecToVec3(const HVec<T>& hVec)
+template <typename T>
+LINAL_NODISCARD LINAL_CONSTEXPR Vec3<T> hVecToVec3(const hcoord::hvec<T>& hVec)
 {
   return Vec3<T>{hVec[0], hVec[1], hVec[2]};
 }
 
-template <typename T, typename = std::enable_if<std::is_same_v<T, HVec<T>>>>
-LINAL_NODISCARD LINAL_CONSTEXPR HVec<T> vec3ToHVec(const Vec3<T>& vec3)
+template <typename T>
+LINAL_NODISCARD LINAL_CONSTEXPR hcoord::hvec<T> vec3ToHVec(const Vec3<T>& vec3)
 {
-  return HVec<T>{vec3[0], vec3[1], vec3[2], 1};
+  return hcoord::hvec<T>{vec3[0], vec3[1], vec3[2], 1};
 }
+
+} // namespace linal_utils
 
 } // namespace linal
 

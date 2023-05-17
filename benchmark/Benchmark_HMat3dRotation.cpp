@@ -1,6 +1,6 @@
 #include <benchmark/benchmark.h>
 #include <linal/HMat.hpp>
-#include <linal/HMatOperations.hpp>
+#include <linal/HMatRotation.hpp>
 #include <linal/HVec.hpp>
 #include <linal/utils/Constants.hpp>
 
