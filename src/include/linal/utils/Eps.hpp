@@ -37,7 +37,7 @@ LINAL_CONSTEXPR bool isZero(T value, T eps)
 template <typename T>
 LINAL_CONSTEXPR bool isZero(T value)
 {
-  return isZero(value, eps<T>::value());
+  return isZero(value, eps<T>::value);
 }
 
 template <typename T>
@@ -49,7 +49,7 @@ LINAL_CONSTEXPR bool isLess(T lhs, T rhs, T eps)
 template <typename T>
 LINAL_CONSTEXPR bool isLess(T lhs, T rhs)
 {
-  return isLess(lhs, rhs, eps<T>::value());
+  return isLess(lhs, rhs, eps<T>::value);
 }
 
 template <typename T>
@@ -61,7 +61,7 @@ LINAL_CONSTEXPR bool isLessEq(T lhs, T rhs, T eps)
 template <typename T>
 LINAL_CONSTEXPR bool isLessEq(T lhs, T rhs)
 {
-  return isLessEq(lhs, rhs, eps<T>::value());
+  return isLessEq(lhs, rhs, eps<T>::value);
 }
 
 template <typename T>
@@ -73,7 +73,7 @@ LINAL_CONSTEXPR bool isGreater(T lhs, T rhs, T eps)
 template <typename T>
 LINAL_CONSTEXPR bool isGreater(T lhs, T rhs)
 {
-  return isGreater(lhs, rhs, eps<T>::value());
+  return isGreater(lhs, rhs, eps<T>::value);
 }
 
 template <typename T>
@@ -85,7 +85,7 @@ LINAL_CONSTEXPR bool isGreaterEq(T lhs, T rhs, T eps)
 template <typename T>
 LINAL_CONSTEXPR bool isGreaterEq(T lhs, T rhs)
 {
-  return isGreaterEq(lhs, rhs, eps<T>::value());
+  return isGreaterEq(lhs, rhs, eps<T>::value);
 }
 
 template <typename T>
@@ -97,7 +97,7 @@ LINAL_CONSTEXPR bool isEq(T lhs, T rhs, T eps)
 template <typename T>
 LINAL_CONSTEXPR bool isEq(T lhs, T rhs)
 {
-  return isEq(lhs, rhs, eps<T>::value());
+  return isEq(lhs, rhs, eps<T>::value);
 }
 
 } // namespace linal
