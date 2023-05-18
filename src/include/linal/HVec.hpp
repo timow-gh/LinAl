@@ -62,6 +62,9 @@ LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec_to_hvec(const Vec<T, D>& vec)
     result[i] = vec[i];
   }
 
+  // Homogeneous coordinate is always 1
+  result[3] = 1;
+
   return result;
 }
 
