@@ -35,8 +35,6 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto dot(Vec<T, D> lhs, Vec<T, D> rhs)
 template <typename T, std::size_t D>
 LINAL_NODISCARD LINAL_CONSTEXPR Vec<T, D> cross(Vec<T, D> lhs, Vec<T, D> rhs)
 {
-  LINAL_ASSERT(norm2(lhs) > T{0.0});
-  LINAL_ASSERT(norm2(rhs) > T{0.0});
   return blaze::cross(lhs, rhs);
 }
 
