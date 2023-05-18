@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <linal/Mat.hpp>
+#include <linal/mat.hpp>
 #include <linal/mat_rot.hpp>
 #include <linal/utils/constants.hpp>
 #include <linal/vec3.hpp>

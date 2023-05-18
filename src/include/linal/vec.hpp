@@ -11,7 +11,7 @@ namespace linal
 {
 
 template <typename T, std::size_t N>
-using vec = blaze::StaticVector<T, N, blaze::columnVector, blaze::aligned, blaze::unpadded>;
+using vec = blaze::StaticVector<T, N, blaze::columnVector, blaze::unaligned, blaze::unpadded>;
 
 template <typename T, std::size_t D>
 using vecAllocator = blaze::AlignedAllocator<vec<T, D>>;

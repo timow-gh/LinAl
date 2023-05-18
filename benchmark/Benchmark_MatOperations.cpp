@@ -1,12 +1,12 @@
 #include <benchmark/benchmark.h>
-#include <linal/Mat.hpp>
-#include <linal/Vec3.hpp>
+#include <linal/mat.hpp>
 #include <linal/mat_rot.hpp>
-#include <linal/utils/Constants.hpp>
+#include <linal/utils/constants.hpp>
+#include <linal/vec3.hpp>
 
 static void BM_transpose_Mat3d(benchmark::State& state)
 {
-  auto mat = linal::mat3XRot(linal::PI<double> / 180.0 * 90.0);
+  linal::mat3d mat = linal::rot_x(linal::PI_D / 180.0 * 90.0);
   for (auto _: state)
   {
     linal::transpose(mat);

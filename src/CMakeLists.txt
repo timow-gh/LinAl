@@ -2,7 +2,7 @@ set(linal_HEADER
         include/linal/utils/assert.hpp
         include/linal/utils/compiler.hpp
         include/linal/utils/constants.hpp
-        include/linal/utils/Eps.hpp
+        include/linal/utils/eps.hpp
         include/linal/utils/util.hpp
         include/linal/utils/warnings.hpp
         include/linal/vec.hpp

@@ -1,68 +1,68 @@
 #include <benchmark/benchmark.h>
-#include <linal/Mat.hpp>
-#include <linal/Vec3.hpp>
+#include <linal/mat.hpp>
 #include <linal/mat_rot.hpp>
-#include <linal/utils/Constants.hpp>
+#include <linal/utils/constants.hpp>
+#include <linal/vec3.hpp>
 
 using namespace linal;
 
-static void BM_mat3fXRot_Vec3f(benchmark::State& state)
+static void BM_mat3fXRot(benchmark::State& state)
 {
-  Vec3f source{1, 0, 0};
+  linal::vec3f source{1, 0, 0};
   for (auto _: state)
   {
-    Vec3f result = mat3XRot(PI<float> / 180 * 90) * source;
+    linal::vec3f result = linal::rot_x(PI<float> / 180 * 90) * source;
     benchmark::DoNotOptimize(result);
   }
 }
-BENCHMARK(BM_mat3fXRot_Vec3f);
+BENCHMARK(BM_mat3fXRot);
 
-static void BM_mat3fYRot_Vec3f(benchmark::State& state)
+static void BM_mat3fYRot(benchmark::State& state)
 {
-  Vec3f source{1, 0, 0};
+  linal::vec3f source{1, 0, 0};
   for (auto _: state)
   {
-    Vec3f result = mat3YRot(PI<float> / 180 * 90) * source;
+    linal::vec3f result = linal::rot_y(PI<float> / 180 * 90) * source;
     benchmark::DoNotOptimize(result);
   }
 }
-BENCHMARK(BM_mat3fYRot_Vec3f);
+BENCHMARK(BM_mat3fYRot);
 
-static void BM_mat3fZRot_Vec3f(benchmark::State& state)
+static void BM_mat3fZRot(benchmark::State& state)
 {
-  Vec3f source{1, 0, 0};
+  linal::vec3f source{1, 0, 0};
   for (auto _: state)
   {
-    Vec3f result = mat3ZRot(PI<float> / 180 * 90) * source;
+    linal::vec3f result = linal::rot_z(PI<float> / 180 * 90) * source;
     benchmark::DoNotOptimize(result);
   }
 }
-BENCHMARK(BM_mat3fZRot_Vec3f);
+BENCHMARK(BM_mat3fZRot);
 
-static void BM_rotationAlign_Vec3f(benchmark::State& state)
+static void BM_rotationAlign(benchmark::State& state)
 {
-  Vec3f source{1, 0, 0};
-  Vec3f target{0, 1, 0};
+  linal::vec3f source{1, 0, 0};
+  linal::vec3f target{0, 1, 0};
   for (auto _: state)
   {
-    Vec3f result = rotationAlign(source, target) * source;
+    linal::vec3f result = linal::rot_align(source, target) * source;
     benchmark::DoNotOptimize(result);
   }
 }
-BENCHMARK(BM_rotationAlign_Vec3f);
+BENCHMARK(BM_rotationAlign);
 
-static void BM_matAxisAngleRot_Vec3f(benchmark::State& state)
+static void BM_matAxisAngleRot(benchmark::State& state)
 {
-  Vec3f source{1, 0, 0};
-  Vec3f rotAxis{0, 0, 1};
+  linal::vec3f source{1, 0, 0};
+  linal::vec3f rotAxis{0, 0, 1};
   constexpr float angle = PI<float> / 180 * 90;
   for (auto _: state)
   {
-    Vec3f result = matAxisAngleRot(rotAxis, angle) * source;
+    linal::vec3f result = linal::rot_axis(rotAxis, angle) * source;
     benchmark::DoNotOptimize(result);
   }
 }
-BENCHMARK(BM_matAxisAngleRot_Vec3f);
+BENCHMARK(BM_matAxisAngleRot);
 
 // Run the benchmark
 BENCHMARK_MAIN();

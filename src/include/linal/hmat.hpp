@@ -1,7 +1,7 @@
 #ifndef LINAL_HMAT_HPP
 #define LINAL_HMAT_HPP
 
-#include <linal/utils/Compiler.hpp>
+#include <linal/utils/compiler.hpp>
 #include <linal/utils/warnings.hpp>
 DISABLE_ALL_WARNINGS
 #include <blaze/math/StaticMatrix.h>
@@ -16,7 +16,7 @@ namespace hcoord
 {
 
 template <typename T>
-using hmat = blaze::StaticMatrix<T, 4, 4, blaze::rowMajor, blaze::aligned, blaze::unpadded>;
+using hmat = blaze::StaticMatrix<T, 4, 4, blaze::rowMajor, blaze::aligned, blaze::padded>;
 using hmatf = hmat<float>;
 using hmatd = hmat<double>;
 

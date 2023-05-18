@@ -1,17 +1,15 @@
 #include <benchmark/benchmark.h>
-#include <linal/Mat.hpp>
-#include <linal/Vec3.hpp>
+#include <linal/mat.hpp>
 #include <linal/mat_rot.hpp>
-#include <linal/utils/Constants.hpp>
-
-using namespace linal;
+#include <linal/utils/constants.hpp>
+#include <linal/vec3.hpp>
 
 static void BM_mat3dXRot_Vec3d(benchmark::State& state)
 {
-  Vec3d source{1, 0, 0};
+  linal::vec3d source{1, 0, 0};
   for (auto _: state)
   {
-    Vec3d result = linal::mat3XRot(linal::PI<double> / 180 * 90) * source;
+    linal::vec3d result = linal::rot_x(linal::PI<double> / 180 * 90) * source;
     benchmark::DoNotOptimize(result);
   }
 }
@@ -19,10 +17,10 @@ BENCHMARK(BM_mat3dXRot_Vec3d);
 
 static void BM_mat3dYRot_Vec3d(benchmark::State& state)
 {
-  Vec3d source{1, 0, 0};
+  linal::vec3d source{1, 0, 0};
   for (auto _: state)
   {
-    Vec3d result = linal::mat3YRot(linal::PI<double> / 180 * 90) * source;
+    linal::vec3d result = linal::rot_y(linal::PI<double> / 180 * 90) * source;
     benchmark::DoNotOptimize(result);
   }
 }
@@ -30,10 +28,10 @@ BENCHMARK(BM_mat3dYRot_Vec3d);
 
 static void BM_mat3dZRot_Vec3d(benchmark::State& state)
 {
-  Vec3d source{1, 0, 0};
+  linal::vec3d source{1, 0, 0};
   for (auto _: state)
   {
-    Vec3d result = linal::mat3ZRot(linal::PI<double> / 180 * 90) * source;
+    linal::vec3d result = linal::rot_y(linal::PI<double> / 180 * 90) * source;
     benchmark::DoNotOptimize(result);
   }
 }
@@ -41,11 +39,11 @@ BENCHMARK(BM_mat3dZRot_Vec3d);
 
 static void BM_rotationAlign_Vec3d(benchmark::State& state)
 {
-  Vec3d source{1, 0, 0};
-  Vec3d target{0, 1, 0};
+  linal::vec3d source{1, 0, 0};
+  linal::vec3d target{0, 1, 0};
   for (auto _: state)
   {
-    Vec3d result = linal::rotationAlign(source, target) * source;
+    linal::vec3d result = linal::rot_align(source, target) * source;
     benchmark::DoNotOptimize(result);
   }
 }
@@ -53,11 +51,11 @@ BENCHMARK(BM_rotationAlign_Vec3d);
 
 static void BM_matAxisAngleRot_Vec3d(benchmark::State& state)
 {
-  Vec3d source{1, 0, 0};
-  Vec3d rotAxis{0, 0, 1};
+  linal::vec3d source{1, 0, 0};
+  linal::vec3d rotAxis{0, 0, 1};
   for (auto _: state)
   {
-    Vec3d result = linal::matAxisAngleRot(rotAxis, linal::PI<double> / 180 * 90) * source;
+    linal::vec3d result = linal::rot_axis(rotAxis, linal::PI<double> / 180 * 90) * source;
     benchmark::DoNotOptimize(result);
   }
 }
