@@ -85,7 +85,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR Vec<T, D> rejection(Vec<T, D> source, Vec<T, D> 
  * @return True, if the vectors are collinear.
  */
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR bool collinear(Vec<T, D> source, Vec<T, D> target, T eps = eps_f<T>)
+LINAL_NODISCARD LINAL_CONSTEXPR bool collinear(Vec<T, D> source, Vec<T, D> target, T eps = eps_v<T>)
 {
   LINAL_ASSERT(normalize(source) == source);
   LINAL_ASSERT(normalize(target) == target);

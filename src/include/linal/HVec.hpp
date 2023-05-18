@@ -37,23 +37,39 @@ constexpr hvecd X_HVECD = hvecd{1, 0, 0, 1};
 constexpr hvecd Y_HVECD = hvecd{0, 1, 0, 1};
 constexpr hvecd Z_HVECD = hvecd{0, 0, 1, 1};
 
+template <typename T, std::size_t D>
+LINAL_NODISCARD LINAL_CONSTEXPR Vec<T, D> hvec_to_vec(const hvec<T>& hVec)
+{
+  static_assert(D != 0 && D < 4, "Vec dimension must be less than 4");
+
+  Vec<T, D> result;
+  for (std::size_t i = 0; i < D; ++i)
+  {
+    result[i] = hVec[i];
+  }
+
+  return result;
+}
+
+template <typename T, std::size_t D>
+LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec_to_hvec(const Vec<T, D>& vec)
+{
+  static_assert(D != 0 && D < 4, "Vec dimension must be less than 4");
+
+  hvec<T> result;
+  for (std::size_t i = 0; i < D; ++i)
+  {
+    result[i] = vec[i];
+  }
+
+  return result;
+}
+
 template <typename T>
 LINAL_NODISCARD LINAL_CONSTEXPR T vec3_norm(const hvec<T>& hVec)
 {
-  ::linal::Vec3<T> vec{hVec[0], hVec[1], hVec[2]};
+  Vec<T, 3> vec = hvec_to_vec<T, 3>(hVec);
   return blaze::norm(vec);
-}
-
-template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR Vec3<T> hvec_to_vec3(const hvec<T>& hVec)
-{
-  return Vec3<T>{hVec[0], hVec[1], hVec[2]};
-}
-
-template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec3_to_hvec(const Vec3<T>& vec3)
-{
-  return hvec<T>{vec3[0], vec3[1], vec3[2], 1};
 }
 
 } // namespace hcoord
