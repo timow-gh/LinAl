@@ -1,22 +1,22 @@
 set(linal_HEADER
-        include/linal/utils/Assert.hpp
-        include/linal/utils/Compiler.hpp
-        include/linal/utils/Constants.hpp
+        include/linal/utils/assert.hpp
+        include/linal/utils/compiler.hpp
+        include/linal/utils/constants.hpp
         include/linal/utils/Eps.hpp
-        include/linal/utils/Util.hpp
-        include/linal/utils/Warnings.hpp
-        include/linal/Vec.hpp
-        include/linal/Mat.hpp
-        include/linal/Containers.hpp
-        include/linal/MatRotation.hpp
-        include/linal/HMatTranslation.hpp
-        include/linal/Vec2.hpp
-        include/linal/Vec3.hpp
-        include/linal/Vec4.hpp
-        include/linal/HMat.hpp
-        include/linal/HVec.hpp
-        include/linal/VecOperations.hpp
-        include/linal/HMatRotation.hpp
+        include/linal/utils/util.hpp
+        include/linal/utils/warnings.hpp
+        include/linal/vec.hpp
+        include/linal/mat.hpp
+        include/linal/containers.hpp
+        include/linal/mat_rot.hpp
+        include/linal/hmat_translation.hpp
+        include/linal/vec2.hpp
+        include/linal/vec3.hpp
+        include/linal/vec4.hpp
+        include/linal/hmat.hpp
+        include/linal/hvec.hpp
+        include/linal/vec_operations.hpp
+        include/linal/hmat_rotation.hpp
         )
 
 set(TARGET_NAME Lin_Al)

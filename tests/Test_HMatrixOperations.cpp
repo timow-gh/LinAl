@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
-#include <linal/HMat.hpp>
-#include <linal/HMatRotation.hpp>
-#include <linal/HMatTranslation.hpp>
-#include <linal/HVec.hpp>
-#include <linal/utils/Constants.hpp>
-#include <linal/utils/Util.hpp>
+#include <linal/hmat.hpp>
+#include <linal/hmat_rotation.hpp>
+#include <linal/hmat_translation.hpp>
+#include <linal/hvec.hpp>
+#include <linal/utils/constants.hpp>
+#include <linal/utils/util.hpp>
 
 using namespace linal;
 
@@ -70,11 +70,11 @@ TEST(hmatOperations, axisRotation_Y)
 
 TEST(hmatOperations, axisRotation)
 {
-  Vec3d rotAxis = linal::cross(Vec3d{1, 0, 0}, Vec3d{0, 1, 1});
+  vec3d rotAxis = linal::cross(vec3d{1, 0, 0}, vec3d{0, 1, 1});
   hcoord::hmat<double_t> hmat = hcoord::rot_axis(hcoord::vec_to_hvec(rotAxis), linal::PI_HALF<double>);
-  Vec3d startVec{0, 1, 1};
-  startVec = linal::normalize(startVec);
-  hcoord::hvec<double_t> start{startVec[0], startVec[1], startVec[2], 1};
+  vec3d startvec{0, 1, 1};
+  startvec = linal::normalize(startvec);
+  hcoord::hvec<double_t> start{startvec[0], startvec[1], startvec[2], 1};
   hcoord::hvec<double_t> result = hmat * start;
   hcoord::hvec<double_t> expected{-1, 0, 0, 1};
   EXPECT_EQ(result, expected);
@@ -100,32 +100,32 @@ TEST(hmatOperations, rot_align_xTox)
 TEST(hmatOperations, rot_align_xToNormalizedOnes)
 {
   hcoord::hvecd xDir = hcoord::X_HVECD;
-  hcoord::hvecd targetVec{1, 1, 1, 1};
-  double_t vec3Len = hcoord::vec3_norm(targetVec);
-  targetVec[0] /= vec3Len;
-  targetVec[1] /= vec3Len;
-  targetVec[2] /= vec3Len;
-  hcoord::hmatd rotMat = hcoord::rot_align(xDir, targetVec);
+  hcoord::hvecd targetvec{1, 1, 1, 1};
+  double_t vec3Len = hcoord::vec3_norm(targetvec);
+  targetvec[0] /= vec3Len;
+  targetvec[1] /= vec3Len;
+  targetvec[2] /= vec3Len;
+  hcoord::hmatd rotMat = hcoord::rot_align(xDir, targetvec);
   hcoord::hvecd result = rotMat * xDir;
   constexpr double_t eps = 1E-7;
   for (std::size_t i{0}; i < 4; ++i)
-    EXPECT_TRUE(linal::isEq(result[i], targetVec[i], eps));
+    EXPECT_TRUE(linal::isEq(result[i], targetvec[i], eps));
 }
 
 TEST(hmatOperations, rot_align_xToOnes)
 {
   hcoord::hvecd xDir = {1, 0, 0, 1};
-  hcoord::hvecd targetVec{1, 1, 1, 1};
-  hcoord::hmatd rotMat = hcoord::rot_align(xDir, targetVec);
+  hcoord::hvecd targetvec{1, 1, 1, 1};
+  hcoord::hmatd rotMat = hcoord::rot_align(xDir, targetvec);
   hcoord::hvecd result = rotMat * xDir;
-  EXPECT_EQ(result, targetVec);
+  EXPECT_EQ(result, targetvec);
 }
 
 TEST(hmatOperations, set_translation)
 {
-  Vec3d targetVec{0, 0, 1};
+  vec3d targetvec{0, 0, 1};
   hcoord::hmatd mat = hcoord::identity<double_t>();
-  hcoord::set_translation(mat, targetVec);
+  hcoord::set_translation(mat, targetvec);
   hcoord::hvecd start = {0, 0, 0, 1};
   hcoord::hvecd result = mat * start;
   hcoord::hvecd expected{0, 0, 1, 1};
@@ -134,13 +134,13 @@ TEST(hmatOperations, set_translation)
 
 TEST(hmatOperations, get_translation)
 {
-  Vec3d targetVec{0, 0, 1};
+  vec3d targetvec{0, 0, 1};
   hcoord::hmatd mat = hcoord::identity<double_t>();
-  hcoord::set_translation(mat, targetVec);
+  hcoord::set_translation(mat, targetvec);
 
-  Vec3d translation{};
+  vec3d translation{};
   hcoord::get_translation(mat, translation);
 
-  Vec3d expected{0, 0, 1};
+  vec3d expected{0, 0, 1};
   EXPECT_EQ(translation, expected);
 }

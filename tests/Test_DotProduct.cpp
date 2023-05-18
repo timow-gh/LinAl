@@ -1,11 +1,11 @@
-#include <linal/Vec3.hpp>
 #include <gtest/gtest.h>
+#include <linal/vec3.hpp>
 
 using namespace linal;
 
 class DotProductFixture : public ::testing::Test {
 protected:
-  Vec3d m_vec3d{linal::X_VEC3D};
+  vec3d m_vec3d{linal::X_VEC3D};
 };
 
 TEST_F(DotProductFixture, collinear)

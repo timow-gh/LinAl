@@ -1,7 +1,7 @@
 #include <benchmark/benchmark.h>
 #include <linal/Mat.hpp>
-#include <linal/MatRotation.hpp>
 #include <linal/Vec3.hpp>
+#include <linal/mat_rot.hpp>
 #include <linal/utils/Constants.hpp>
 
 static void BM_transpose_Mat3d(benchmark::State& state)

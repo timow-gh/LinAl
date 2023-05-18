@@ -1,11 +1,11 @@
-#ifndef GLFWTESTAPP_BLAZEMATRIXOPERATIONS_H
-#define GLFWTESTAPP_BLAZEMATRIXOPERATIONS_H
+#ifndef LINAL_BLAZEMATRIXOPERATIONS_H
+#define LINAL_BLAZEMATRIXOPERATIONS_H
 
 #include <linal/utils/Compiler.hpp>
-#include <linal/utils/Warnings.hpp>
+#include <linal/utils/warnings.hpp>
 DISABLE_ALL_WARNINGS
-#include <linal/Containers.hpp>
-#include <linal/Vec.hpp>
+#include <linal/containers.hpp>
+#include <linal/vec.hpp>
 ENABLE_ALL_WARNINGS
 
 namespace linal
@@ -35,4 +35,4 @@ LINAL_CONSTEXPR void transpose(mat<T, M, N>& matrix)
 
 } // namespace linal
 
-#endif // GLFWTESTAPP_BLAZEMATRIXOPERATIONS_H
+#endif // LINAL_BLAZEMATRIXOPERATIONS_H

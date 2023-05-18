@@ -2,7 +2,7 @@
 #define LINAL_HMAT_HPP
 
 #include <linal/utils/Compiler.hpp>
-#include <linal/utils/Warnings.hpp>
+#include <linal/utils/warnings.hpp>
 DISABLE_ALL_WARNINGS
 #include <blaze/math/StaticMatrix.h>
 #include <blaze/math/Submatrix.h>

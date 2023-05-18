@@ -1,12 +1,12 @@
-#ifndef LINAL_MATROTATION_HPP
-#define LINAL_MATROTATION_HPP
+#ifndef LINAL_MAT_ROT_HPP
+#define LINAL_MAT_ROT_HPP
 
-#include <linal/HMat.hpp>
-#include <linal/Mat.hpp>
-#include <linal/VecOperations.hpp>
-#include <linal/utils/Compiler.hpp>
-#include <linal/utils/Util.hpp>
-#include <linal/utils/Warnings.hpp>
+#include <linal/hmat.hpp>
+#include <linal/mat.hpp>
+#include <linal/utils/compiler.hpp>
+#include <linal/utils/util.hpp>
+#include <linal/utils/warnings.hpp>
+#include <linal/vec_operations.hpp>
 DISABLE_ALL_WARNINGS
 #include <blaze/math/Submatrix.h>
 ENABLE_ALL_WARNINGS
@@ -52,9 +52,9 @@ LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_z(T alpha)
 
 //! Angle in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR auto rot_axis(Vec<T, 3> axis, T angleRad)
+LINAL_NODISCARD LINAL_CONSTEXPR auto rot_axis(vec<T, 3> axis, T angleRad)
 {
-  Vec<T, 3> nAxis = linal::normalize(axis);
+    vec<T, 3> nAxis = linal::normalize(axis);
   const T c = std::cos(angleRad);
   const T C = 1 - c;
   const T s = std::sin(angleRad);
@@ -79,10 +79,10 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto rot_axis(Vec<T, 3> axis, T angleRad)
   // clang-format on
 }
 
-//! Input Vectors are not normalized.
+//! Input vectors are not normalized.
 //! Make sure the input vectors are normalized if scaling is not desired.
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR auto rot_align(Vec<T, 3> source, Vec<T, 3> target)
+LINAL_NODISCARD LINAL_CONSTEXPR auto rot_align(vec<T, 3> source, vec<T, 3> target)
 {
   // clang-format off
     // https://iquilezles.org/www/articles/noacos/noacos.htm
@@ -91,7 +91,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto rot_align(Vec<T, 3> source, Vec<T, 3> targe
     M = -------  +  ( -v.z,   c,    v.x)
          1+c        (  v.y,  -v.x,  c  )
     */
-    const Vec<T, 3> v = cross(source, target);
+    const vec<T, 3> v = cross(source, target);
     const T c = dot(source, target);
     const T k = T(1.0) / (T(1.0) + c);
 
@@ -107,7 +107,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto rot_align(Vec<T, 3> source, Vec<T, 3> targe
 }
 
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR auto createLcsTransformation(Vec<T, 3> lcsX, Vec<T, 3> lcsY, Vec<T, 3> lcsZ)
+LINAL_NODISCARD LINAL_CONSTEXPR auto createLcsTransformation(vec<T, 3> lcsX, vec<T, 3> lcsY, vec<T, 3> lcsZ)
 {
   // clang-format off
     return mat3<T>{{lcsX[0], lcsY[0], lcsZ[0]},
@@ -118,4 +118,4 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto createLcsTransformation(Vec<T, 3> lcsX, Vec
 
 } // namespace linal
 
-#endif // LINAL_MATROTATION_HPP
+#endif // LINAL_MAT_ROT_HPP

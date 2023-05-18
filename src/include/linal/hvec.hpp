@@ -1,9 +1,9 @@
 #ifndef LINAL_HVEC_HPP
 #define LINAL_HVEC_HPP
 
-#include <linal/Vec3.hpp>
-#include <linal/utils/Util.hpp>
-#include <linal/utils/Warnings.hpp>
+#include <linal/utils/util.hpp>
+#include <linal/utils/warnings.hpp>
+#include <linal/vec3.hpp>
 DISABLE_ALL_WARNINGS
 #include <blaze/math/StaticVector.h>
 #include <blaze/util/AlignedAllocator.h>
@@ -38,21 +38,21 @@ constexpr hvecd Y_HVECD = hvecd{0, 1, 0, 1};
 constexpr hvecd Z_HVECD = hvecd{0, 0, 1, 1};
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR Vec<T, D> hvec_to_vec(const hvec<T>& hVec)
+LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> hvec_to_vec(const hvec<T>& hvec)
 {
   static_assert(D > 1 && D < 4);
 
-  Vec<T, D> result;
+  vec<T, D> result;
   for (std::size_t i = 0; i < D; ++i)
   {
-    result[i] = hVec[i];
+    result[i] = hvec[i];
   }
 
   return result;
 }
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec_to_hvec(const Vec<T, D>& vec)
+LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec_to_hvec(const vec<T, D>& vec)
 {
   static_assert(D > 1 && D < 4);
 
@@ -69,9 +69,9 @@ LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec_to_hvec(const Vec<T, D>& vec)
 }
 
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR T vec3_norm(const hvec<T>& hVec)
+LINAL_NODISCARD LINAL_CONSTEXPR T vec3_norm(const hvec<T>& hvec)
 {
-  Vec<T, 3> vec = hvec_to_vec<T, 3>(hVec);
+  vec<T, 3> vec = hvec_to_vec<T, 3>(hvec);
   return blaze::norm(vec);
 }
 

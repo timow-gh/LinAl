@@ -1,7 +1,7 @@
 #include <benchmark/benchmark.h>
-#include <linal/HMat.hpp>
-#include <linal/HMatRotation.hpp>
-#include <linal/HVec.hpp>
+#include <linal/hmat.hpp>
+#include <linal/hmat_rotation.hpp>
+#include <linal/hvec.hpp>
 #include <linal/utils/Constants.hpp>
 
 using namespace linal;

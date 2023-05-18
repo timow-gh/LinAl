@@ -1,12 +1,12 @@
-#ifndef LINAL_HMATROTATION_HPP
-#define LINAL_HMATROTATION_HPP
+#ifndef LINAL_HMAT_ROTATION_HPP
+#define LINAL_HMAT_ROTATION_HPP
 
-#include <linal/HMat.hpp>
-#include <linal/MatRotation.hpp>
-#include <linal/Vec.hpp>
-#include <linal/VecOperations.hpp>
-#include <linal/utils/Compiler.hpp>
-#include <linal/utils/Util.hpp>
+#include <linal/hmat.hpp>
+#include <linal/mat_rot.hpp>
+#include <linal/utils/compiler.hpp>
+#include <linal/utils/util.hpp>
+#include <linal/vec.hpp>
+#include <linal/vec_operations.hpp>
 
 namespace linal
 {
@@ -67,4 +67,4 @@ LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> rot_align(const hvec<T>& source, const h
 
 } // namespace linal
 
-#endif // LINAL_HMATROTATION_HPP
+#endif // LINAL_HMAT_ROTATION_HPP
