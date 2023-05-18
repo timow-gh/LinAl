@@ -1,6 +1,8 @@
 #ifndef LINAL_EPS_H
 #define LINAL_EPS_H
 
+#include <linal/utils/Compiler.hpp>
+
 namespace linal
 {
 
