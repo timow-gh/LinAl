@@ -40,7 +40,7 @@ constexpr hvecd Z_HVECD = hvecd{0, 0, 1, 1};
 template <typename T, std::size_t D>
 LINAL_NODISCARD LINAL_CONSTEXPR Vec<T, D> hvec_to_vec(const hvec<T>& hVec)
 {
-  static_assert(D != 0 && D < 4, "Vec dimension must be less than 4");
+  static_assert(D > 1 && D < 4);
 
   Vec<T, D> result;
   for (std::size_t i = 0; i < D; ++i)
@@ -54,7 +54,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR Vec<T, D> hvec_to_vec(const hvec<T>& hVec)
 template <typename T, std::size_t D>
 LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec_to_hvec(const Vec<T, D>& vec)
 {
-  static_assert(D != 0 && D < 4, "Vec dimension must be less than 4");
+  static_assert(D > 1 && D < 4);
 
   hvec<T> result;
   for (std::size_t i = 0; i < D; ++i)
