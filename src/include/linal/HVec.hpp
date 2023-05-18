@@ -44,6 +44,18 @@ LINAL_NODISCARD LINAL_CONSTEXPR T vec3_norm(const hvec<T>& hVec)
   return blaze::norm(vec);
 }
 
+template <typename T>
+LINAL_NODISCARD LINAL_CONSTEXPR Vec3<T> hVecToVec3(const hvec<T>& hVec)
+{
+  return Vec3<T>{hVec[0], hVec[1], hVec[2]};
+}
+
+template <typename T>
+LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec3ToHVec(const Vec3<T>& vec3)
+{
+  return hvec<T>{vec3[0], vec3[1], vec3[2], 1};
+}
+
 } // namespace hcoord
 
 } // namespace linal

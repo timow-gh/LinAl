@@ -49,7 +49,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> rot_axis(const hvec<T>& axis, T alphaRad
 {
   hmat<T> result = hcoord::identity<T>();
   auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-  R = linal::rot_axis(linal::linal_utils::hVecToVec3<T>(axis), alphaRad);
+  R = linal::rot_axis(hcoord::hVecToVec3<T>(axis), alphaRad);
   return result;
 }
 
@@ -59,7 +59,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> rot_align(const hvec<T>& source, const h
 {
   hmat<T> result = hcoord::identity<T>();
   auto R = blaze::submatrix<0UL, 0UL, 3UL, 3UL>(result);
-  R = linal::rot_align(linal::linal_utils::hVecToVec3(source), linal::linal_utils::hVecToVec3(target));
+  R = linal::rot_align(hcoord::hVecToVec3(source), hcoord::hVecToVec3(target));
   return result;
 }
 

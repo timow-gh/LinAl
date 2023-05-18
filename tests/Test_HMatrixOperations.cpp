@@ -2,6 +2,7 @@
 #include <linal/HMat.hpp>
 #include <linal/HMatRotation.hpp>
 #include <linal/HMatTranslation.hpp>
+#include <linal/HVec.hpp>
 #include <linal/utils/Constants.hpp>
 #include <linal/utils/Util.hpp>
 
@@ -70,7 +71,7 @@ TEST(hmatOperations, axisRotation_Y)
 TEST(hmatOperations, axisRotation)
 {
   Vec3d rotAxis = linal::cross(Vec3d{1, 0, 0}, Vec3d{0, 1, 1});
-  hcoord::hmat<double_t> hmat = hcoord::rot_axis(linal::linal_utils::vec3ToHVec(rotAxis), linal::PI_HALF<double>);
+  hcoord::hmat<double_t> hmat = hcoord::rot_axis(hcoord::vec3ToHVec(rotAxis), linal::PI_HALF<double>);
   Vec3d startVec{0, 1, 1};
   startVec = linal::normalize(startVec);
   hcoord::hvec<double_t> start{startVec[0], startVec[1], startVec[2], 1};
