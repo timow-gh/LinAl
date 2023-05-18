@@ -17,6 +17,19 @@ namespace linal
 namespace hcoord
 {
 
+template <typename T, std::size_t D>
+LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> create_translation(Vec<T, D> vec)
+{
+  static_assert(D > 1 && D < 4);
+
+  hmat<T> result = hcoord::identity<T>();
+
+  for (std::size_t i = 0; i < D; ++i)
+    result(i, D) = vec[i];
+
+  return result;
+}
+
 template <typename T>
 LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> create_translation(hvec<T> vec)
 {
