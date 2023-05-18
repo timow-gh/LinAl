@@ -7,7 +7,7 @@
 namespace linal
 {
 
-template <typename TFloat>
+template <typename T>
 struct eps;
 
 template <>
@@ -22,11 +22,11 @@ struct eps<double>
   static constexpr double value{1e-12};
 };
 
-template <typename TFloat>
-constexpr inline TFloat eps_f = eps<TFloat>::value;
+template <typename T>
+constexpr inline T eps_v = eps<T>::value;
 
-constexpr inline float eps_f32{eps_f<float>};
-constexpr inline double eps_f64{eps_f<double>};
+constexpr inline float eps_f32{eps_v<float>};
+constexpr inline double eps_f64{eps_v<double>};
 
 template <typename T>
 LINAL_CONSTEXPR bool isZero(T value, T eps)
