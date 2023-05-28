@@ -12,11 +12,10 @@ struct linal_utils
 {
 
   template <typename T>
-  LINAL_NODISCARD static LINAL_CONSTEXPR auto calcCosSin(T alphaRad)
+  LINAL_NODISCARD static constexpr auto calcCosSin(T alphaRad) noexcept
   {
     return std::make_pair(std::cos(alphaRad), std::sin(alphaRad));
   }
-
 };
 
 } // namespace linal

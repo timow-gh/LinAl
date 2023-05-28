@@ -16,7 +16,7 @@ namespace linal
 
 //! alpha in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_x(T alpha)
+LINAL_NODISCARD constexpr mat3<T> rot_x(T alpha) noexcept
 {
   auto [cos, sin] = linal_utils::calcCosSin(alpha);
   // clang-format off
@@ -28,7 +28,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_x(T alpha)
 
 //! alpha in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_y(T alpha)
+LINAL_NODISCARD constexpr mat3<T> rot_y(T alpha) noexcept
 {
   auto [cos, sin] = linal_utils::calcCosSin(alpha);
   // clang-format off
@@ -40,7 +40,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_y(T alpha)
 
 //! alpha in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_z(T alpha)
+LINAL_NODISCARD constexpr mat3<T> rot_z(T alpha) noexcept
 {
   auto [cos, sin] = linal_utils::calcCosSin(alpha);
   // clang-format off
@@ -52,9 +52,9 @@ LINAL_NODISCARD LINAL_CONSTEXPR mat3<T> rot_z(T alpha)
 
 //! Angle in radians
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR auto rot_axis(vec<T, 3> axis, T angleRad)
+LINAL_NODISCARD constexpr auto rot_axis(vec<T, 3> axis, T angleRad) noexcept
 {
-    vec<T, 3> nAxis = linal::normalize(axis);
+  vec<T, 3> nAxis = linal::normalize(axis);
   const T c = std::cos(angleRad);
   const T C = 1 - c;
   const T s = std::sin(angleRad);
@@ -82,7 +82,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto rot_axis(vec<T, 3> axis, T angleRad)
 //! Input vectors are not normalized.
 //! Make sure the input vectors are normalized if scaling is not desired.
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR auto rot_align(vec<T, 3> source, vec<T, 3> target)
+LINAL_NODISCARD constexpr auto rot_align(vec<T, 3> source, vec<T, 3> target) noexcept
 {
   // clang-format off
     // https://iquilezles.org/www/articles/noacos/noacos.htm
@@ -107,7 +107,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto rot_align(vec<T, 3> source, vec<T, 3> targe
 }
 
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR auto createLcsTransformation(vec<T, 3> lcsX, vec<T, 3> lcsY, vec<T, 3> lcsZ)
+LINAL_NODISCARD constexpr auto createLcsTransformation(vec<T, 3> lcsX, vec<T, 3> lcsY, vec<T, 3> lcsZ) noexcept
 {
   // clang-format off
     return mat3<T>{{lcsX[0], lcsY[0], lcsZ[0]},

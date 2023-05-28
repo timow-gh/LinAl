@@ -38,7 +38,7 @@ constexpr hvecd Y_HVECD = hvecd{0, 1, 0, 1};
 constexpr hvecd Z_HVECD = hvecd{0, 0, 1, 1};
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> hvec_to_vec(const hvec<T>& hvec)
+LINAL_NODISCARD constexpr vec<T, D> hvec_to_vec(const hvec<T>& hvec) noexcept
 {
   static_assert(D > 1 && D < 4);
 
@@ -52,7 +52,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> hvec_to_vec(const hvec<T>& hvec)
 }
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec_to_hvec(const vec<T, D>& vec)
+LINAL_NODISCARD constexpr hvec<T> vec_to_hvec(const vec<T, D>& vec) noexcept
 {
   static_assert(D > 1 && D < 4);
 
@@ -69,7 +69,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR hvec<T> vec_to_hvec(const vec<T, D>& vec)
 }
 
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR T vec3_norm(const hvec<T>& hvec)
+LINAL_NODISCARD constexpr T vec3_norm(const hvec<T>& hvec) noexcept
 {
   vec<T, 3> vec = hvec_to_vec<T, 3>(hvec);
   return blaze::norm(vec);

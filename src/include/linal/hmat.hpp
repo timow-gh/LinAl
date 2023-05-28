@@ -26,16 +26,18 @@ using hmatAllocatorf = hmatAllocator<hmatf>;
 using hmatAllocatord = hmatAllocator<hmatd>;
 
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> identity()
+LINAL_NODISCARD constexpr hmat<T> identity() noexcept
 {
   hmat<T> result;
   for (std::size_t i{0}; i < 4; ++i)
+  {
     result(i, i) = 1.0;
+  }
   return result;
 }
 
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> hMatInverse(const hmat<T>& matrix)
+LINAL_NODISCARD constexpr hmat<T> hMatInverse(const hmat<T>& matrix) noexcept
 {
   hmat<T> result = matrix;
 

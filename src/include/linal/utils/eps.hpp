@@ -29,73 +29,73 @@ constexpr inline float eps_f32{eps_v<float>};
 constexpr inline double eps_f64{eps_v<double>};
 
 template <typename T>
-LINAL_CONSTEXPR bool isZero(T value, T eps)
+constexpr bool isZero(T value, T eps) noexcept
 {
   return std::abs(value) < eps;
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isZero(T value)
+constexpr bool isZero(T value) noexcept
 {
   return isZero(value, eps<T>::value);
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isLess(T lhs, T rhs, T eps)
+constexpr bool isLess(T lhs, T rhs, T eps) noexcept
 {
   return lhs + eps < rhs;
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isLess(T lhs, T rhs)
+constexpr bool isLess(T lhs, T rhs) noexcept
 {
   return isLess(lhs, rhs, eps<T>::value);
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isLessEq(T lhs, T rhs, T eps)
+constexpr bool isLessEq(T lhs, T rhs, T eps) noexcept
 {
   return !(isLess(rhs, lhs, eps));
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isLessEq(T lhs, T rhs)
+constexpr bool isLessEq(T lhs, T rhs) noexcept
 {
   return isLessEq(lhs, rhs, eps<T>::value);
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isGreater(T lhs, T rhs, T eps)
+constexpr bool isGreater(T lhs, T rhs, T eps) noexcept
 {
   return isLess(rhs, lhs, eps);
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isGreater(T lhs, T rhs)
+constexpr bool isGreater(T lhs, T rhs) noexcept
 {
   return isGreater(lhs, rhs, eps<T>::value);
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isGreaterEq(T lhs, T rhs, T eps)
+constexpr bool isGreaterEq(T lhs, T rhs, T eps) noexcept
 {
   return !isLess(lhs, rhs, eps);
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isGreaterEq(T lhs, T rhs)
+constexpr bool isGreaterEq(T lhs, T rhs) noexcept
 {
   return isGreaterEq(lhs, rhs, eps<T>::value);
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isEq(T lhs, T rhs, T eps)
+constexpr bool isEq(T lhs, T rhs, T eps) noexcept
 {
   return std::abs(lhs - rhs) < eps;
 }
 
 template <typename T>
-LINAL_CONSTEXPR bool isEq(T lhs, T rhs)
+constexpr bool isEq(T lhs, T rhs) noexcept
 {
   return isEq(lhs, rhs, eps<T>::value);
 }

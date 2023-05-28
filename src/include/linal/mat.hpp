@@ -26,7 +26,7 @@ using matAllocator3f = matAllocator3<float>;
 using matAllocator3d = matAllocator3<double>;
 
 template <typename T, std::size_t M, std::size_t N>
-void transpose(mat<T, M, N>& matrix)
+void transpose(mat<T, M, N>& matrix) noexcept
 {
   blaze::transpose(matrix);
 }

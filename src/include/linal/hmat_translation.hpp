@@ -18,7 +18,7 @@ namespace hcoord
 {
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> create_translation(vec<T, D> vec)
+LINAL_NODISCARD constexpr hmat<T> create_translation(vec<T, D> vec) noexcept
 {
   static_assert(D > 1 && D < 4);
 
@@ -31,7 +31,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> create_translation(vec<T, D> vec)
 }
 
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> create_translation(hvec<T> vec)
+LINAL_NODISCARD constexpr hmat<T> create_translation(hvec<T> vec) noexcept
 {
   hmat<T> result = hcoord::identity<T>();
   result(0, 3) = vec[0];
@@ -41,7 +41,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> create_translation(hvec<T> vec)
 }
 
 template <typename T>
-LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> create_translation(T x, T y, T z)
+LINAL_NODISCARD constexpr hmat<T> create_translation(T x, T y, T z) noexcept
 {
   hmat<T> result = hcoord::identity<T>();
   result(0, 3) = x;
@@ -51,7 +51,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR hmat<T> create_translation(T x, T y, T z)
 }
 
 template <typename T, std::size_t N>
-LINAL_CONSTEXPR void get_translation(const hmat<T>& hmat, vec<T, N>& result)
+constexpr void get_translation(const hmat<T>& hmat, vec<T, N>& result) noexcept
 {
   result[0] = hmat(0, 3);
   result[1] = hmat(1, 3);
@@ -61,7 +61,7 @@ LINAL_CONSTEXPR void get_translation(const hmat<T>& hmat, vec<T, N>& result)
 }
 
 template <typename T, std::size_t D>
-LINAL_CONSTEXPR void set_translation(hmat<T>& hmat, vec<T, D> translation)
+constexpr void set_translation(hmat<T>& hmat, vec<T, D> translation)
 {
   hmat(0, 3) = translation[0];
   hmat(1, 3) = translation[1];
@@ -69,7 +69,7 @@ LINAL_CONSTEXPR void set_translation(hmat<T>& hmat, vec<T, D> translation)
 }
 
 template <typename T>
-[[deprecated]] LINAL_CONSTEXPR void hMatScaleTranslation(hmat<T>& matrix, T scaleFactor, T lowerLimit, T upperLimit)
+[[deprecated]] constexpr void hMatScaleTranslation(hmat<T>& matrix, T scaleFactor, T lowerLimit, T upperLimit) noexcept
 {
   auto translSubMatrix = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(matrix);
   translSubMatrix = translSubMatrix * scaleFactor;

@@ -12,7 +12,7 @@ namespace linal
 {
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR auto norm2Squared(vec<T, D> vector)
+LINAL_NODISCARD constexpr auto norm2Squared(vec<T, D> vector) noexcept
 {
   T sum{0};
   for (const auto& value: vector)
@@ -21,25 +21,25 @@ LINAL_NODISCARD LINAL_CONSTEXPR auto norm2Squared(vec<T, D> vector)
 }
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR T norm2(vec<T, D> vec)
+LINAL_NODISCARD constexpr T norm2(vec<T, D> vec) noexcept
 {
   return blaze::norm(vec);
 }
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR auto dot(vec<T, D> lhs, vec<T, D> rhs)
+LINAL_NODISCARD constexpr auto dot(vec<T, D> lhs, vec<T, D> rhs) noexcept
 {
   return blaze::dot(lhs, rhs);
 }
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> cross(vec<T, D> lhs, vec<T, D> rhs)
+LINAL_NODISCARD constexpr vec<T, D> cross(vec<T, D> lhs, vec<T, D> rhs) noexcept
 {
   return blaze::cross(lhs, rhs);
 }
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> normalize(vec<T, D> vector)
+LINAL_NODISCARD constexpr vec<T, D> normalize(vec<T, D> vector) noexcept
 {
   return vec<T, D>{blaze::normalize(vector)};
 }
@@ -55,7 +55,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> normalize(vec<T, D> vector)
  * @return The projection of source onto target.
  */
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> projection(vec<T, D> source, vec<T, D> target)
+LINAL_NODISCARD constexpr vec<T, D> projection(vec<T, D> source, vec<T, D> target) noexcept
 {
   return target * (dot(source, target)) / (dot(target, target));
 }
@@ -71,7 +71,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> projection(vec<T, D> source, vec<T, D>
  * @return The rejection of source onto target.
  */
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> rejection(vec<T, D> source, vec<T, D> target)
+LINAL_NODISCARD constexpr vec<T, D> rejection(vec<T, D> source, vec<T, D> target) noexcept
 {
   return source - projection(source, target);
 }
@@ -85,7 +85,7 @@ LINAL_NODISCARD LINAL_CONSTEXPR vec<T, D> rejection(vec<T, D> source, vec<T, D> 
  * @return True, if the vectors are collinear.
  */
 template <typename T, std::size_t D>
-LINAL_NODISCARD LINAL_CONSTEXPR bool collinear(vec<T, D> source, vec<T, D> target, T eps = eps_v<T>)
+LINAL_NODISCARD constexpr bool collinear(vec<T, D> source, vec<T, D> target, T eps = eps_v<T>) noexcept
 {
   LINAL_ASSERT(normalize(source) == source);
   LINAL_ASSERT(normalize(target) == target);
