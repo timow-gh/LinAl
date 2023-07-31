@@ -18,7 +18,7 @@ namespace hcoord
 {
 
 template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr hmat<T> create_translation(vec<T, D> vec) noexcept
+LINAL_NODISCARD constexpr hmat<T> hmat_translation(vec<T, D> vec) noexcept
 {
   static_assert(D > 1 && D < 4);
 
@@ -31,7 +31,7 @@ LINAL_NODISCARD constexpr hmat<T> create_translation(vec<T, D> vec) noexcept
 }
 
 template <typename T>
-LINAL_NODISCARD constexpr hmat<T> create_translation(hvec<T> vec) noexcept
+LINAL_NODISCARD constexpr hmat<T> hmat_translation(hvec<T> vec) noexcept
 {
   hmat<T> result = hcoord::identity<T>();
   result(0, 3) = vec[0];
@@ -41,7 +41,7 @@ LINAL_NODISCARD constexpr hmat<T> create_translation(hvec<T> vec) noexcept
 }
 
 template <typename T>
-LINAL_NODISCARD constexpr hmat<T> create_translation(T x, T y, T z) noexcept
+LINAL_NODISCARD constexpr hmat<T> hmat_translation(T x, T y, T z) noexcept
 {
   hmat<T> result = hcoord::identity<T>();
   result(0, 3) = x;
@@ -53,6 +53,7 @@ LINAL_NODISCARD constexpr hmat<T> create_translation(T x, T y, T z) noexcept
 template <typename T, std::size_t N>
 constexpr void get_translation(const hmat<T>& hmat, vec<T, N>& result) noexcept
 {
+  static_assert(N > 1 && N < 4);
   result[0] = hmat(0, 3);
   result[1] = hmat(1, 3);
   result[2] = hmat(2, 3);
@@ -63,33 +64,10 @@ constexpr void get_translation(const hmat<T>& hmat, vec<T, N>& result) noexcept
 template <typename T, std::size_t D>
 constexpr void set_translation(hmat<T>& hmat, vec<T, D> translation)
 {
+  static_assert(D > 1 && D < 4);
   hmat(0, 3) = translation[0];
   hmat(1, 3) = translation[1];
   hmat(2, 3) = translation[2];
-}
-
-template <typename T>
-[[deprecated]] constexpr void hMatScaleTranslation(hmat<T>& matrix, T scaleFactor, T lowerLimit, T upperLimit) noexcept
-{
-  auto translSubMatrix = blaze::submatrix<0UL, 3UL, 3UL, 1UL>(matrix);
-  translSubMatrix = translSubMatrix * scaleFactor;
-
-  vec3<T> lengthvec{matrix(0, 3), matrix(1, 3), matrix(2, 3)};
-  T length = linal::norm2(lengthvec);
-  if (length < lowerLimit)
-  {
-    lengthvec = linal::normalize(lengthvec) * lowerLimit;
-  }
-  else if (length > upperLimit)
-  {
-    lengthvec = linal::normalize(lengthvec) * upperLimit;
-  }
-  else
-    return;
-
-  matrix(0, 3) = lengthvec[0];
-  matrix(1, 3) = lengthvec[1];
-  matrix(2, 3) = lengthvec[2];
 }
 
 } // namespace hcoord

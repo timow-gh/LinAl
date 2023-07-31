@@ -16,7 +16,7 @@ namespace hcoord
 {
 
 template <typename T>
-using hvec = blaze::StaticVector<T, 4, blaze::columnVector, blaze::aligned, blaze::padded>;
+using hvec = blaze::StaticVector<T, 4, blaze::columnVector, blaze::unaligned, blaze::unpadded>;
 
 using hvecf = hvec<float>;
 using hvecd = hvec<double>;

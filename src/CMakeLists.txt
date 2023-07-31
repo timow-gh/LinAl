@@ -6,18 +6,19 @@ set(linal_HEADER
         include/linal/utils/util.hpp
         include/linal/utils/warnings.hpp
         include/linal/vec.hpp
-        include/linal/mat.hpp
-        include/linal/containers.hpp
-        include/linal/mat_rot.hpp
-        include/linal/hmat_translation.hpp
         include/linal/vec2.hpp
         include/linal/vec3.hpp
         include/linal/vec4.hpp
-        include/linal/hmat.hpp
-        include/linal/hvec.hpp
         include/linal/vec_operations.hpp
+        include/linal/mat.hpp
+        include/linal/hvec.hpp
+        include/linal/hmat.hpp
         include/linal/hmat_rotation.hpp
-        )
+        include/linal/hmat_translation.hpp
+        include/linal/hmat_transformations.hpp
+        include/linal/mat_rot.hpp
+        include/linal/containers.hpp
+)
 
 set(TARGET_NAME Lin_Al)
 add_library(${TARGET_NAME} INTERFACE ${linal_HEADER})
