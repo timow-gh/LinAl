@@ -14,7 +14,7 @@ FetchContent_MakeAvailable(googletest)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     target_compile_options(gtest_main INTERFACE
             "-Wno-weak-vtables"
-            )
+    )
 endif ()
 
 mark_as_advanced(FETCHCONTENT_BASE_DIR)
@@ -33,5 +33,6 @@ endmacro()
 create_linal_test(Test_HMatrixOperations)
 create_linal_test(Test_MatrixOperations)
 create_linal_test(Test_DotProduct)
-create_linal_test(Test_VecOperations)
 create_linal_test(Test_Vec)
+create_linal_test(Test_VecCompare)
+create_linal_test(Test_VecOperations)

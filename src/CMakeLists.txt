@@ -9,6 +9,7 @@ set(linal_HEADER
         include/linal/vec2.hpp
         include/linal/vec3.hpp
         include/linal/vec4.hpp
+        include/linal/vec_compare.hpp
         include/linal/vec_operations.hpp
         include/linal/mat.hpp
         include/linal/hvec.hpp
