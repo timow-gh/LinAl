@@ -4,10 +4,10 @@
 #include <linal/utils/util.hpp>
 #include <linal/utils/warnings.hpp>
 #include <linal/vec3.hpp>
-DISABLE_ALL_WARNINGS
+TW_LINAL_DISABLE_ALL_WARNINGS
 #include <blaze/math/StaticVector.h>
 #include <blaze/util/AlignedAllocator.h>
-ENABLE_ALL_WARNINGS
+TW_LINAL_ENABLE_ALL_WARNINGS
 
 namespace linal
 {

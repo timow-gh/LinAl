@@ -7,9 +7,9 @@
 #include <linal/utils/util.hpp>
 #include <linal/utils/warnings.hpp>
 #include <linal/vec_operations.hpp>
-DISABLE_ALL_WARNINGS
+TW_LINAL_DISABLE_ALL_WARNINGS
 #include <blaze/math/Submatrix.h>
-ENABLE_ALL_WARNINGS
+TW_LINAL_ENABLE_ALL_WARNINGS
 
 namespace linal
 {
