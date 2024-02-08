@@ -11,51 +11,16 @@
 namespace linal
 {
 
-template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr auto norm2Squared(vec<T, D> vector) noexcept
-{
-  T sum{0};
-  for (const auto& value: vector)
-    sum += value * value;
-  return sum;
-}
-
-template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr T norm2(vec<T, D> vec) noexcept
-{
-  return blaze::norm(vec);
-}
-
-template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr auto dot(vec<T, D> lhs, vec<T, D> rhs) noexcept
-{
-  return blaze::dot(lhs, rhs);
-}
-
-template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr vec<T, D> cross(vec<T, D> lhs, vec<T, D> rhs) noexcept
-{
-  return blaze::cross(lhs, rhs);
-}
-
-template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr vec<T, D> normalize(vec<T, D> vector) noexcept
-{
-  return vec<T, D>{blaze::normalize(vector)};
-}
-
 /** @brief Returns the projection of source onto target.
  *
  * \link [vector_projection](https://en.wikipedia.org/wiki/vector_projection) \endlink
  *
- * @tparam T The type of the vector components.
- * @tparam D The dimension of the vectors.
  * @param source The vector to be projected.
  * @param target The vector to be projected onto.
  * @return The projection of source onto target.
  */
-template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr vec<T, D> projection(vec<T, D> source, vec<T, D> target) noexcept
+template <typename TVec>
+LINAL_NODISCARD constexpr TVec projection(const TVec& source, const TVec& target) noexcept
 {
   return target * (dot(source, target)) / (dot(target, target));
 }
@@ -64,32 +29,29 @@ LINAL_NODISCARD constexpr vec<T, D> projection(vec<T, D> source, vec<T, D> targe
  *
  * \link [vector_projection](https://en.wikipedia.org/wiki/vector_projection) \endlink
  *
- * @tparam T The type of the vector components.
- * @tparam D The dimension of the vectors.
  * @param source The vector of which the rejection is to be computed.
  * @param target The vector to be projected onto.
  * @return The rejection of source onto target.
  */
-template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr vec<T, D> rejection(vec<T, D> source, vec<T, D> target) noexcept
+template <typename TVec>
+LINAL_NODISCARD constexpr TVec rejection(const TVec& source, const TVec& target) noexcept
 {
   return source - projection(source, target);
 }
 
 /** @brief Checks if the vectors are collinear.
  *
- * @tparam T The type of the vector components.
- * @tparam D The dimension of the vectors.
  * @param source The first vector, must be of length one.
  * @param target The second vector, must be of length one.
  * @return True, if the vectors are collinear.
  */
-template <typename T, std::size_t D>
-LINAL_NODISCARD constexpr bool collinear(vec<T, D> source, vec<T, D> target, T eps = eps_v<T>) noexcept
+template <typename TVec>
+LINAL_NODISCARD constexpr bool
+collinear(const TVec& source, const TVec& target, typename TVec::value_type eps = eps_v<typename TVec::value_type>) noexcept
 {
   LINAL_ASSERT(normalize(source) == source);
   LINAL_ASSERT(normalize(target) == target);
-  return (T{1} - std::abs(linal::dot(source, target))) < eps;
+  return (typename TVec::value_type{1} - std::abs(dot(source, target))) < eps;
 }
 
 } // namespace linal

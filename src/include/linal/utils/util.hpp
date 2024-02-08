@@ -1,9 +1,7 @@
 #ifndef LINAL_UTIL_HPP
 #define LINAL_UTIL_HPP
 
-#include <linal/hvec.hpp>
 #include <linal/utils/compiler.hpp>
-#include <linal/vec3.hpp>
 
 namespace linal
 {

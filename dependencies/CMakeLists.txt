@@ -1,2 +1,0 @@
-include(FetchContent)
-add_subdirectory(linalbase)

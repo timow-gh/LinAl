@@ -64,6 +64,18 @@
 #define LINAL_RESTRICT
 #endif
 
+#if __has_attribute(pure)
+#define LINAL_PURE __attribute__((pure))
+#else
+#define LINAL_PURE
+#endif
+
+#if __has_attribute(const)
+#define LINAL_CONST __attribute__((const))
+#else
+#define LINAL_CONST
+#endif
+
 #define LINAL_NODISCARD [[nodiscard]]
 
 #endif // LINAL_COMPILER_HPP

@@ -10,8 +10,8 @@ namespace linal
 {
 
 /* @brief Checks if the elements of the vector are equal to zero with the given eps.*/
-template <typename T, std::size_t N>
-LINAL_NODISCARD constexpr bool is_zero(linal::vec<T, N> vec, const T eps) noexcept
+template <typename TVec, typename T>
+LINAL_NODISCARD constexpr bool is_zero(const TVec& vec, const T eps) noexcept
 {
   auto iter = vec.cbegin();
   auto end = vec.cend();
@@ -27,17 +27,17 @@ LINAL_NODISCARD constexpr bool is_zero(linal::vec<T, N> vec, const T eps) noexce
 }
 
 /* @brief Checks if the elements of the vector are equal to zero using the default eps.*/
-template <typename T, std::size_t N>
-LINAL_NODISCARD constexpr bool is_zero(linal::vec<T, N> vec) noexcept
+template <typename TVec>
+LINAL_NODISCARD constexpr bool is_zero(const TVec& vec) noexcept
 {
-  return is_zero(vec, linal::eps<T>::value);
+  return is_zero(vec, linal::eps<typename TVec::value_type>::value);
 }
 
 /* @brief Compare two vectors with the given eps.*/
-template <typename T, std::size_t N>
-LINAL_NODISCARD constexpr bool is_equal(linal::vec<T, N> lhs, linal::vec<T, N> rhs, const T eps) noexcept
+template <typename TVec, typename T>
+LINAL_NODISCARD constexpr bool is_equal(const TVec& lhs, const TVec& rhs, const T eps) noexcept
 {
-  assert(lhs.size() == rhs.size());
+  assert(lhs.dim == rhs.dim);
   auto lhsIter = lhs.cbegin();
   auto rhsIter = rhs.cbegin();
   auto end = lhs.cend();
@@ -54,10 +54,10 @@ LINAL_NODISCARD constexpr bool is_equal(linal::vec<T, N> lhs, linal::vec<T, N> r
 }
 
 /* @brief Compare two vectors using the default eps.*/
-template <typename T, std::size_t N>
-LINAL_NODISCARD constexpr bool is_equal(linal::vec<T, N> lhs, linal::vec<T, N> rhs) noexcept
+template <typename TVec>
+LINAL_NODISCARD constexpr bool is_equal(const TVec& lhs, const TVec& rhs) noexcept
 {
-  return is_equal(lhs, rhs, linal::eps<T>::value);
+  return is_equal(lhs, rhs, linal::eps<typename TVec::value_type>::value);
 }
 
 } // namespace linal

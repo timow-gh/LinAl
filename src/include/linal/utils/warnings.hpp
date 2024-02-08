@@ -6,11 +6,11 @@
 #if defined(_MSC_VER)
 #define TW_LINAL_DISABLE_ALL_WARNINGS DO_PRAGMA(warning(push, 0))
 #elif defined(__clang__)
-#define TW_LINAL_DISABLE_ALL_WARNINGS                                                                                                               \
+#define TW_LINAL_DISABLE_ALL_WARNINGS                                                                                                      \
   DO_PRAGMA(clang diagnostic push)                                                                                                         \
   DO_PRAGMA(clang diagnostic ignored "-Weverything")
 #elif defined(__GNUC__)
-#define TW_LINAL_DISABLE_ALL_WARNINGS                                                                                                               \
+#define TW_LINAL_DISABLE_ALL_WARNINGS                                                                                                      \
   DO_PRAGMA(GCC diagnostic push)                                                                                                           \
   DO_PRAGMA(GCC diagnostic ignored "-Wall")                                                                                                \
   DO_PRAGMA(GCC diagnostic ignored "-Wextra")                                                                                              \

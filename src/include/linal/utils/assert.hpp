@@ -58,8 +58,7 @@ inline void assertion(const char* fileName, int line, const char* funcName, cons
       ::linal::assertion(__FILE__, __LINE__, __func__, #__VA_ARGS__);                                                                      \
       LINAL_ASSERT_TRAP();                                                                                                                 \
     }                                                                                                                                      \
-  }                                                                                                                                        \
-  while (false)
+  } while (false)
 #endif
 
 #endif // LINAL_ASSERT_HPP
