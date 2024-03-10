@@ -2,7 +2,7 @@
 #define LINAL_ASSERT_HPP
 
 #include <cstdio>
-#include <linal/utils/compiler.hpp>
+#include "linal/utils/compiler.hpp"
 
 // Check if we're on windows and have access to __debugbreak().
 #if !defined(LINAL_DEBUGBREAK)

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <linal/vec.hpp>
+#include <linal/linal.hpp>
 
 using namespace linal;
 
@@ -219,4 +219,12 @@ TEST(vec, dot)
   vec2 = float3{-1.0F, 0.0F, 0.0F};
   dotP = dot(vec1, vec2);
   EXPECT_FLOAT_EQ(dotP, -1.0F);
+}
+
+TEST(vec, vec_from_vec_with_different_value_type)
+{
+  float2 vec1{1.0F};
+  double2 vec2 = vec1;
+  EXPECT_DOUBLE_EQ(vec2[0], 1.0);
+  EXPECT_DOUBLE_EQ(vec2[1], 1.0);
 }

@@ -2,9 +2,9 @@
 #define LINAL_VEC_COMPARE_HPP
 
 #include <cstdint>
-#include <linal/utils/compiler.hpp>
-#include <linal/utils/eps.hpp>
-#include <linal/vec.hpp>
+#include "linal/utils/compiler.hpp"
+#include "linal/utils/eps.hpp"
+#include "linal/vec.hpp"
 
 namespace linal
 {

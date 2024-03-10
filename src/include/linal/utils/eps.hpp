@@ -2,7 +2,7 @@
 #define LINAL_EPS_H
 
 #include <cmath>
-#include <linal/utils/compiler.hpp>
+#include "linal/utils/compiler.hpp"
 
 namespace linal
 {

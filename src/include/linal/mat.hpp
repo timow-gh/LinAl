@@ -38,8 +38,8 @@ template <typename T, int M, int N>
 template <typename T, int M, int N>
 [[nodiscard]] constexpr bool is_orthogonal(const mat<T, M, N>& mat) noexcept;
 
-template <typename LMat, typename RMat>
-constexpr auto matrix_multiply(const LMat& lhs, const RMat& rhs) noexcept;
+template <typename LMat, typename RMat, typename TResult>
+constexpr TResult matrix_multiply(const LMat& lhs, const RMat& rhs) noexcept;
 
 template <typename TMat, typename TVec>
 constexpr TVec matrix_vec_multiply(const TMat& lhs, const TVec& rhs) noexcept;
@@ -65,6 +65,8 @@ class mat
 public:
   using value_type = T;
   using size_type = int;
+  using iterator = T*;
+  using const_iterator = const T*;
   using reference = T&;
 
   static constexpr size_type noOfRows = M;
@@ -85,6 +87,9 @@ public:
       m_data[i] = value;
     }
   }
+
+  constexpr iterator data() noexcept { return m_data; }
+  constexpr const_iterator data() const noexcept { return m_data; }
 
   /** @brief Accesses the element at the specified index.
    *
@@ -196,10 +201,11 @@ public:
    * @param rhs The matrix to multiply with.
    * @return The resulting matrix.
    */
-  template <typename Matrix, typename = std::enable_if_t<std::is_same_v<typename Matrix::value_type, mat::value_type>>>
-  constexpr auto operator*(const Matrix& rhs) const noexcept
+  template <typename TRhs, typename = std::enable_if_t<std::is_same_v<typename TRhs::value_type, mat::value_type>>>
+  constexpr auto operator*(const TRhs& rhs) const noexcept
   {
-    return linal::matrix_multiply(*this, rhs);
+    using TResult = mat<value_type, mat::noOfRows, TRhs::noOfCols>;
+    return linal::matrix_multiply<mat, TRhs, TResult>(*this, rhs);
   }
 
   /** @brief Multiplies the matrix with a vector.
@@ -299,7 +305,7 @@ template <typename T, int M, int N>
 template <typename T, int M, int N>
 [[nodiscard]] constexpr bool is_identity(const mat<T, M, N>& mat) noexcept
 {
-  static_assert(M == N, "Matrix must be square.");
+  static_assert(M == N, "TRhs must be square.");
 
   using matrix = ::linal::mat<T, N, M>;
   using size_type = typename matrix::size_type;
@@ -330,7 +336,7 @@ template <typename T, int M, int N>
 template <typename T, int M, int N>
 [[nodiscard]] constexpr bool is_symmetric(const mat<T, M, N>& mat) noexcept
 {
-  static_assert(M == N, "Matrix must be square.");
+  static_assert(M == N, "TRhs must be square.");
 
   using matrix = ::linal::mat<T, N, M>;
   using size_type = typename matrix::size_type;
@@ -351,7 +357,7 @@ template <typename T, int M, int N>
 template <typename T, int M, int N>
 [[nodiscard]] constexpr bool is_orthogonal(const mat<T, M, N>& mat) noexcept
 {
-  static_assert(M == N, "Matrix must be square.");
+  static_assert(M == N, "TRhs must be square.");
 
   using matrix = ::linal::mat<T, N, M>;
   using size_type = typename matrix::size_type;
@@ -363,12 +369,11 @@ template <typename T, int M, int N>
   return res;
 }
 
-template <typename LMat, typename RMat>
-constexpr auto matrix_multiply(const LMat& lhs, const RMat& rhs) noexcept
+template <typename LMat, typename RMat, typename TResult>
+constexpr TResult matrix_multiply(const LMat& lhs, const RMat& rhs) noexcept
 {
-  static_assert(RMat::noOfRows == LMat::noOfCols && "Matrix dimensions do not match.");
+  static_assert(RMat::noOfRows == LMat::noOfCols && "TRhs dimensions do not match.");
 
-  using TResult = mat<typename LMat::value_type, LMat::noOfRows, RMat::noOfCols>;
   using size_type = typename TResult::size_type;
 
   TResult result;
@@ -390,7 +395,7 @@ constexpr TVec matrix_vec_multiply(const TMat& lhs, const TVec& rhs) noexcept
 {
   using value_type = typename TMat::value_type;
   using size_type = typename TMat::size_type;
-  static_assert(TVec::dim == TMat::noOfCols, "Matrix and vector dimensions do not match.");
+  static_assert(TVec::dim == TMat::noOfCols, "TRhs and vector dimensions do not match.");
 
   TVec result;
   for (size_type i = 0; i < TMat::noOfRows; ++i)

@@ -1,11 +1,11 @@
 #ifndef LINAL_HMAT_HPP
 #define LINAL_HMAT_HPP
 
-#include <linal/array_type_traits.hpp>
-#include <linal/mat.hpp>
-#include <linal/mat_rot.hpp>
-#include <linal/utils/compiler.hpp>
-#include <linal/utils/util.hpp>
+#include "linal/array_type_traits.hpp"
+#include "linal/mat.hpp"
+#include "linal/mat_rot.hpp"
+#include "linal/utils/compiler.hpp"
+#include "linal/utils/util.hpp"
 
 namespace linal
 {
@@ -33,6 +33,8 @@ class hmat
 public:
   using value_type = T;
   using size_type = int;
+  using iterator = T*;
+  using const_iterator = const T*;
   static constexpr size_type noOfCols = 4;
   static constexpr size_type noOfRows = 4;
   static constexpr size_type size = noOfCols * noOfRows;
@@ -76,10 +78,13 @@ public:
     set_translation(translation);
   }
 
+  constexpr iterator data() noexcept { return m_data; }
+  constexpr const_iterator data() const noexcept { return m_data; }
+
   constexpr value_type& operator[](int index) noexcept { return m_data[index]; }
   constexpr const value_type& operator[](int index) const noexcept { return m_data[index]; }
 
-  constexpr auto operator*=(const hmat& rhs) noexcept { return linal::matrix_multiply(*this, rhs); }
+  constexpr hmat operator*(const hmat& rhs) const noexcept { return linal::matrix_multiply<hmat, hmat, hmat>(*this, rhs); }
 
   constexpr hvec<T> operator*(const hvec<T>& rhs) const noexcept { return linal::matrix_vec_multiply(*this, rhs); }
 

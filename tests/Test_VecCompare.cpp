@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <linal/vec_compare.hpp>
+#include <linal/linal.hpp>
 
 using namespace linal;
 

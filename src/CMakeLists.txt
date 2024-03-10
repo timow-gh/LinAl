@@ -12,6 +12,7 @@ set(linal_HEADER
         include/linal/utils/warnings.hpp
         include/linal/array_type_traits.hpp
         include/linal/hmat.hpp
+        include/linal/linal.hpp
         include/linal/mat.hpp
         include/linal/mat_rot.hpp
         include/linal/vec.hpp
@@ -29,3 +30,23 @@ set_target_properties(${TARGET_NAME}
         EXPORT_NAME ${TARGET_ALIAS})
 
 add_library(${TARGET_ALIAS}::${TARGET_ALIAS} ALIAS ${TARGET_NAME})
+
+if (LinAl_INSTALL)
+    include(setup_export_set_installation)
+
+    set(project_export_set_name "${PROJECT_NAME}TargetsExportSet")
+
+    install(DIRECTORY "include/${TARGET_NAME}" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+
+    install(TARGETS
+            ${TARGET_NAME}
+            EXPORT ${project_export_set_name}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+    setup_export_set_installation(
+            ${PROJECT_NAME}
+            ${project_export_set_name}
+            Config.cmake.in
+            ${PROJECT_VERSION_MAJOR} ${PROJECT_VERSION_MINOR} ${PROJECT_VERSION_PATCH}
+    )
+endif ()

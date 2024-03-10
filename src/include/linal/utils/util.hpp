@@ -1,7 +1,7 @@
 #ifndef LINAL_UTIL_HPP
 #define LINAL_UTIL_HPP
 
-#include <linal/utils/compiler.hpp>
+#include "linal/utils/compiler.hpp"
 
 namespace linal
 {

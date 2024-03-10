@@ -1,7 +1,7 @@
 #ifndef LINAL_MAT_ROT_HPP
 #define LINAL_MAT_ROT_HPP
 
-#include <linal/utils/util.hpp>
+#include "linal/utils/util.hpp"
 
 namespace linal
 {

@@ -1,11 +1,11 @@
 #ifndef LINAL_VECTOROPERATIONS_H
 #define LINAL_VECTOROPERATIONS_H
 
+#include "linal/utils/assert.hpp"
+#include "linal/utils/compiler.hpp"
+#include "linal/utils/eps.hpp"
+#include "linal/vec.hpp"
 #include <cmath>
-#include <linal/utils/assert.hpp>
-#include <linal/utils/compiler.hpp>
-#include <linal/utils/eps.hpp>
-#include <linal/vec.hpp>
 #include <numeric>
 
 namespace linal

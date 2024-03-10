@@ -7,8 +7,8 @@
 #include "linal/policies/multiplication_policy.hpp"
 #include "linal/policies/subtraction_policy.hpp"
 #include "linal/policies/unary_policy.hpp"
+#include "linal/utils/compiler.hpp"
 #include <cassert>
-#include <linal/utils/compiler.hpp>
 #include <type_traits>
 
 namespace linal
@@ -63,6 +63,15 @@ public:
     for (size_type i = 0; i < D; ++i)
     {
       m_data[i] = value;
+    }
+  }
+
+  template <typename U, typename = std::enable_if<std::is_convertible_v<U, T>>>
+  constexpr vec(const vec<U, D>& other) noexcept
+  {
+    for (size_type i = 0; i < D; ++i)
+    {
+      m_data[i] = static_cast<T>(other[i]);
     }
   }
 

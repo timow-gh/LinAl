@@ -1,8 +1,6 @@
-#include <gtest/gtest.h>
-#include <linal/mat.hpp>
-#include <linal/mat_rot.hpp>
-#include <linal/utils/constants.hpp>
 #include <array>
+#include <gtest/gtest.h>
+#include <linal/linal.hpp>
 
 using namespace linal;
 
@@ -440,7 +438,7 @@ static void testZRotation(const double3& a, const double33& rotationMatrix)
   EXPECT_EQ(e, eExpected);
 }
 
-TEST(createLcsToGlobalRotationMatrix_vectors, Matrix)
+TEST(createLcsToGlobalRotationMatrix_vectors, TRhs)
 {
   std::array<double3, 3> rotatedLcs = create90DegRotatedLcs();
   double33 rotationMatrix;

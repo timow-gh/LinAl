@@ -1,7 +1,7 @@
 #ifndef LINAL_COMPARISON_POLICY_HPP
 #define LINAL_COMPARISON_POLICY_HPP
 
-#include <linal/utils/eps.hpp>
+#include "linal/utils/eps.hpp"
 
 namespace linal
 {

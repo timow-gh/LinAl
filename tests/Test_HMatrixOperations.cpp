@@ -1,7 +1,5 @@
 #include <gtest/gtest.h>
-#include <linal/hmat.hpp>
-#include <linal/utils/constants.hpp>
-#include <linal/vec_operations.hpp>
+#include <linal/linal.hpp>
 
 TEST(hmatOperations, createIdentity)
 {
@@ -177,4 +175,30 @@ TEST(hmatOperations, hmat_rot_translate)
 
   linal::hvecd expected{0, 1, 1, 1};
   EXPECT_EQ(result, expected);
+}
+
+TEST(hmatOperations, hmat_hmat_multiplication)
+{
+  linal::hmatd mat1 = linal::hmatd::identity();
+  linal::hmatd mat2 = linal::hmatd::identity();
+  linal::hmatd result = mat1 * mat2;
+  EXPECT_EQ(result, mat1);
+
+  // Test with translation
+  linal::hmatd translation = linal::hmatd::identity();
+  translation.set_translation(linal::double3{1.0, 0.0, 0.0});
+  result = mat1 * translation;
+  linal::hvecd start{0.0, 0.0, 0.0, 1.0};
+  linal::hvecd expected{1.0, 0.0, 0.0, 1.0};
+  linal::hvecd resultVec = result * start;
+  EXPECT_EQ(resultVec, expected);
+
+  // Test with rotation
+  linal::hmatd rotation = linal::hmatd::identity();
+  linal::rot_x(rotation, linal::PI_HALF<double>);
+  result = mat1 * rotation;
+  linal::hvecd startVec{0.0, 1.0, 0.0, 1.0};
+  linal::hvecd expectedVec{0.0, 0.0, 1.0, 1.0};
+  resultVec = result * startVec;
+  EXPECT_EQ(resultVec, expectedVec);
 }

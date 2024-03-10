@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
-#include <linal/vec.hpp>
-#include <linal/vec_operations.hpp>
+#include <linal/linal.hpp>
 
 using namespace linal;
 

@@ -1,8 +1,8 @@
 #ifndef LINAL_ADDITIONPOLICY_HPP
 #define LINAL_ADDITIONPOLICY_HPP
 
-#include <linal/array_type_traits.hpp>
-#include <linal/utils/compiler.hpp>
+#include "linal/array_type_traits.hpp"
+#include "linal/utils/compiler.hpp"
 #include <type_traits>
 
 namespace linal
