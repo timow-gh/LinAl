@@ -33,6 +33,8 @@ class hmat
 public:
   using value_type = T;
   using size_type = int;
+  using iterator = T*;
+  using const_iterator = const T*;
   static constexpr size_type noOfCols = 4;
   static constexpr size_type noOfRows = 4;
   static constexpr size_type size = noOfCols * noOfRows;
@@ -75,6 +77,9 @@ public:
     set_rotation(rotationMatrix);
     set_translation(translation);
   }
+
+  constexpr iterator data() noexcept { return m_data; }
+  constexpr const_iterator data() const noexcept { return m_data; }
 
   constexpr value_type& operator[](int index) noexcept { return m_data[index]; }
   constexpr const value_type& operator[](int index) const noexcept { return m_data[index]; }
