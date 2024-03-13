@@ -84,7 +84,7 @@ public:
   constexpr value_type& operator[](int index) noexcept { return m_data[index]; }
   constexpr const value_type& operator[](int index) const noexcept { return m_data[index]; }
 
-  constexpr auto operator*(const hmat& rhs) noexcept { return linal::matrix_multiply(*this, rhs); }
+  constexpr hmat operator*(const hmat& rhs) const noexcept { return linal::matrix_multiply<hmat, hmat, hmat>(*this, rhs); }
 
   constexpr hvec<T> operator*(const hvec<T>& rhs) const noexcept { return linal::matrix_vec_multiply(*this, rhs); }
 
