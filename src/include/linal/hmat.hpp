@@ -148,7 +148,7 @@ public:
    *
    * @return Reference this matrix.
    */
-  [[nodiscard]] constexpr hmat& inverse()
+  constexpr hmat& inverse()
   {
     hmat& matrix = *this;
     // Transpose the rotation part of the matrix
