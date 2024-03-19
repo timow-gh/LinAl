@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <linal/linal.hpp>
-#include <linal/utils/print_mat.hpp>
 
 TEST(hmatOperations, createIdentity)
 {
@@ -255,9 +254,9 @@ TEST(hmatOperations, hmat_inverse)
 
   linal::hmatd rotation = linal::hmatd::identity();
   linal::rot_x(rotation, linal::PI_HALF<double>);
-  result = linal::hmatd::inverse(rotation);
+  linal::hmatd inverseRot = rotation.inverse();
   linal::hvecd startVec{0.0, 1.0, 0.0, 1.0};
   linal::hvecd expectedVec{0.0, 0.0, -1.0, 1.0};
-  linal::hvecd resultVec = result * startVec;
+  linal::hvecd resultVec = inverseRot * startVec;
   EXPECT_EQ(resultVec, expectedVec);
 }

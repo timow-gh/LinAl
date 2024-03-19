@@ -172,27 +172,28 @@ public:
    *
    * @return Reference this matrix.
    */
-  constexpr hmat& inverse()
+  constexpr hmat inverse()
   {
-    hmat& matrix = *this;
+    auto& matrix = *this;
+    hmat result = matrix;
     // Transpose the rotation part of the matrix
     for (size_type i{0}; i < 3; ++i)
     {
       for (size_type j{0}; j < 3; ++j)
       {
-        std::swap(matrix(i, j), matrix(j, i));
+        result(i, j) = matrix(j, i);
       }
     }
 
     // The translation par of the inverted matrix is calculated by
     // multiplying the transposed rotation matrix with the negative
     // translation vector.
-    mat<T, 3, 3> rot = get_rotation();
-    hvec<T> translation = get_translation();
+    mat<T, 3, 3> rot = result.get_rotation();
+    hvec<T> translation = result.get_translation();
     vec3<T> rotated = -rot * vec3<T>{translation[0], translation[1], translation[2]};
-    set_translation(rotated);
+    result.set_translation(rotated);
 
-    return *this;
+    return result;
   }
 
   /** @brief Invert the given matrix.
