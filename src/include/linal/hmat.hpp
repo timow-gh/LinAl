@@ -116,9 +116,9 @@ public:
   {
     auto& matrix = *this;
     mat<T, 3, 3> result;
-    for (std::size_t i{0}; i < 3; ++i)
+    for (H i{0}; i < 3; ++i)
     {
-      for (std::size_t j{0}; j < 3; ++j)
+      for (size_type j{0}; j < 3; ++j)
       {
         result(i, j) = matrix(i, j);
       }
@@ -129,9 +129,9 @@ public:
   constexpr void set_rotation(const mat<T, 3, 3>& rotation)
   {
     auto& matrix = *this;
-    for (std::size_t i{0}; i < 3; ++i)
+    for (size_type i{0}; i < 3; ++i)
     {
-      for (std::size_t j{0}; j < 3; ++j)
+      for (size_type j{0}; j < 3; ++j)
       {
         matrix(i, j) = rotation(i, j);
       }
@@ -152,9 +152,9 @@ public:
   {
     hmat& matrix = *this;
     // Transpose the rotation part of the matrix
-    for (std::size_t i{0}; i < 3; ++i)
+    for (size_type i{0}; i < 3; ++i)
     {
-      for (std::size_t j{0}; j < 3; ++j)
+      for (size_type j{0}; j < 3; ++j)
       {
         std::swap(matrix(i, j), matrix(j, i));
       }
@@ -163,10 +163,10 @@ public:
     // The translation par of the inverted matrix is calculated by
     // multiplying the transposed rotation matrix with the negative
     // translation vector.
-    auto rot = get_rotation();
-    vec3<T> translation = get_translation();
-    translation = -rot * translation;
-    set_translation(translation);
+    mat<T, 3, 3> rot = get_rotation();
+    hvec<T> translation = get_translation();
+    vec3<T> rotated = -rot * vec3<T>{translation[0], translation[1], translation[2]};
+    set_translation(rotated);
 
     return *this;
   }
