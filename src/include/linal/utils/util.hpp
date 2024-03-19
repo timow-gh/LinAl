@@ -2,6 +2,7 @@
 #define LINAL_UTIL_HPP
 
 #include "linal/utils/compiler.hpp"
+#include <utility>
 
 namespace linal
 {
