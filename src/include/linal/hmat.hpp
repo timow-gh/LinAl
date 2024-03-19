@@ -138,6 +138,30 @@ public:
     }
   }
 
+  /** @brief Transposes the matrix.
+   *
+   * The transpose of a matrix is a new matrix whose rows are the columns of the original.
+   *
+   * @return The transposed matrix.
+   */
+  [[nodiscard]] constexpr hmat transpose() const noexcept { return linal::transpose(*this); }
+
+  /** @brief Checks if the matrix is the identity matrix.
+   *
+   * The identity matrix is a square matrix with ones on the main diagonal and zeros elsewhere.
+   *
+   * @return True if the matrix is the identity matrix, false otherwise.
+   */
+  [[nodiscard]] constexpr bool is_identity() const noexcept { return linal::is_identity(*this); }
+
+  /** @brief Checks if the matrix is symmetric.
+   *
+   * A matrix is symmetric if it is equal to its transpose.
+   *
+   * @return True if the matrix is symmetric, false otherwise.
+   */
+  [[nodiscard]] constexpr bool is_symmetric() const noexcept { return linal::is_symmetric(*this); }
+
   /** @brief Invert the matrix.
    *
    * The inverse of a homogeneous transformation matrix is calculated by
@@ -148,7 +172,7 @@ public:
    *
    * @return Reference this matrix.
    */
-  [[nodiscard]] constexpr hmat& inverse()
+  constexpr hmat& inverse()
   {
     hmat& matrix = *this;
     // Transpose the rotation part of the matrix
@@ -177,7 +201,7 @@ public:
    *
    * @return The inverted matrix.
    */
-  [[nodiscard]] friend constexpr hmat inverse(const hmat& matrix) noexcept
+  [[nodiscard]] static constexpr hmat inverse(const hmat& matrix) noexcept
   {
     hmat result = matrix;
     result.inverse();

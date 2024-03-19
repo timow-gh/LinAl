@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <linal/linal.hpp>
+#include <linal/utils/print_mat.hpp>
 
 TEST(hmatOperations, createIdentity)
 {
@@ -200,5 +201,63 @@ TEST(hmatOperations, hmat_hmat_multiplication)
   linal::hvecd startVec{0.0, 1.0, 0.0, 1.0};
   linal::hvecd expectedVec{0.0, 0.0, 1.0, 1.0};
   resultVec = result * startVec;
+  EXPECT_EQ(resultVec, expectedVec);
+}
+
+TEST(hmatOperations, hmat_transpose)
+{
+  linal::hmatd mat = linal::hmatd::identity();
+  linal::hmatd result = linal::transpose(mat);
+  EXPECT_EQ(result, mat);
+
+  linal::hmatd translation = linal::hmatd::identity();
+  translation.set_translation(linal::double3{1.0, 2.0, 3.0});
+  result = linal::transpose(translation);
+
+  EXPECT_FLOAT_EQ(result(3, 0), 1.0);
+  EXPECT_FLOAT_EQ(result(3, 1), 2.0);
+  EXPECT_FLOAT_EQ(result(3, 2), 3.0);
+  EXPECT_FLOAT_EQ(result(3, 3), 1.0);
+}
+
+TEST(hmatOperations, hmat_is_identity)
+{
+  linal::hmatd mat = linal::hmatd::identity();
+  EXPECT_TRUE(linal::is_identity(mat));
+
+  linal::hmatd translation = linal::hmatd::identity();
+  translation.set_translation(linal::double3{1.0, 2.0, 3.0});
+  EXPECT_FALSE(linal::is_identity(translation));
+}
+
+TEST(hmatOperations, hmat_is_symmetric)
+{
+  linal::hmatd mat = linal::hmatd::identity();
+  EXPECT_TRUE(linal::is_symmetric(mat));
+
+  linal::hmatd translation = linal::hmatd::identity();
+  translation.set_translation(linal::double3{1.0, 2.0, 3.0});
+  EXPECT_FALSE(linal::is_symmetric(translation));
+}
+
+TEST(hmatOperations, hmat_inverse)
+{
+  linal::hmatd mat = linal::hmatd::identity();
+  linal::hmatd result = mat.inverse();
+  EXPECT_EQ(result, mat);
+
+  linal::hmatd translation = linal::hmatd::identity();
+  translation.set_translation(linal::double3{1.0, 2.0, 3.0});
+  result = translation.inverse();
+  linal::hvecd expected{-1.0, -2.0, -3.0, 1.0};
+  linal::hvecd translationVec = result.get_translation();
+  EXPECT_EQ(translationVec, expected);
+
+  linal::hmatd rotation = linal::hmatd::identity();
+  linal::rot_x(rotation, linal::PI_HALF<double>);
+  result = linal::hmatd::inverse(rotation);
+  linal::hvecd startVec{0.0, 1.0, 0.0, 1.0};
+  linal::hvecd expectedVec{0.0, 0.0, -1.0, 1.0};
+  linal::hvecd resultVec = result * startVec;
   EXPECT_EQ(resultVec, expectedVec);
 }
