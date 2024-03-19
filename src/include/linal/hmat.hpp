@@ -116,7 +116,7 @@ public:
   {
     auto& matrix = *this;
     mat<T, 3, 3> result;
-    for (H i{0}; i < 3; ++i)
+    for (size_type i{0}; i < 3; ++i)
     {
       for (size_type j{0}; j < 3; ++j)
       {

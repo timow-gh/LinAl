@@ -3,6 +3,7 @@ set(linal_HEADER
         include/linal/policies/subtraction_policy.hpp
         include/linal/policies/multiplication_policy.hpp
         include/linal/policies/division_policy.hpp
+        include/linal/policies/element_access_policy.hpp
         include/linal/policies/comparison_policy.hpp
         include/linal/utils/assert.hpp
         include/linal/utils/compiler.hpp
@@ -14,7 +15,9 @@ set(linal_HEADER
         include/linal/hmat.hpp
         include/linal/linal.hpp
         include/linal/mat.hpp
+        include/linal/mat_operations.hpp
         include/linal/mat_rot.hpp
+        include/linal/mat_transposed_type_trait.hpp
         include/linal/vec.hpp
         include/linal/vec_compare.hpp
         include/linal/vec_operations.hpp

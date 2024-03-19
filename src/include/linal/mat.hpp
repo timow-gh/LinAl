@@ -2,6 +2,7 @@
 #define LINAL_BLAZEMATRIXOPERATIONS_H
 
 #include "linal/array_type_traits.hpp"
+#include "linal/mat_operations.hpp"
 #include "linal/policies/addition_policy.hpp"
 #include "linal/policies/comparison_policy.hpp"
 #include "linal/policies/division_policy.hpp"
@@ -16,24 +17,6 @@ namespace linal
 
 template <typename T, int M, int N>
 class mat;
-
-template <typename TMat, typename T>
-constexpr void diagonal(TMat& result, T value) noexcept;
-
-template <typename TMat, typename T>
-constexpr void from_rows(TMat& result, std::initializer_list<vec<T, TMat::noOfCols>> rows) noexcept;
-
-template <typename TMat, typename T>
-constexpr void from_columns(TMat& result, std::initializer_list<vec<T, TMat::noOfCols>> columns) noexcept;
-
-template <typename T, int M, int N>
-[[nodiscard]] constexpr mat<T, N, M> transpose(const mat<T, M, N>& mat) noexcept;
-
-template <typename T, int M, int N>
-[[nodiscard]] constexpr bool is_identity(const mat<T, M, N>& mat) noexcept;
-
-template <typename T, int M, int N>
-[[nodiscard]] constexpr bool is_symmetric(const mat<T, M, N>& mat) noexcept;
 
 template <typename T, int M, int N>
 [[nodiscard]] constexpr bool is_orthogonal(const mat<T, M, N>& mat) noexcept;
@@ -220,139 +203,6 @@ public:
 protected:
   value_type m_data[M * N]{};
 };
-
-template <typename TMat, typename T>
-constexpr void diagonal(TMat& result, T value) noexcept
-{
-  using value_type = typename TMat::value_type;
-  using size_type = typename TMat::size_type;
-  constexpr size_type m = TMat::noOfCols;
-  constexpr size_type n = TMat::noOfRows;
-
-  for (size_type i = 0; i < m; ++i)
-  {
-    for (size_type j = 0; j < n; ++j)
-    {
-      if (i == j)
-      {
-        result[i * n + j] = value;
-      }
-      else
-      {
-        result[i * n + j] = value_type{0};
-      }
-    }
-  }
-}
-
-template <typename TMat, typename T>
-constexpr void from_rows(TMat& result, std::initializer_list<vec<T, TMat::noOfCols>> rows) noexcept
-{
-  using value_type = typename TMat::value_type;
-  using size_type = typename TMat::size_type;
-  constexpr size_type m = TMat::noOfCols;
-  constexpr size_type n = TMat::noOfRows;
-
-  const size_type size = rows.size();
-  assert(size == n && "Number of rows does not match column length.");
-  for (size_type i = 0; i < size; ++i)
-  {
-    const auto& rowVec = rows.begin()[i];
-    for (size_type j = 0; j < n; ++j)
-    {
-      result(i, j) = rowVec[j];
-    }
-  }
-}
-
-template <typename TMat, typename T>
-constexpr void from_columns(TMat& result, std::initializer_list<vec<T, TMat::noOfCols>> columns) noexcept
-{
-  using value_type = typename TMat::value_type;
-  using size_type = typename TMat::size_type;
-  constexpr size_type m = TMat::noOfCols;
-  constexpr size_type n = TMat::noOfRows;
-
-  const size_type size = columns.size();
-  assert(size == m && "Number of columns does not match row length.");
-  for (size_type j = 0; j < size; ++j)
-  {
-    const auto& columnVec = columns.begin()[j];
-    for (size_type i = 0; i < n; ++i)
-    {
-      result(i, j) = columnVec[i];
-    }
-  }
-}
-
-template <typename T, int M, int N>
-[[nodiscard]] constexpr mat<T, N, M> transpose(const mat<T, M, N>& mat) noexcept
-{
-  using matrix = ::linal::mat<T, N, M>;
-  using size_type = typename matrix::size_type;
-
-  matrix result;
-  for (size_type i = 0; i < M; ++i)
-  {
-    for (size_type j = 0; j < N; ++j)
-    {
-      result(j, i) = mat(i, j);
-    }
-  }
-  return result;
-}
-
-template <typename T, int M, int N>
-[[nodiscard]] constexpr bool is_identity(const mat<T, M, N>& mat) noexcept
-{
-  static_assert(M == N, "TRhs must be square.");
-
-  using matrix = ::linal::mat<T, N, M>;
-  using size_type = typename matrix::size_type;
-
-  for (size_type i = 0; i < M; ++i)
-  {
-    for (size_type j = 0; j < N; ++j)
-    {
-      if (i == j)
-      {
-        if (!isEq(mat(i, j), T{1}))
-        {
-          return false;
-        }
-      }
-      else
-      {
-        if (!isEq(mat(i, j), T{0}))
-        {
-          return false;
-        }
-      }
-    }
-  }
-  return true;
-}
-
-template <typename T, int M, int N>
-[[nodiscard]] constexpr bool is_symmetric(const mat<T, M, N>& mat) noexcept
-{
-  static_assert(M == N, "TRhs must be square.");
-
-  using matrix = ::linal::mat<T, N, M>;
-  using size_type = typename matrix::size_type;
-
-  for (size_type i = 0; i < M; ++i)
-  {
-    for (size_type j = 0; j < N; ++j)
-    {
-      if (!isEq(mat(i, j), mat(j, i)))
-      {
-        return false;
-      }
-    }
-  }
-  return true;
-}
 
 template <typename T, int M, int N>
 [[nodiscard]] constexpr bool is_orthogonal(const mat<T, M, N>& mat) noexcept
