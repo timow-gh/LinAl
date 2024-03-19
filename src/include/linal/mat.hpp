@@ -118,7 +118,6 @@ public:
   {
     assert(i < M && "Index out of range.");
     vec<value_type, N> result;
-    auto& mat = *this;
     for (size_type j = 0; j < N; ++j)
     {
       result[j] = m_data[i * N + j];
@@ -210,7 +209,6 @@ template <typename T, int M, int N>
   static_assert(M == N, "TRhs must be square.");
 
   using matrix = ::linal::mat<T, N, M>;
-  using size_type = typename matrix::size_type;
 
   const matrix transposed = transpose(mat);
 
@@ -243,7 +241,6 @@ constexpr TResult matrix_multiply(const LMat& lhs, const RMat& rhs) noexcept
 template <typename TMat, typename TVec>
 constexpr TVec matrix_vec_multiply(const TMat& lhs, const TVec& rhs) noexcept
 {
-  using value_type = typename TMat::value_type;
   using size_type = typename TMat::size_type;
   static_assert(TVec::dim == TMat::noOfCols, "TRhs and vector dimensions do not match.");
 

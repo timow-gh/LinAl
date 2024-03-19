@@ -4,9 +4,10 @@
 TEST(hmatOperations, createIdentity)
 {
   auto result = linal::hmatf::identity();
-  for (std::size_t i{0}; i < 4; ++i)
+  using size_type = typename linal::hmatf::size_type;
+  for (size_type i{0}; i < 4; ++i)
   {
-    for (std::size_t j{0}; j < 4; ++j)
+    for (size_type j{0}; j < 4; ++j)
     {
       if (i == j)
         EXPECT_FLOAT_EQ(result(i, j), 1.0f);
@@ -126,7 +127,8 @@ TEST(hmatOperations, rot_align_xToNormalizedOnes)
   linal::hvecd result = rotMat * xDir;
   constexpr double_t eps = 1E-7;
   constexpr auto size = std::min(xDir.dim, target.dim);
-  for (std::size_t i{0}; i < size; ++i)
+  using size_type = typename linal::hvecd::size_type;
+  for (size_type i{0}; i < size; ++i)
     EXPECT_TRUE(linal::isEq(result[i], target[i], eps));
 }
 

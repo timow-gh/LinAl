@@ -12,7 +12,7 @@ TEST(vec, construct_default)
 
 TEST(vec, construct_from_value)
 {
-  float2 vec{1.0F};
+  [[maybe_unused]] float2 vec{1.0F};
 }
 
 TEST(vec, construct_size)
@@ -108,7 +108,6 @@ TEST(vec, subtraction_operators)
 TEST(vec, multiplication_operators)
 {
   float2 vec1{1.0F};
-  float2 vec2{2.0F};
 
   float2 vec3 = vec1 * 2.0F;
   EXPECT_EQ(vec3[0], 2.0F);
@@ -126,7 +125,6 @@ TEST(vec, multiplication_operators)
 TEST(vec, division_operators)
 {
   float2 vec1{1.0F};
-  float2 vec2{2.0F};
 
   float2 vec3 = vec1 / 2.0F;
   EXPECT_EQ(vec3[0], 0.5F);
@@ -147,23 +145,18 @@ TEST(vec, unary_operators)
 
 TEST(vec, use_all_types)
 {
-  int2 vec1{1};
-  int3 vec2{1};
-
-  uint2 vec3{1U};
-  uint3 vec4{1U};
-
-  long2 vec5{1L};
-  long3 vec6{1L};
-
-  ulong2 vec7{1UL};
-  ulong3 vec8{1UL};
-
-  float2 vec9{1.0F};
-  float3 vec10{1.0F};
-
-  double2 vec11{1.0};
-  double3 vec12{1.0};
+  [[maybe_unused]] int2 vec1{1};
+  [[maybe_unused]] int3 vec2{1};
+  [[maybe_unused]] uint2 vec3{1U};
+  [[maybe_unused]] uint3 vec4{1U};
+  [[maybe_unused]] long2 vec5{1L};
+  [[maybe_unused]] long3 vec6{1L};
+  [[maybe_unused]] ulong2 vec7{1UL};
+  [[maybe_unused]] ulong3 vec8{1UL};
+  [[maybe_unused]] float2 vec9{1.0F};
+  [[maybe_unused]] float3 vec10{1.0F};
+  [[maybe_unused]] double2 vec11{1.0};
+  [[maybe_unused]] double3 vec12{1.0};
 }
 
 TEST(vec, length)

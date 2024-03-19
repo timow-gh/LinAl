@@ -35,17 +35,15 @@ constexpr void diagonal(TMat& result, T value) noexcept
 template <typename TMat, typename TVec>
 constexpr void from_rows(TMat& result, std::initializer_list<TVec> rows) noexcept
 {
-  using value_type = typename TMat::value_type;
   using size_type = typename TMat::size_type;
-  constexpr size_type M = TMat::noOfCols;
-  constexpr size_type N = TMat::noOfRows;
 
-  const size_type size = rows.size();
-  assert(size == N && "Number of rows does not match column length.");
+  const size_type size = static_cast<size_type>(rows.size());
+
+  assert(size == TMat::noOfCols && "Number of rows does not match column length.");
   for (size_type i = 0; i < size; ++i)
   {
     const auto& rowVec = rows.begin()[i];
-    for (size_type j = 0; j < N; ++j)
+    for (size_type j = 0; j < TMat::noOfCols; ++j)
     {
       result(i, j) = rowVec[j];
     }
@@ -55,12 +53,11 @@ constexpr void from_rows(TMat& result, std::initializer_list<TVec> rows) noexcep
 template <typename TMat, typename TVec>
 constexpr void from_columns(TMat& result, std::initializer_list<TVec> columns) noexcept
 {
-  using value_type = typename TMat::value_type;
   using size_type = typename TMat::size_type;
   constexpr size_type M = TMat::noOfCols;
   constexpr size_type N = TMat::noOfRows;
 
-  const size_type size = columns.size();
+  const size_type size = static_cast<size_type>(columns.size());
   assert(size == M && "Number of columns does not match row length.");
   for (size_type j = 0; j < size; ++j)
   {
@@ -76,7 +73,6 @@ template <typename TMat>
 [[nodiscard]] constexpr auto transpose(const TMat& mat) noexcept
 {
   using size_type = typename TMat::size_type;
-  using value_type = TMat::value_type;
 
   constexpr size_type M = TMat::noOfRows;
   constexpr size_type N = TMat::noOfCols;

@@ -26,9 +26,10 @@ TEST(mat, construct_default)
 TEST(mat, zeros)
 {
   const auto mat = double22{0.0};
-  for (std::size_t i{0}; i < 2; ++i)
+  using size_type = typename double22::size_type;
+  for (size_type i{0}; i < 2; ++i)
   {
-    for (std::size_t j{0}; j < 2; ++j)
+    for (size_type j{0}; j < 2; ++j)
     {
       EXPECT_EQ(mat(i, j), 0);
     }
@@ -39,9 +40,10 @@ TEST(mat, diag)
 {
   int value = 1;
   const auto mat = int22::diagonal(value);
-  for (std::size_t i{0}; i < 2; ++i)
+  using size_type = typename int22::size_type;
+  for (size_type i{0}; i < 2; ++i)
   {
-    for (std::size_t j{0}; j < 2; ++j)
+    for (size_type j{0}; j < 2; ++j)
     {
       if (i == j)
       {
@@ -396,8 +398,8 @@ TEST(mat, from_rows)
   EXPECT_DOUBLE_EQ(mat(1, 0), 3.0);
   EXPECT_DOUBLE_EQ(mat(1, 1), 4.0);
 
-  ASSERT_DEBUG_DEATH(auto res = double22::from_rows({row1}), "Number of rows does not match column length.");
-  ASSERT_DEBUG_DEATH(auto res = double22::from_rows({row1, row2, row2}), "Number of rows does not match column length.");
+  ASSERT_DEBUG_DEATH([[maybe_unused]] auto res = double22::from_rows({row1}), "Number of rows does not match column length.");
+  ASSERT_DEBUG_DEATH([[maybe_unused]] auto res = double22::from_rows({row1, row2, row2}), "Number of rows does not match column length.");
 }
 
 TEST(mat, from_columns)
@@ -410,8 +412,8 @@ TEST(mat, from_columns)
   EXPECT_DOUBLE_EQ(mat(1, 0), 3.0);
   EXPECT_DOUBLE_EQ(mat(1, 1), 4.0);
 
-  ASSERT_DEBUG_DEATH(auto res = double22::from_columns({column1}), "Number of columns does not match row length.");
-  ASSERT_DEBUG_DEATH(auto res = double22::from_columns({column1, column2, column2}), "Number of columns does not match row length.");
+  ASSERT_DEBUG_DEATH([[maybe_unused]] auto res = double22::from_columns({column1}), "Number of columns does not match row length.");
+  ASSERT_DEBUG_DEATH([[maybe_unused]] auto res = double22::from_columns({column1, column2, column2}), "Number of columns does not match row length.");
 }
 
 std::array<double3, 3> create90DegRotatedLcs() noexcept
@@ -519,7 +521,8 @@ TEST(Matrix3Operations, rot_align_xToNormalizedOnes)
   rot_align(rotMat, xDir, normalized);
   double3 result = rotMat * xDir;
   constexpr double_t eps = 1E-7;
-  for (std::size_t i{0}; i < 3; ++i)
+  using size_type = double3::size_type;
+  for (size_type i{0}; i < 3; ++i)
   {
     EXPECT_TRUE(linal::isEq(result[i], normalized[i], eps));
   }

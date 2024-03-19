@@ -35,6 +35,11 @@ set_target_properties(${TARGET_NAME}
 
 add_library(${TARGET_ALIAS}::${TARGET_ALIAS} ALIAS ${TARGET_NAME})
 
+add_warnings_and_compile_options(${TARGET_NAME} "${${PROJECT_NAME}_WARNINGS_AS_ERRORS}")
+if (${${PROJECT_NAME}_STATIC_ANALYSIS})
+    enable_static_analysis(${TARGET_NAME} "${${PROJECT_NAME}_WARNINGS_AS_ERRORS}")
+endif ()
+
 if (LinAl_INSTALL)
     include(setup_export_set_installation)
 
