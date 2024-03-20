@@ -95,7 +95,6 @@ template <typename TMat>
   using value_type = typename TMat::value_type;
   constexpr size_type M = TMat::noOfCols;
   constexpr size_type N = TMat::noOfRows;
-
   static_assert(M == N, "TRhs must be square.");
 
   for (size_type i = 0; i < M; ++i)
