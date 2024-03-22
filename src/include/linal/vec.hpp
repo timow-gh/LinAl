@@ -149,7 +149,7 @@ public:
   [[nodiscard]] LINAL_CONST constexpr vec normalize() noexcept { return linal::normalize(*this); }
 
 private:
-  value_type m_data[dim]{};
+  value_type m_data[static_cast<std::size_t>(dim)]{};
 };
 
 template <typename T>

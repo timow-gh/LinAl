@@ -215,10 +215,10 @@ TEST(hmatOperations, hmat_transpose)
   translation.set_translation(linal::double3{1.0, 2.0, 3.0});
   result = linal::transpose(translation);
 
-  EXPECT_FLOAT_EQ(result(3, 0), 1.0);
-  EXPECT_FLOAT_EQ(result(3, 1), 2.0);
-  EXPECT_FLOAT_EQ(result(3, 2), 3.0);
-  EXPECT_FLOAT_EQ(result(3, 3), 1.0);
+  EXPECT_DOUBLE_EQ(result(3, 0), 1.0);
+  EXPECT_DOUBLE_EQ(result(3, 1), 2.0);
+  EXPECT_DOUBLE_EQ(result(3, 2), 3.0);
+  EXPECT_DOUBLE_EQ(result(3, 3), 1.0);
 }
 
 TEST(hmatOperations, hmat_is_identity)

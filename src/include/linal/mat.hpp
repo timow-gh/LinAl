@@ -200,7 +200,7 @@ public:
   constexpr vec<value_type, M> operator*(const vec<value_type, N>& rhs) const noexcept { return linal::matrix_vec_multiply(*this, rhs); }
 
 protected:
-  value_type m_data[M * N]{};
+  value_type m_data[static_cast<std::size_t>(M * N)]{};
 };
 
 template <typename T, int M, int N>
