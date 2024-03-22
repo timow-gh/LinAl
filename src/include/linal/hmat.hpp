@@ -62,6 +62,14 @@ public:
 
   constexpr hmat() = default;
 
+  constexpr hmat(T value) : hmat()
+  {
+    for (size_type i{0}; i < size; ++i)
+    {
+      m_data[i] = value;
+    }
+  }
+
   constexpr hmat(const mat<T, 3, 3>& rotationMatrix)
   {
     set_rotation(rotationMatrix);
