@@ -54,7 +54,7 @@ template <typename TMat, typename TVec>
 constexpr void from_columns(TMat& result, std::initializer_list<TVec> columns) noexcept
 {
   using size_type = typename TMat::size_type;
-  constexpr size_type M = TMat::noOfCols;
+  [[maybe_unused]] constexpr size_type M = TMat::noOfCols;
   constexpr size_type N = TMat::noOfRows;
 
   const size_type size = static_cast<size_type>(columns.size());
