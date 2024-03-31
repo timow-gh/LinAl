@@ -20,14 +20,13 @@ jobs:
         platform: [x64]
         toolset: [v143]
         standard: [17, 20, 23]
-        shared: [-DBUILD_SHARED_LIBS=OFF]
         build_type: [Debug, Release]
 
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 2
-    - run: git checkout HEAD^
+        fetch-depth: 0
+    - run: git checkout HEAD
 
     - name: Create Build Environment
       run: cmake -E make_directory ${{runner.workspace}}/build
@@ -39,7 +38,7 @@ jobs:
       run: |
         cmake -A ${{matrix.platform}} -T ${{matrix.toolset}} \
               -DCMAKE_CXX_STANDARD=${{matrix.standard}} \
-              ${{matrix.shared}} -DCMAKE_BUILD_TYPE=${{matrix.build_type}} \
+              -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=${{matrix.build_type}} \
               $GITHUB_WORKSPACE
 
     - name: Build
