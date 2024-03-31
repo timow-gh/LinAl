@@ -54,11 +54,10 @@ template <typename TMat, typename TVec>
 constexpr void from_columns(TMat& result, std::initializer_list<TVec> columns) noexcept
 {
   using size_type = typename TMat::size_type;
-  [[maybe_unused]] constexpr size_type M = TMat::noOfCols;
   constexpr size_type N = TMat::noOfRows;
 
   const size_type size = static_cast<size_type>(columns.size());
-  assert(size == M && "Number of columns does not match row length.");
+  assert(size == TMat::noOfCols && "Number of columns does not match row length.");
   for (size_type j = 0; j < size; ++j)
   {
     const auto& columnVec = columns.begin()[j];
