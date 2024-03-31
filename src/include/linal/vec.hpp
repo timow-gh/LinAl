@@ -9,6 +9,7 @@
 #include "linal/policies/unary_policy.hpp"
 #include "linal/utils/compiler.hpp"
 #include <cassert>
+#include <cstdint>
 #include <type_traits>
 
 namespace linal
