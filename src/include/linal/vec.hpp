@@ -177,6 +177,17 @@ using double2 = vec2<double>;
 using double3 = vec3<double>;
 
 // clang-format off
+template<typename T>
+constexpr inline vec2<T> vec2X     {1, 0};
+template<typename T>
+constexpr inline vec2<T> vec2Y     {0, 1};
+template<typename T>
+constexpr inline vec3<T> vec3X     {1, 0, 0};
+template<typename T>
+constexpr inline vec3<T> vec3Y     {0, 1, 0};
+template<typename T>
+constexpr inline vec3<T> vec3Z     {0, 0, 1};
+
 constexpr inline int2     int2X     {1, 0};
 constexpr inline int2     int2Y     {0, 1};
 constexpr inline int3     int3X     {1, 0, 0};

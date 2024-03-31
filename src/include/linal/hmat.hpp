@@ -15,6 +15,18 @@ using hvec = vec<T, 4>;
 using hvecf = hvec<float>;
 using hvecd = hvec<double>;
 
+template <typename T>
+constexpr inline hvec<T> to_hvec(const vec<T, 3>& vec, T w) noexcept
+{
+  return hvec<T>{vec[0], vec[1], vec[2], w};
+}
+
+template <typename T>
+constexpr inline hvec<T> to_hvec(const vec<T, 3>& vec) noexcept
+{
+  return hvec<T>{vec[0], vec[1], vec[2], 1};
+}
+
 /** @brief A 4x4 matrix class for homogeneous transformations.
  *
  *
@@ -62,7 +74,8 @@ public:
 
   constexpr hmat() = default;
 
-  constexpr hmat(T value) : hmat()
+  constexpr hmat(T value)
+      : hmat()
   {
     for (size_type i{0}; i < size; ++i)
     {
