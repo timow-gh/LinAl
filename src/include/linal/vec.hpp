@@ -14,25 +14,25 @@
 namespace linal
 {
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 class vec;
 
 template <typename T>
 [[nodiscard]] constexpr vec<T, 3> cross(const vec<T, 3>& lhs, const vec<T, 3>& rhs) noexcept;
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 [[nodiscard]] constexpr T dot(const vec<T, D>& lhs, const vec<T, D>& rhs) noexcept;
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 [[nodiscard]] constexpr T length(const vec<T, D>& vector) noexcept;
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 [[nodiscard]] constexpr T length_squared(const vec<T, D>& vector) noexcept;
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 constexpr vec<T, D> normalize(const vec<T, D>& vector) noexcept;
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 class vec
     : public addition_policy<vec<T, D>, array_traits<T, decltype(D), D>>
     , public subtraction_policy<vec<T, D>, array_traits<T, decltype(D), D>>
@@ -238,7 +238,7 @@ template <typename T>
   return lhs1 * rhs1 + lhs2 * rhs2 + lhs3 * rhs3;
 }
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 [[nodiscard]] LINAL_PURE constexpr T dot(const vec<T, D>& lhs, const vec<T, D>& rhs) noexcept
 {
   T result{0};
@@ -249,19 +249,19 @@ template <typename T, int D>
   return result;
 }
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 [[nodiscard]] constexpr T length(const vec<T, D>& vector) noexcept
 {
   return std::sqrt(linal::dot(vector, vector));
 }
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 [[nodiscard]] constexpr T length_squared(const vec<T, D>& vector) noexcept
 {
   return linal::dot(vector, vector);
 }
 
-template <typename T, int D>
+template <typename T, std::uint8_t D>
 [[nodiscard]] constexpr vec<T, D> normalize(const vec<T, D>& vector) noexcept
 {
   return vector / linal::length(vector);
