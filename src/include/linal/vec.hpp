@@ -1,6 +1,7 @@
 #ifndef LINAL_EIGENLINEARALGEBRA_H
 #define LINAL_EIGENLINEARALGEBRA_H
 
+#include "linal/array_type_traits.hpp"
 #include "linal/policies/addition_policy.hpp"
 #include "linal/policies/comparison_policy.hpp"
 #include "linal/policies/division_policy.hpp"
@@ -8,6 +9,7 @@
 #include "linal/policies/subtraction_policy.hpp"
 #include "linal/policies/unary_policy.hpp"
 #include "linal/utils/compiler.hpp"
+#include "policies/addition_policy.hpp"
 #include <cassert>
 #include <cstdint>
 #include <type_traits>
@@ -33,6 +35,8 @@ template <typename T, std::uint8_t D>
 template <typename T, std::uint8_t D>
 constexpr vec<T, D> normalize(const vec<T, D>& vector) noexcept;
 
+template <typename T, std::uint8_t D>
+constexpr bool is_normalized(const vec<T, D>& vector) noexcept;
 template <typename T, std::uint8_t D>
 class vec
     : public addition_policy<vec<T, D>, array_traits<T, decltype(D), D>>
@@ -148,6 +152,13 @@ public:
    * @return Normalized vector.
    */
   [[nodiscard]] LINAL_CONST constexpr vec normalize() noexcept { return linal::normalize(*this); }
+
+  /**
+   * @brief Check if this vector is normalized.
+   *
+   * @return True if the vector is normalized, false otherwise.
+   */
+  [[nodiscard]] LINAL_CONST constexpr bool is_normalized() const noexcept { return linal::is_normalized(*this); }
 
 private:
   value_type m_data[static_cast<std::size_t>(dim)]{};
@@ -266,6 +277,12 @@ template <typename T, std::uint8_t D>
 [[nodiscard]] constexpr vec<T, D> normalize(const vec<T, D>& vector) noexcept
 {
   return vector / linal::length(vector);
+}
+
+template <typename T, std::uint8_t D>
+[[nodiscard]] constexpr bool is_normalized(const vec<T, D>& vector) noexcept
+{
+  return linal::length_squared(vector) == static_cast<T>(1);
 }
 
 } // namespace linal
