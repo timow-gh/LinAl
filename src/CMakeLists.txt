@@ -27,13 +27,13 @@ set(linal_HEADER
 set(TARGET_NAME Lin_Al)
 add_library(${TARGET_NAME} INTERFACE ${linal_HEADER})
 target_include_directories(${TARGET_NAME} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
-set(TARGET_ALIAS linal)
+
 set_target_properties(${TARGET_NAME}
         PROPERTIES
         LINKER_LANGUAGE CXX
-        EXPORT_NAME ${TARGET_ALIAS})
+        EXPORT_NAME ${TARGET_NAME})
 
-add_library(${TARGET_ALIAS}::${TARGET_ALIAS} ALIAS ${TARGET_NAME})
+add_library(${TARGET_NAME}::${TARGET_NAME} ALIAS ${TARGET_NAME})
 
 add_warnings_and_compile_options(${TARGET_NAME} "${${PROJECT_NAME}_WARNINGS_AS_ERRORS}")
 if (${${PROJECT_NAME}_STATIC_ANALYSIS})
