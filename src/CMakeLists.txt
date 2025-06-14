@@ -45,7 +45,7 @@ if (LinAl_INSTALL)
 
     set(project_export_set_name "${PROJECT_NAME}TargetsExportSet")
 
-    install(DIRECTORY "include/${TARGET_NAME}" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+    install(DIRECTORY "include/linal" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
     install(TARGETS
             ${TARGET_NAME}
