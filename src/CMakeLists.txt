@@ -24,16 +24,16 @@ set(linal_HEADER
         include/linal/vec_operations.hpp
 )
 
-set(TARGET_NAME Lin_Al)
+set(TARGET_NAME LinAl)
 add_library(${TARGET_NAME} INTERFACE ${linal_HEADER})
 target_include_directories(${TARGET_NAME} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
-set(TARGET_ALIAS linal)
+
 set_target_properties(${TARGET_NAME}
         PROPERTIES
         LINKER_LANGUAGE CXX
-        EXPORT_NAME ${TARGET_ALIAS})
+        EXPORT_NAME ${TARGET_NAME})
 
-add_library(${TARGET_ALIAS}::${TARGET_ALIAS} ALIAS ${TARGET_NAME})
+add_library(linal::linal ALIAS ${TARGET_NAME})
 
 add_warnings_and_compile_options(${TARGET_NAME} "${${PROJECT_NAME}_WARNINGS_AS_ERRORS}")
 if (${${PROJECT_NAME}_STATIC_ANALYSIS})
@@ -45,7 +45,7 @@ if (LinAl_INSTALL)
 
     set(project_export_set_name "${PROJECT_NAME}TargetsExportSet")
 
-    install(DIRECTORY "include/${TARGET_NAME}" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+    install(DIRECTORY "include/linal" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
     install(TARGETS
             ${TARGET_NAME}

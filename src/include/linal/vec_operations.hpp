@@ -49,9 +49,7 @@ template <typename TVec>
 LINAL_NODISCARD constexpr bool
 collinear(const TVec& source, const TVec& target, typename TVec::value_type eps = eps_v<typename TVec::value_type>) noexcept
 {
-  LINAL_ASSERT(normalize(source) == source);
-  LINAL_ASSERT(normalize(target) == target);
-  return (typename TVec::value_type{1} - std::abs(dot(source, target))) < eps;
+  return linal::length_squared(linal::cross(source, target)) < eps * eps;
 }
 
 } // namespace linal

@@ -314,7 +314,7 @@ constexpr inline hvecd hvecdz = {0.0, 0.0, 1.0, 1.0};
 template <typename T>
 constexpr void rot_axis(hmat<T>& matrix, const vec3<T>& axis, T alphaRad) noexcept
 {
-  linal::double33 rotMatrix = linal::double33::identity();
+  linal::mat33<T> rotMatrix = linal::mat33<T>::identity();
   linal::rot_axis(rotMatrix, axis, alphaRad);
   matrix = hmat<T>::identity();
   matrix.set_rotation(rotMatrix);
@@ -325,7 +325,7 @@ constexpr void rot_align(hmat<T>& result, const TVec& source, const TVec& target
 {
   static_assert(TVec::dim == 3 || TVec::dim == 4);
 
-  double33 rotMatrix = double33::identity();
+  linal::mat33<T> rotMatrix = linal::mat33<T>::identity();
   linal::rot_align(rotMatrix, source, target);
   result = hmat<T>::identity();
   result.set_rotation(rotMatrix);
