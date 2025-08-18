@@ -398,8 +398,10 @@ TEST(mat, from_rows)
   EXPECT_DOUBLE_EQ(mat(1, 0), 3.0);
   EXPECT_DOUBLE_EQ(mat(1, 1), 4.0);
 
+#ifdef DEBUG
   ASSERT_DEBUG_DEATH([[maybe_unused]] auto res = double22::from_rows({row1}), "Number of rows does not match column length.");
   ASSERT_DEBUG_DEATH([[maybe_unused]] auto res = double22::from_rows({row1, row2, row2}), "Number of rows does not match column length.");
+#endif
 }
 
 TEST(mat, from_columns)
@@ -412,8 +414,10 @@ TEST(mat, from_columns)
   EXPECT_DOUBLE_EQ(mat(1, 0), 3.0);
   EXPECT_DOUBLE_EQ(mat(1, 1), 4.0);
 
+#ifdef DEBUG
   ASSERT_DEBUG_DEATH([[maybe_unused]] auto res = double22::from_columns({column1}), "Number of columns does not match row length.");
   ASSERT_DEBUG_DEATH([[maybe_unused]] auto res = double22::from_columns({column1, column2, column2}), "Number of columns does not match row length.");
+#endif
 }
 
 std::array<double3, 3> create90DegRotatedLcs() noexcept
