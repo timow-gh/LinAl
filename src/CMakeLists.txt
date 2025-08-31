@@ -10,6 +10,7 @@ set(linal_HEADER
         include/linal/utils/constants.hpp
         include/linal/utils/eps.hpp
         include/linal/utils/print_mat.hpp
+        include/linal/utils/radians.hpp
         include/linal/utils/util.hpp
         include/linal/utils/warnings.hpp
         include/linal/array_type_traits.hpp
