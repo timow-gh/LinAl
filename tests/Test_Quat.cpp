@@ -183,3 +183,70 @@ TEST(quat, slerp_near)
   EXPECT_NEAR(vec[1], std::sin(1e-8), 1e-10);
   EXPECT_NEAR(vec[2], 0.0, 1e-10);
 }
+
+TEST(quat, shortest_path)
+{
+  double angle = linal::degrees_to_radians(10.0);
+  auto q1 = quatd::create(0.0, 0.0, 1.0, angle);
+  angle = linal::degrees_to_radians(350.0);
+  auto q2 = quatd::create(0.0, 0.0, 1.0, angle);
+
+  // Verify they would take the long path (dot product should be negative)
+  double dotProd = q1.dot(q2);
+  EXPECT_LT(dotProd, 0.0); // Should be negative for long path
+
+  double x = 1.0;
+  double y = 0.0;
+  double z = 0.0;
+
+  // Test that slerp takes the shortest path (should interpolate through 0°, not 180°)
+  auto qMid = quatd::slerp(q1, q2, 0.5);
+  linal::double3 vec = qMid.rotate(x, y, z);
+  
+  // At 0.5, should be at 0° rotation (identity), so vector (1,0,0) stays (1,0,0)
+  EXPECT_NEAR(vec[0], 1.0, 1e-10);
+  EXPECT_NEAR(vec[1], 0.0, 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+}
+
+TEST(quat, slerp_range)
+{
+  auto q1 = quatd::create(0.0, 0.0, 1.0, 0.0);
+  auto q2 = quatd::create(0.0, 0.0, 1.0, linal::PI_D);
+
+  std::array<double, 5> fractions = {0.0, 0.25, 0.5, 0.75, 1.0};
+  std::vector<quatd> results;
+  quatd::slerp(q1, q2, fractions.begin(), fractions.end(), std::back_inserter(results));
+
+  // vector to rotate: (1,0,0)
+  double x = 1.0;
+  double y = 0.0;
+  double z = 0.0;
+
+  EXPECT_EQ(results.size(), fractions.size());
+
+  auto vec = results[0].rotate(x, y, z);
+  EXPECT_NEAR(vec[0], 1.0, 1e-10);
+  EXPECT_NEAR(vec[1], 0.0, 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+
+  vec = results[1].rotate(x, y, z);
+  EXPECT_NEAR(vec[0], std::sqrt(2) / 2, 1e-10);
+  EXPECT_NEAR(vec[1], std::sqrt(2) / 2, 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+
+  vec = results[2].rotate(x, y, z);
+  EXPECT_NEAR(vec[0], 0.0, 1e-10);
+  EXPECT_NEAR(vec[1], 1.0, 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+
+  vec = results[3].rotate(x, y, z);
+  EXPECT_NEAR(vec[0], -std::sqrt(2) / 2, 1e-10);
+  EXPECT_NEAR(vec[1], std::sqrt(2) / 2, 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+
+  vec = results[4].rotate(x, y, z);
+  EXPECT_NEAR(vec[0], -1.0, 1e-10);
+  EXPECT_NEAR(vec[1], 0.0, 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+}

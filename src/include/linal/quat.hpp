@@ -43,7 +43,7 @@ public:
   }
 
   /** \brief Creates a quaternion from vector components (no rotation, since w=0).
-   * 
+   *
    * \note Useful to represent pure vectors as quaternions for the rotation calculation.
    *
    * \param x The x component of the vector part.
@@ -62,9 +62,9 @@ public:
   quaternion() noexcept = default;
 
   /** \brief Constructs a quaternion from its components.
-   * 
+   *
    * \attention Assumes components to represent a normalized quaternion.
-   * 
+   *
    * \param w The scalar part of the quaternion.
    * \param x The x component of the vector part.
    * \param y The y component of the vector part.
@@ -78,11 +78,11 @@ public:
   }
 
   /** \brief Constructs a quaternion from vector components (no rotation, since w=0).
-   * 
+   *
    * \note Useful to represent pure vectors as quaternions for the rotation calculation.
-   * 
+   *
    * \attention Assumes the vector to be normalized.
-   * 
+   *
    * \param x The x component of the vector part.
    * \param y The y component of the vector part.
    * \param z The z component of the vector part.
@@ -102,7 +102,7 @@ public:
   /** \brief Multiplies two quaternions.
    *
    * \note Quaternion multiplication: q1 * q2 = (w1*w2 - v1·v2, w1*v2 + w2*v1 + v1×v2)
-   * 
+   *
    * \param lhs The left-hand side quaternion.
    * \param rhs The right-hand side quaternion.
    * \return The result of the multiplication.
@@ -115,13 +115,13 @@ public:
     quaternion result;
     result.m_w = lhs.m_w * rhs.m_w - lhs.m_vec.dot(rhs.m_vec);
     result.m_vec = lhs.m_w * rhs.m_vec + rhs.m_w * lhs.m_vec + lhs.m_vec.cross(rhs.m_vec);
-    return result;  
+    return result;
   }
 
   /** \brief Returns the length (magnitude) of the quaternion.
    *
    * \note Definition: |q| = sqrt(w^2 + x^2 + y^2 + z^2)
-   * 
+   *
    * \return The length of the quaternion.
    */
   [[nodiscard]] constexpr value_type length() const noexcept
@@ -164,9 +164,9 @@ public:
   }
 
   /** \brief Computes the conjugate of the quaternion.
-   * 
+   *
    * \note q* = (w, -x, -y, -z)
-   * 
+   *
    * \return The conjugate of the quaternion.
    */
   constexpr quaternion conjugate() const noexcept
@@ -196,7 +196,7 @@ public:
   /** \brief Rotates a 3D vector using this quaternion.
    *
    * \note textbook definition: v' = q * v * q^-1
-   * 
+   *
    * \param x The x component of the vector to rotate.
    * \param y The y component of the vector to rotate.
    * \param z The z component of the vector to rotate.
@@ -230,7 +230,7 @@ public:
    * \param end Iterator to the end of the range of vector components.
    * \pre The range [begin, end) must contain a multiple of 3 elements.
    */
-  template<typename TIter>
+  template <typename TIter>
   constexpr void rotate(TIter begin, TIter end) const noexcept
   {
     LINAL_ASSERT(is_normalized());
@@ -257,7 +257,7 @@ public:
    * \param out Output iterator to write the rotated vector components.
    * \pre The range [begin, end) must contain a multiple of 3 elements.
    */
-  template<typename TIter, typename TOutIter>
+  template <typename TIter, typename TOutIter>
   constexpr void rotate(TIter begin, TIter end, TOutIter out) const noexcept
   {
     LINAL_ASSERT(is_normalized());
@@ -292,28 +292,83 @@ public:
     LINAL_ASSERT(toQ.is_normalized());
     LINAL_ASSERT(fraction >= value_type(0) && fraction <= value_type(1));
 
-    // Compute the cosine of the angle between the two quaternions
+    value_type dotProd = calc_dot(fromQ, toQ);
+
+    if (dotProd > (1.0 - epsilon))
+    {
+      return calc_linear_interpolation(fromQ, toQ, fraction);
+    }
+    else
+    {
+      return slerp_internal(dotProd, fromQ, toQ, fraction);
+    }
+  }
+
+  template <typename TFloatIter, typename TQuatOutIter>
+  static constexpr void slerp(quaternion fromQ,
+                              quaternion toQ,
+                              TFloatIter fractionBegin,
+                              TFloatIter fractionEnd,
+                              TQuatOutIter outBegin,
+                              value_type epsilon = value_type(1e-6)) noexcept
+  {
+    LINAL_ASSERT(fromQ.is_normalized());
+    LINAL_ASSERT(toQ.is_normalized());
+    LINAL_ASSERT(std::distance(fractionBegin, fractionEnd) > 0);
+
+    value_type dotProd = calc_dot(fromQ, toQ);
+
+    if (dotProd > (value_type(1.0) - epsilon))
+    {
+      for (auto it = fractionBegin; it != fractionEnd; ++it)
+      {
+        value_type fraction = *it;
+        LINAL_ASSERT(fraction >= value_type(0) && fraction <= value_type(1));
+        *outBegin++ = calc_linear_interpolation(fromQ, toQ, fraction);
+      }
+    }
+    else
+    {
+      for (auto it = fractionBegin; it != fractionEnd; ++it)
+      {
+        value_type fraction = *it;
+        LINAL_ASSERT(fraction >= value_type(0) && fraction <= value_type(1));
+        *outBegin++ = slerp_internal(dotProd, fromQ, toQ, fraction);
+      }
+    }
+  }
+
+private:
+  // Calculate dot product and adjust to ensure shortest path
+  [[nodiscard]] static constexpr value_type calc_dot(const quaternion& fromQ, quaternion& toQ) noexcept
+  {
     value_type dotProd = fromQ.dot(toQ);
 
-    // If cosTheta < 0, the interpolation will take the long way around the sphere.
-    // To fix this, one quaternion must be negated.
+    // Use shortest path
     if (dotProd < 0.0)
     {
       toQ.m_w = -toQ.m_w;
       toQ.m_vec = -toQ.m_vec;
       dotProd = -dotProd;
+      std::cout << "Adjusted to shortest path, new dot product: " << dotProd << "\n";
     }
+    return dotProd;
+  }
 
-    // If the quaternions are very close, use linear interpolation
-    if (dotProd > (1.0 - epsilon))
-    {
-      quaternion result;
-      result.m_w = (1 - fraction) * fromQ.m_w + fraction * toQ.m_w;
-      result.m_vec = (1 - fraction) * fromQ.m_vec + fraction * toQ.m_vec;
-      result.normalize();
-      return result;
-    }
+  // If the quaternions are very close, use linear interpolation
+  [[nodiscard]] static constexpr quaternion
+  calc_linear_interpolation(const quaternion& fromQ, const quaternion& toQ, value_type fraction) noexcept
+  {
+    quaternion result;
+    result.m_w = (1 - fraction) * fromQ.m_w + fraction * toQ.m_w;
+    result.m_vec = (1 - fraction) * fromQ.m_vec + fraction * toQ.m_vec;
+    result.normalize();
+    return result;
+  }
 
+  [[nodiscard]] static constexpr quaternion
+  slerp_internal(const value_type dotProd, const quaternion& fromQ, const quaternion& toQ, value_type fraction) noexcept
+  {
     // Compute the angle between the quaternions
     // resultQ  = (sin((1 - t) * angle) * fromQ + sin(t * angle) * toQ) / sin(angle)
     //          = weightA * fromQ + weightB * toQ
@@ -330,6 +385,7 @@ public:
     quaternion result;
     result.m_w = weightA * fromQ.m_w + weightB * toQ.m_w;
     result.m_vec = weightA * fromQ.m_vec + weightB * toQ.m_vec;
+
     return result;
   }
 };
