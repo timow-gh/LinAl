@@ -305,7 +305,7 @@ public:
     }
 
     // If the quaternions are very close, use linear interpolation
-    if (dotProd > epsilon)
+    if (dotProd > (1.0 - epsilon))
     {
       quaternion result;
       result.m_w = (1 - fraction) * fromQ.m_w + fraction * toQ.m_w;

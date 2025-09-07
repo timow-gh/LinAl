@@ -153,3 +153,33 @@ TEST(quat, slerp)
   EXPECT_NEAR(vec[1], 0.0, 1e-10);
   EXPECT_NEAR(vec[2], 0.0, 1e-10);
 }
+
+TEST(quat, slerp_near)
+{
+  auto q1 = quatd::create(0.0, 0.0, 1.0, 0.0);
+  // very close to q1
+  auto q2 = quatd::create(1e-8, 0.0, 1.0, 1e-8);
+
+  // vector to rotate: (1,0,0)
+  double x = 1.0;
+  double y = 0.0;
+  double z = 0.0;
+
+  auto qStart = quatd::slerp(q1, q2, 0.0);
+  linal::double3 vec = qStart.rotate(x, y, z);
+  EXPECT_NEAR(vec[0], 1.0, 1e-10);
+  EXPECT_NEAR(vec[1], 0.0, 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+
+  auto qMid = quatd::slerp(q1, q2, 0.5);
+  vec = qMid.rotate(x, y, z);
+  EXPECT_NEAR(vec[0], std::cos(5e-9), 1e-10);
+  EXPECT_NEAR(vec[1], std::sin(5e-9), 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+
+  auto qEnd = quatd::slerp(q1, q2, 1.0);
+  vec = qEnd.rotate(x, y, z);
+  EXPECT_NEAR(vec[0], std::cos(1e-8), 1e-10);
+  EXPECT_NEAR(vec[1], std::sin(1e-8), 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);
+}
