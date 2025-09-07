@@ -272,6 +272,12 @@ public:
     }
   }
 
+  enum class RotationDirection
+  {
+    ShortestPath,
+    LongestPath
+  };
+
   /** \brief Spherical linear interpolation between two quaternions.
    *
    * \note Interpolates along the shortest path on the 4D unit sphere.
@@ -282,17 +288,21 @@ public:
    * \param fromQ The starting quaternion (must be normalized).
    * \param toQ The ending quaternion (must be normalized).
    * \param fraction The interpolation factor in [0, 1].
+   * \param direction The rotation direction, either shortest or longest path.
    * \param epsilon Threshold to switch to linear interpolation for very close quaternions. This avoids numerical instability.
    * \return The interpolated quaternion.
    */
-  [[nodiscard]] static constexpr quaternion
-  slerp(quaternion fromQ, quaternion toQ, value_type fraction, value_type epsilon = value_type(1e-6)) noexcept
+  [[nodiscard]] static constexpr quaternion slerp(quaternion fromQ,
+                                                  quaternion toQ,
+                                                  value_type fraction,
+                                                  RotationDirection rotDirection = RotationDirection::ShortestPath,
+                                                  value_type epsilon = value_type(1e-6)) noexcept
   {
     LINAL_ASSERT(fromQ.is_normalized());
     LINAL_ASSERT(toQ.is_normalized());
     LINAL_ASSERT(fraction >= value_type(0) && fraction <= value_type(1));
 
-    value_type dotProd = calc_dot(fromQ, toQ);
+    value_type dotProd = calc_dot(fromQ, toQ, rotDirection);
 
     if (dotProd > (1.0 - epsilon))
     {
@@ -310,13 +320,14 @@ public:
                               TFloatIter fractionBegin,
                               TFloatIter fractionEnd,
                               TQuatOutIter outBegin,
+                              RotationDirection rotDirection = RotationDirection::ShortestPath,
                               value_type epsilon = value_type(1e-6)) noexcept
   {
     LINAL_ASSERT(fromQ.is_normalized());
     LINAL_ASSERT(toQ.is_normalized());
     LINAL_ASSERT(std::distance(fractionBegin, fractionEnd) > 0);
 
-    value_type dotProd = calc_dot(fromQ, toQ);
+    value_type dotProd = calc_dot(fromQ, toQ, rotDirection);
 
     if (dotProd > (value_type(1.0) - epsilon))
     {
@@ -340,12 +351,12 @@ public:
 
 private:
   // Calculate dot product and adjust to ensure shortest path
-  [[nodiscard]] static constexpr value_type calc_dot(const quaternion& fromQ, quaternion& toQ) noexcept
+  [[nodiscard]] static constexpr value_type calc_dot(const quaternion& fromQ, quaternion& toQ, RotationDirection direction) noexcept
   {
     value_type dotProd = fromQ.dot(toQ);
 
     // Use shortest path
-    if (dotProd < 0.0)
+    if (dotProd < 0.0 && direction == RotationDirection::ShortestPath)
     {
       toQ.m_w = -toQ.m_w;
       toQ.m_vec = -toQ.m_vec;

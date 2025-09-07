@@ -207,6 +207,14 @@ TEST(quat, shortest_path)
   EXPECT_NEAR(vec[0], 1.0, 1e-10);
   EXPECT_NEAR(vec[1], 0.0, 1e-10);
   EXPECT_NEAR(vec[2], 0.0, 1e-10);
+
+  // Now test with LongestPath option
+  qMid = quatd::slerp(q1, q2, 0.5, quatd::RotationDirection::LongestPath);
+  vec = qMid.rotate(x, y, z);
+  // At 0.5, should be at 180° rotation, so vector (1,0,0) becomes (-1,0,0)
+  EXPECT_NEAR(vec[0], -1.0, 1e-10);
+  EXPECT_NEAR(vec[1], 0.0, 1e-10);
+  EXPECT_NEAR(vec[2], 0.0, 1e-10);  
 }
 
 TEST(quat, slerp_range)
