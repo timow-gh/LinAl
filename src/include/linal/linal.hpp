@@ -3,6 +3,7 @@
 
 #include "linal/hmat.hpp"
 #include "linal/mat.hpp"
+#include "linal/quat.hpp"
 #include "linal/utils/constants.hpp"
 #include "linal/utils/radians.hpp"
 #include "linal/vec.hpp"

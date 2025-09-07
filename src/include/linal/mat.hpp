@@ -1,5 +1,5 @@
-#ifndef LINAL_BLAZEMATRIXOPERATIONS_H
-#define LINAL_BLAZEMATRIXOPERATIONS_H
+#ifndef LINAL_MATRIXOPERATIONS_H
+#define LINAL_MATRIXOPERATIONS_H
 
 #include "linal/array_type_traits.hpp"
 #include "linal/mat_operations.hpp"
@@ -281,4 +281,4 @@ using double33 = mat33<double>;
 
 } // namespace linal
 
-#endif // LINAL_BLAZEMATRIXOPERATIONS_H
+#endif // LINAL_MATRIXOPERATIONS_H
