@@ -14,7 +14,7 @@
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "CMAKE_CXX_STANDARD": "23",
-        "BUILD_SHARED_LIBS": "ON",
+        "BUILD_SHARED_LIBS": "OFF",
         "CMAKE_CXX_EXTENSIONS": "OFF"
       },
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"

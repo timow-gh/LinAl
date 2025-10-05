@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <linal/linal.hpp>
+#include <array>
 
 using namespace linal;
 

@@ -376,20 +376,48 @@ private:
     return result;
   }
 
+  /**
+   * @brief Performs internal spherical linear interpolation (SLERP) between two unit quaternions.
+   *
+   * The SLERP formula is obtained as follows:
+   *
+   * 1. For unit quaternions q0 and q1:
+   *        dotProd = q0 · q1 = cos(theta)
+   *    where theta is the angle between them on the 4D unit sphere.
+   *
+   * 2. The path on the unit sphere can be parameterized as:
+   *        q(t) = q0 * cos(t * theta) + v * sin(t * theta)
+   *    where v is the unit vector orthogonal to q0 in the plane spanned by q0 and q1.
+   *
+   * 3. Express v in terms of q0 and q1:
+   *        v = (q1 - q0 * cos(theta)) / sin(theta)
+   *
+   *    Substituting back gives:
+   *        q(t) = (sin((1 - t) * theta) / sin(theta)) * q0
+   *              + (sin(t * theta) / sin(theta)) * q1
+   *
+   * The resulting interpolation weights are:
+   *        weightA = sin((1 - fraction) * theta) / sin(theta)
+   *        weightB = sin(fraction * theta) / sin(theta)
+   *
+   * The interpolated quaternion is then:
+   *        result = weightA * fromQ + weightB * toQ
+   *
+   * @param dotProd    Dot product between fromQ and toQ.
+   * @param fromQ      Starting quaternion (must be normalized).
+   * @param toQ        Target quaternion (must be normalized).
+   * @param fraction   Interpolation parameter in [0, 1].
+   * @return Interpolated quaternion on the unit sphere.
+   */
   [[nodiscard]] static constexpr quaternion
   slerp_internal(const value_type dotProd, const quaternion& fromQ, const quaternion& toQ, value_type fraction) noexcept
   {
-    // Compute the angle between the quaternions
-    // resultQ  = (sin((1 - t) * angle) * fromQ + sin(t * angle) * toQ) / sin(angle)
-    //          = weightA * fromQ + weightB * toQ
-    // with weightA = sin((1 - t) * angle) / sin(angle)
-    // and weightB = sin(t * angle) / sin(angle)
-    // and angle = acos(dotProd)
+    LINAL_ASSERT(fromQ.is_normalized());
+    LINAL_ASSERT(toQ.is_normalized());
 
-    value_type angle = std::acos(dotProd);
-    value_type sinAngle = std::sin(angle);
-
-    value_type weightA = std::sin((1 - fraction) * angle) / sinAngle;
+    value_type sinAngle = std::sqrt(value_type(1) - dotProd * dotProd);
+    value_type angle = std::atan2(sinAngle, dotProd);
+    value_type weightA = std::sin((value_type(1) - fraction) * angle) / sinAngle;
     value_type weightB = std::sin(fraction * angle) / sinAngle;
 
     quaternion result;
