@@ -288,7 +288,7 @@ public:
    * \param fromQ The starting quaternion (must be normalized).
    * \param toQ The ending quaternion (must be normalized).
    * \param fraction The interpolation factor in [0, 1].
-   * \param direction The rotation direction, either shortest or longest path.
+   * \param rotDirection The rotation direction, either shortest or longest path.
    * \param epsilon Threshold to switch to linear interpolation for very close quaternions. This avoids numerical instability.
    * \return The interpolated quaternion.
    */
@@ -361,7 +361,6 @@ private:
       toQ.m_w = -toQ.m_w;
       toQ.m_vec = -toQ.m_vec;
       dotProd = -dotProd;
-      std::cout << "Adjusted to shortest path, new dot product: " << dotProd << "\n";
     }
     return dotProd;
   }
