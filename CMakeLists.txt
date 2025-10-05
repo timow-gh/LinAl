@@ -29,7 +29,7 @@ else ()
     option(${PROJECT_NAME}_WARNINGS_AS_ERRORS "Treat compiler warnings as errors " OFF)
     option(LinAl_TESTS "" OFF)
 endif ()
-option(LinAl_INSTALL "Install project targets" ON)
+option(LinAl_INSTALL "Install project targets" OFF)
 
 add_subdirectory(src)
 
