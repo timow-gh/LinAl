@@ -30,6 +30,8 @@ else ()
     option(LinAl_TESTS "" OFF)
 endif ()
 option(LinAl_INSTALL "Install project targets" OFF)
+set(${PROJECT_NAME}_TARGET_NAME "LinAl" CACHE STRING "CMake target name for the LinAl library.")
+
 
 add_subdirectory(src)
 

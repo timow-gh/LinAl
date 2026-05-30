@@ -25,7 +25,7 @@ set(linal_HEADER
         include/linal/vec_operations.hpp
 )
 
-set(TARGET_NAME LinAl)
+set(TARGET_NAME ${PROJECT_NAME}_TARGET_NAME)
 add_library(${TARGET_NAME} INTERFACE ${linal_HEADER})
 target_include_directories(${TARGET_NAME} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
 
