@@ -4,6 +4,8 @@
 #include "linal/utils/assert.hpp"
 #include "linal/vec.hpp"
 
+#include <iterator>
+
 namespace linal
 {
 

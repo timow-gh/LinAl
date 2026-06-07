@@ -20,6 +20,7 @@ set(linal_HEADER
         include/linal/mat_operations.hpp
         include/linal/mat_rot.hpp
         include/linal/mat_transposed_type_trait.hpp
+        include/linal/quat.hpp
         include/linal/vec.hpp
         include/linal/vec_compare.hpp
         include/linal/vec_operations.hpp
