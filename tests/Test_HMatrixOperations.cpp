@@ -31,6 +31,14 @@ TEST(hmatOperations, constructor_translation)
   EXPECT_EQ(expected, result);
 }
 
+TEST(hmatOperations, to_vec_converts_homogeneous_to_cartesian)
+{
+  linal::hvecf homogeneous{2.0f, 4.0f, 6.0f, 2.0f};
+  linal::float3 result = linal::to_vec(homogeneous);
+  linal::float3 expected{1.0f, 2.0f, 3.0f};
+  EXPECT_EQ(result, expected);
+}
+
 TEST(hmatOperations, xTranslation)
 {
   linal::hvecf expected({3.0f, 0.0f, 0.0f, 1.0f});

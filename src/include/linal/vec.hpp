@@ -9,6 +9,7 @@
 #include "linal/policies/subtraction_policy.hpp"
 #include "linal/policies/unary_policy.hpp"
 #include "linal/utils/compiler.hpp"
+#include "linal/utils/eps.hpp"
 #include "policies/addition_policy.hpp"
 #include <cassert>
 #include <cstdint>
@@ -71,7 +72,7 @@ public:
     }
   }
 
-  template <typename U, typename = std::enable_if<std::is_convertible_v<U, T>>>
+  template <typename U, typename = std::enable_if_t<std::is_convertible_v<U, T>>>
   constexpr vec(const vec<U, D>& other) noexcept
   {
     for (size_type i = 0; i < D; ++i)
@@ -282,7 +283,7 @@ template <typename T, std::uint8_t D>
 template <typename T, std::uint8_t D>
 [[nodiscard]] constexpr bool is_normalized(const vec<T, D>& vector) noexcept
 {
-  return linal::length_squared(vector) == static_cast<T>(1);
+  return linal::isEq(linal::length(vector), static_cast<T>(1));
 }
 
 } // namespace linal

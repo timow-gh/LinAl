@@ -27,8 +27,8 @@ constexpr inline hvec<T> to_hvec(const vec<T, D>& vec) noexcept
   return hvec<T>{vec[0], vec[1], vec[2], 1};
 }
 
-template <typename T, std::uint8_t D>
-constexpr inline vec<T, D> to_vec(const hvec<T>& vec) noexcept
+template <typename T>
+constexpr inline vec3<T> to_vec(const hvec<T>& vec) noexcept
 {
   return vec3<T>{vec[0] / vec[3], vec[1] / vec[3], vec[2] / vec[3]};
 }

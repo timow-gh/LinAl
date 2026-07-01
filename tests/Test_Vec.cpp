@@ -221,3 +221,31 @@ TEST(vec, vec_from_vec_with_different_value_type)
   EXPECT_DOUBLE_EQ(vec2[0], 1.0);
   EXPECT_DOUBLE_EQ(vec2[1], 1.0);
 }
+
+TEST(vec, is_normalized_true_for_unit_vector)
+{
+  float3 vec = float3{1.0F, 0.0F, 0.0F};
+  EXPECT_TRUE(vec.is_normalized());
+}
+
+TEST(vec, is_normalized_true_after_normalize_call)
+{
+  float3 vec{1.0F, 2.0F, 3.0F};
+  float3 normalized = vec.normalize();
+  EXPECT_TRUE(normalized.is_normalized());
+}
+
+TEST(vec, is_normalized_false_for_non_unit_vector)
+{
+  float3 vec{2.0F, 0.0F, 0.0F};
+  EXPECT_FALSE(vec.is_normalized());
+}
+
+TEST(vec, converting_constructor_widens_int_to_float)
+{
+  int3 intVec{1, 2, 3};
+  float3 floatVec = intVec;
+  EXPECT_FLOAT_EQ(floatVec[0], 1.0F);
+  EXPECT_FLOAT_EQ(floatVec[1], 2.0F);
+  EXPECT_FLOAT_EQ(floatVec[2], 3.0F);
+}
