@@ -142,6 +142,34 @@ TEST(hmatOperations, rot_align_xToOnes)
   EXPECT_EQ(result, targetvec);
 }
 
+TEST(hmatOperations, rot_align_xToNegativeX)
+{
+  linal::hvecd xDir = {1.0, 0.0, 0.0, 1.0};
+  linal::hvecd targetvec{-1.0, 0.0, 0.0, 1.0};
+  linal::hmatd rotMat;
+  linal::rot_align(rotMat, xDir, targetvec);
+  linal::hvecd result = rotMat * xDir;
+  constexpr double_t eps = 1E-7;
+  constexpr auto size = std::min(xDir.dim, targetvec.dim);
+  using size_type = typename linal::hvecd::size_type;
+  for (size_type i{0}; i < size; ++i)
+    EXPECT_TRUE(linal::isEq(result[i], targetvec[i], eps));
+}
+
+TEST(hmatOperations, rot_align_yToNegativeY)
+{
+  linal::hvecd yDir = {0.0, 1.0, 0.0, 1.0};
+  linal::hvecd targetvec{0.0, -1.0, 0.0, 1.0};
+  linal::hmatd rotMat;
+  linal::rot_align(rotMat, yDir, targetvec);
+  linal::hvecd result = rotMat * yDir;
+  constexpr double_t eps = 1E-7;
+  constexpr auto size = std::min(yDir.dim, targetvec.dim);
+  using size_type = typename linal::hvecd::size_type;
+  for (size_type i{0}; i < size; ++i)
+    EXPECT_TRUE(linal::isEq(result[i], targetvec[i], eps));
+}
+
 TEST(hmatOperations, set_translation)
 {
   linal::double3 targetvec(0.0, 0.0, 1.0);

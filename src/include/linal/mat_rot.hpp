@@ -1,6 +1,8 @@
 #ifndef LINAL_MAT_ROT_HPP
 #define LINAL_MAT_ROT_HPP
 
+#include "linal/utils/constants.hpp"
+#include "linal/utils/eps.hpp"
 #include "linal/utils/util.hpp"
 
 namespace linal
@@ -162,6 +164,24 @@ constexpr void rot_align(TMat& mat, const TVecA& source, const TVecB& target) no
   //      1+c        (  v.y,  -v.x,  c  )
   const vec3<T> v = cross(source[0], source[1], source[2], target[0], target[1], target[2]);
   const T c = dot(source[0], source[1], source[2], target[0], target[1], target[2]);
+
+  // When source and target are (near-)anti-parallel, c -> -1 and 1/(1+c) diverges.
+  // Fall back to a stable 180-degree rotation about any axis perpendicular to source.
+  if (isEq(c, T(-1.0), eps_v<T>))
+  {
+    const vec3<T> src{source[0], source[1], source[2]};
+    // Pick the coordinate axis least aligned with src to build a robust perpendicular vector.
+    vec3<T> helper{T(1.0), T(0.0), T(0.0)};
+    if (std::abs(src[0]) > std::abs(src[1]) && std::abs(src[0]) > std::abs(src[2]))
+    {
+      helper = vec3<T>{T(0.0), T(1.0), T(0.0)};
+    }
+    vec3<T> axis = cross(src[0], src[1], src[2], helper[0], helper[1], helper[2]);
+    axis = linal::normalize(axis);
+    rot_axis(mat, axis, PI<T>);
+    return;
+  }
+
   const T k = T(1.0) / (T(1.0) + c);
 
   const T v10k = v[1] * v[0] * k;

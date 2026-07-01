@@ -1,6 +1,7 @@
 #ifndef LINAL_MAT_OPERATIONS_HPP
 #define LINAL_MAT_OPERATIONS_HPP
 
+#include <cassert>
 #include <initializer_list>
 #include <linal/mat_transposed_type_trait.hpp>
 #include <linal/utils/eps.hpp>

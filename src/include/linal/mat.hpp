@@ -1,6 +1,8 @@
 #ifndef LINAL_MATRIXOPERATIONS_H
 #define LINAL_MATRIXOPERATIONS_H
 
+#include <cassert>
+
 #include "linal/array_type_traits.hpp"
 #include "linal/mat_operations.hpp"
 #include "linal/policies/addition_policy.hpp"

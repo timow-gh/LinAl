@@ -1,6 +1,7 @@
 #ifndef LINAL_VEC_COMPARE_HPP
 #define LINAL_VEC_COMPARE_HPP
 
+#include <cassert>
 #include <cstdint>
 #include "linal/utils/compiler.hpp"
 #include "linal/utils/eps.hpp"

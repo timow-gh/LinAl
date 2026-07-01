@@ -40,4 +40,5 @@ create_linal_test(Test_MatrixOperations)
 create_linal_test(Test_HMatrixOperations)
 create_linal_test(Test_Radians)
 create_linal_test(Test_Quat)
+create_linal_test(Test_MatRot)
 
